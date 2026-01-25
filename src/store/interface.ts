@@ -2,6 +2,7 @@ export interface ITodoItem {
   id: string; // Changed to string for UUIDs
   nameTodo: string;
   topic: string;
+  status?: string;
   completed: boolean;
   createdAt: number;
   completedAt: number | null; // Nullable if not yet finished

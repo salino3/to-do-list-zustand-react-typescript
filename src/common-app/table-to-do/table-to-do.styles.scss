@@ -1,0 +1,82 @@
+@import "../../index.scss";
+
+.table-container {
+  width: 100%;
+  overflow-x: auto; // Ensures mobile responsiveness
+  margin: 20px 0;
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse; // Removes double borders
+  color: var(--text-main);
+  @include glass-effect;
+  border-radius: var(--border-radius);
+  overflow: hidden; // Ensures corners are rounded
+
+  caption {
+    text-align: left;
+    padding: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--color-secondary);
+    caption-side: top;
+  }
+
+  thead {
+    background-color: rgba(var(--color-primary), 0.2);
+
+    th {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      transition: background-color var(--transition-speed);
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.03);
+      }
+
+      &.row-completed {
+        opacity: 0.6;
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    td,
+    th {
+      padding: 12px 15px;
+    }
+  }
+
+  // Priority Badges
+  .badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: capitalize;
+
+    &.priority-high {
+      background-color: rgba(var(--color-error), 0.2);
+      color: var(--color-error);
+    }
+    &.priority-medium {
+      background-color: rgba(var(--color-secondary), 0.2);
+      color: var(--color-secondary);
+    }
+    &.priority-low {
+      background-color: rgba(var(--text-dim), 0.2);
+      color: var(--text-dim);
+    }
+  }
+}
