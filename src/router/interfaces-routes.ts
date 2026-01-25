@@ -7,6 +7,6 @@ interface Routes {
 export const routesApp: Routes = {
   root: "/to-do-list-zustand-react-typescript",
   detailsTodo: (id: string) =>
-    `/to-do-list-zustand-react-typescript/details-${id}`,
+    `/to-do-list-zustand-react-typescript/details/${id}`,
   error404: "*",
 };

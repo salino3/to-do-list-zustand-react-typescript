@@ -1,5 +1,4 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
 import "./container-layout.styles.scss";
 
 interface Props {
