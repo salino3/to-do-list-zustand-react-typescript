@@ -1,6 +1,7 @@
 import type React from "react";
 import { Link } from "react-router-dom";
-import { routesApp } from "../../router/interfaces-routes";
+import { TodoTable } from "../../common-app";
+import { routesApp } from "../../router";
 import "./home.styles.scss";
 
 const HomePage: React.FC = () => {
@@ -10,6 +11,8 @@ const HomePage: React.FC = () => {
       <Link to={routesApp?.detailsTodo("test-route")}>
         <button>Click</button>
       </Link>
+      <br />
+      <TodoTable />
     </div>
   );
 };

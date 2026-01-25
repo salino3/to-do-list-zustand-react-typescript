@@ -1,7 +1,7 @@
 import React, { lazy, type JSX } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { ContainerLayout } from "../layout";
-import { routesApp } from "./interfaces-routes";
+import { routesApp } from ".";
 
 interface PropsRoutes {
   path: string;
