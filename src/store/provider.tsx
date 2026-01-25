@@ -7,7 +7,7 @@ import type { ITodoItem, PropsProvider } from "./interface";
 
 export const useProvider = create<PropsProvider>()(
   persist(
-    immer((set, get) => ({
+    immer((set) => ({
       todoList: [],
       addTodo: (todo: ITodoItem) =>
         set((state) => {
