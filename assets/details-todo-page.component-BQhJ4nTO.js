@@ -1,0 +1,1 @@
+import{n as e}from"./index-SpoPul7E.js";var t=e();const n=()=>(0,t.jsx)(`div`,{className:`rootDetailsTodoPage`,children:`rootDetailsTodoPage`});export{n as DetailsTodoPage};
