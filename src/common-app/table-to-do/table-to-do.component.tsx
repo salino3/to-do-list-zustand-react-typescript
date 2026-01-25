@@ -15,6 +15,7 @@ export const TodoTable = () => {
             <th scope="col">Topic</th>
             <th scope="col">Priority</th>
             <th scope="col">Status</th>
+            <th scope="col">info</th>
           </tr>
         </thead>
         <tbody>
@@ -34,6 +35,11 @@ export const TodoTable = () => {
                   </span>
                 </td>
                 <td>{todo.completed ? "✅ Done" : "⏳ Pending"}</td>
+                <td style={{ minWidth: "290px" }}>
+                  {todo.nameTodo}
+                  {todo.nameTodo}
+                  {todo.nameTodo}
+                </td>
               </tr>
             ))}
         </tbody>
