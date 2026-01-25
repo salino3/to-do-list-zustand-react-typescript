@@ -44,7 +44,7 @@ async function generateServiceWorker() {
 
   // The base content of your Service Worker
   const swContent = `
-const CACHE_NAME = 'shader-art-cache-v1';
+const CACHE_NAME = 'to-do-list-cache-v1';
 const OFFLINE_URL = '${OFFLINE_PAGE}';
 
 // List of files to precache automatically
