@@ -5,24 +5,24 @@ export interface ITodoItem {
   completed: boolean;
   createdAt: number;
   completedAt: number | null; // Nullable if not yet finished
-  updatedAt: number;
+  updatedAt: number | null;
 
   // Contact & Location Info
-  place: string;
-  email: string;
-  tel: string;
-  web: string;
+  place?: string;
+  email?: string;
+  tel?: string;
+  web?: string;
 
   // Content
-  description: string;
-  note: string;
+  description?: string;
+  note?: string;
 
   // Scheduling
-  reminderDate: number | null;
+  reminderDate?: number | null;
   priority: "low" | "medium" | "high"; // Added for better sorting
 
   // Metadata
-  tags: string[]; // Added for filtering
+  tags?: string[]; // Added for filtering
 }
 
 export interface PropsProvider {

@@ -2,17 +2,22 @@ import { create } from "zustand";
 import { useShallow } from "zustand/react/shallow";
 import { immer } from "zustand/middleware/immer";
 import { createJSONStorage, persist } from "zustand/middleware";
-import { PropsProvider } from "./interface";
+import { dbIDBStorage } from "./db";
+import type { ITodoItem, PropsProvider } from "./interface";
 
 export const useProvider = create<PropsProvider>()(
   persist(
     immer((set, get) => ({
       todoList: [],
+      addTodo: (todo: ITodoItem) =>
+        set((state) => {
+          state.todoList.push(todo as ITodoItem);
+        }),
     })),
     {
       name: "to-do-storage",
       //* Storage in localStorage for default, also without include the parameter.
-      // example:  storage: createJSONStorage(() => sessionStorage),
+      storage: createJSONStorage(() => dbIDBStorage),
       //* For default 'persist' saves all objects and arrays
       partialize: (state) => ({
         todoList: state.todoList,

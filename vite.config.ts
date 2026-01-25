@@ -5,4 +5,7 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   base: "/to-do-list-zustand-react-typescript/",
   plugins: [react()],
+  optimizeDeps: {
+    include: ["immer", "zustand/middleware/immer"],
+  },
 });
