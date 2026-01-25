@@ -14,7 +14,9 @@ export const useProvider = create<PropsProvider>()(
       //* Storage in localStorage for default, also without include the parameter.
       // example:  storage: createJSONStorage(() => sessionStorage),
       //* For default 'persist' saves all objects and arrays
-      partialize: (state) => ({}),
+      partialize: (state) => ({
+        todoList: state.todoList,
+      }),
     },
   ),
 );
