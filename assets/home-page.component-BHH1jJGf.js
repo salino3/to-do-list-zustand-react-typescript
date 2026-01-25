@@ -1,0 +1,1 @@
+import{t as e}from"./index-BCSJAMAS.js";var t=e(),n=()=>(0,t.jsx)(`div`,{className:`rootHomePage`,children:`HomePage`});export{n as default};
