@@ -1,9 +1,58 @@
-import { useProviderSelector, type ITodoItem } from "../../store";
+import { type ITodoItem } from "../../store";
 import "./table-to-do.styles.scss";
 
-export const TodoTable = () => {
-  const { todoList } = useProviderSelector("todoList");
+export interface FilteringValuesFilter {
+  [key: string]: ValuesFilter[];
+}
 
+export interface ValuesFilter {
+  text: string;
+  value: any;
+}
+
+export interface Row {
+  key?: string;
+  title: string;
+  tooltip?: (item: any, row: ITodoItem) => any | string | undefined;
+  render?: (item: any, row: ITodoItem) => any | string | undefined;
+  typeFilter?: any;
+  valuesFilter?: ValuesFilter[] | [];
+  filter?: any;
+  setFilter?: any;
+  minDate?: string | number | undefined;
+  maxDate?: string | number | undefined;
+  formToRight?: boolean;
+}
+
+//
+
+interface TableProps {
+  totalData: number;
+  columns: any[];
+  row: any[];
+  uniqueKey?: string;
+  page?: number;
+  pageSize?: number;
+  setFlag?: React.Dispatch<React.SetStateAction<boolean>>;
+  setPage?: React.Dispatch<React.SetStateAction<number>>;
+  setPageSize?: React.Dispatch<React.SetStateAction<number>>;
+  rowPerPages?: number[];
+  initialFilters: Partial<ITodoItem>;
+}
+
+export const TodoTable: React.FC<TableProps> = ({
+  totalData = 0,
+  columns,
+  row,
+  uniqueKey,
+  page = 1,
+  pageSize = 10,
+  setFlag,
+  setPage,
+  setPageSize,
+  rowPerPages = [5, 10, 25, 50],
+  initialFilters,
+}) => {
   return (
     <div className="table-container">
       <table className="custom-table">
@@ -19,9 +68,9 @@ export const TodoTable = () => {
           </tr>
         </thead>
         <tbody>
-          {todoList &&
-            todoList?.length > 0 &&
-            todoList.map((todo: ITodoItem, index: number) => (
+          {columns &&
+            columns?.length > 0 &&
+            columns.map((todo: ITodoItem, index: number) => (
               <tr
                 key={todo.id}
                 className={todo.completed ? "row-completed" : ""}

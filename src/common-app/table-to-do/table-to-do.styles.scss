@@ -1,5 +1,3 @@
-@import "../../index.scss";
-
 .table-container {
   width: 100%;
   overflow-x: auto; // Ensures mobile responsiveness
@@ -10,9 +8,12 @@
   width: 100%;
   border-collapse: collapse; // Removes double borders
   color: var(--text-main);
-  @include glass-effect;
   border-radius: var(--border-radius);
   overflow: hidden; // Ensures corners are rounded
+
+  background: rgba(30, 30, 36, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 
   caption {
     text-align: left;

@@ -3,7 +3,7 @@ export interface ITodoItem {
   nameTodo: string;
   topic: string;
   status?: string;
-  completed: boolean;
+  completed: boolean | null;
   createdAt: number;
   completedAt: number | null; // Nullable if not yet finished
   updatedAt: number | null;
