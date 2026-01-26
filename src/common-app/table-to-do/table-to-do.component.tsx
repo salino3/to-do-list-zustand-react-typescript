@@ -1,4 +1,3 @@
-import { type ITodoItem } from "../../store";
 import "./table-to-do.styles.scss";
 
 export interface FilteringValuesFilter {
@@ -55,14 +54,6 @@ export const TodoTable: React.FC<TableProps> = ({
   console.log("clog1", rows);
   console.log("clog2", columns);
 
-  const keysToFilter = rows.map((row) => row.key);
-  console.log("clog3", keysToFilter);
-
-  const values: any = {};
-  keysToFilter.forEach((key) => {
-    values[key] = columns[key] || "";
-  });
-
   return (
     <div className="table-container">
       <table className="custom-table">
@@ -73,7 +64,7 @@ export const TodoTable: React.FC<TableProps> = ({
               rows.length > 0 &&
               rows.map((item: any) => (
                 <th scope="col" key={item?.key}>
-                  {item.title}
+                  {item?.title}
                 </th>
               ))}
           </tr>
@@ -88,27 +79,26 @@ export const TodoTable: React.FC<TableProps> = ({
                 }
                 className={values.completed ? "row-completed" : ""}
               >
-                {keysToFilter &&
-                  keysToFilter?.length > 0 &&
-                  keysToFilter.map((key, colIndex) => {
-                    const rowConfig = rows.find((r) => r.key === key);
+                {rows &&
+                  rows?.length > 0 &&
+                  rows.map((row, colIndex) => {
                     const content =
-                      rowConfig && rowConfig.render
-                        ? rowConfig.render(values[key], values)
-                        : values[key];
+                      row && row.render
+                        ? row.render(values[row.key], values)
+                        : values[row.key];
                     const tooltip =
-                      rowConfig && rowConfig.tooltip
-                        ? rowConfig.tooltip(values[key], values)
+                      row && row.tooltip
+                        ? row.tooltip(values[row.key], values)
                         : null;
 
                     return (
                       <td
-                        key={`${key}_${
+                        key={`${row.key}_${
                           uniqueKey && values[uniqueKey]
                             ? values[uniqueKey]
                             : rowIndex
                         }_${colIndex}`}
-                        className={`table_x02_${key}_${
+                        className={`table_x02_${row.key}_${
                           uniqueKey && values[uniqueKey]
                             ? values[uniqueKey]
                             : rowIndex
@@ -126,10 +116,11 @@ export const TodoTable: React.FC<TableProps> = ({
                           }
                         }
                       >
-                        {key && tooltip && (
+                        {row?.key && tooltip && (
                           <span
                             className={`${
-                              key == "Contenido" || key == "diputados_autores"
+                              row.key == "Contenido" ||
+                              row.key == "diputados_autores"
                                 ? "table_x02_spanTooltip"
                                 : ""
                             }`}

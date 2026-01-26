@@ -14,10 +14,6 @@ const HomePage: React.FC = () => {
   const [flag, setFlag] = useState<boolean>(false);
 
   const rowsTable: Row[] = [
-    // {
-    //   key: "id",
-    //   title: "",
-    // },
     {
       key: "nameTodo",
       title: "To do",
