@@ -3,7 +3,7 @@ export interface ITodoItem {
   nameTodo: string;
   topic: string;
   status?: string;
-  completed: boolean | null;
+  completed: boolean;
   createdAt: number;
   completedAt: number | null; // Nullable if not yet finished
   updatedAt: number | null;
@@ -28,4 +28,5 @@ export interface ITodoItem {
 
 export interface PropsProvider {
   todoList: ITodoItem[];
+  addTodo: (todo: ITodoItem) => unknown;
 }

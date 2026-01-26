@@ -2,7 +2,7 @@ export const initialFilters = {
   nameTodo: "",
   web: "",
   tel: "",
-  priority: "low",
+  priority: "",
   reminderDate: 0,
   place: "",
   completed: null,
