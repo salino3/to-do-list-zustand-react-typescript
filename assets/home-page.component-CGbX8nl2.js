@@ -1,1 +1,0 @@
-import{n as e,r as t,t as n}from"./index-SpoPul7E.js";var r=e(),i=()=>(0,r.jsxs)(`div`,{className:`rootHomePage`,children:[`HomePage`,(0,r.jsx)(t,{to:n?.detailsTodo(`test-route`),children:(0,r.jsx)(`button`,{children:`Click`})})]});export{i as default};
