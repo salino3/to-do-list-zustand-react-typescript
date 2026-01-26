@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { initialFilters, useProviderSelector } from "../../store";
 import { TodoTable, type Row } from "../../common-app";
 import { routesApp } from "../../router";
 import "./home.styles.scss";
+
+const ROW_PER_PAGES = [5, 10, 25];
 
 const HomePage: React.FC = () => {
   const { todoList, addTodo } = useProviderSelector("todoList", "addTodo");
@@ -13,28 +15,31 @@ const HomePage: React.FC = () => {
   const [pageSize, setPageSize] = useState<number>(10);
   const [flag, setFlag] = useState<boolean>(false);
 
-  const columnsTable: Row[] = [
-    {
-      key: "nameTodo",
-      title: "To do",
-      tooltip: (item: string) => item,
-      render: (item: string) => item,
-    },
-    {
-      key: "web",
-      title: "Web",
-      tooltip: (item: string) => item,
-      render: (item: string) => item,
-    },
-    {
-      key: "completed",
-      title: "Task",
-      render: (item: boolean, row) => {
-        console.log("clog6", row);
-        return item ? "✅ Done" : "⏳ Pending";
+  const columnsTable: Row[] = useMemo(
+    () => [
+      {
+        key: "nameTodo",
+        title: "To do",
+        tooltip: (item: string) => item,
+        render: (item: string) => item,
       },
-    },
-  ];
+      {
+        key: "web",
+        title: "Web",
+        tooltip: (item: string) => item,
+        render: (item: string) => item,
+      },
+      {
+        key: "completed",
+        title: "Task",
+        render: (item: boolean, row) => {
+          console.log("clog6", row);
+          return item ? "✅ Done" : "⏳ Pending";
+        },
+      },
+    ],
+    [],
+  );
 
   function addData() {
     addTodo &&
@@ -62,6 +67,7 @@ const HomePage: React.FC = () => {
         <button>Click</button>
       </Link>
       <button onClick={() => addData()}>Add data</button>
+      <button onClick={() => setFlag((prev) => !prev)}>test data</button>
       <br />
       <TodoTable
         uniqueKey="id"
@@ -71,7 +77,7 @@ const HomePage: React.FC = () => {
         page={page}
         pageSize={pageSize}
         setFlag={setFlag}
-        rowPerPages={[5, 10, 25]}
+        rowPerPages={ROW_PER_PAGES}
         totalData={todoList?.length || 0}
         rows={todoList || []}
         initialFilters={initialFilters}
