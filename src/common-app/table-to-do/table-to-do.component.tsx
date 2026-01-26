@@ -53,30 +53,67 @@ export const TodoTable: React.FC<TableProps> = ({
   rowPerPages = [5, 10, 25, 50],
   initialFilters,
 }) => {
+  console.log("clog1", row);
+  console.log("clog2", columns);
+
+  const keysToFilter = row.map((r) => r.key);
+  console.log("clog3", keysToFilter);
+
+  const valuesArray =
+    columns &&
+    columns?.length > 0 &&
+    columns.map((column) => {
+      const values: any = {};
+      keysToFilter.forEach((key) => {
+        values[key] = column[key] || "";
+      });
+      return values;
+    });
+
+  console.log("clog4", valuesArray);
+
   return (
     <div className="table-container">
       <table className="custom-table">
         <caption>List of To-Dos</caption>
         <thead>
           <tr>
-            <th scope="col">#</th>
+            {row &&
+              row.length > 0 &&
+              row.map((item: any) => (
+                <th scope="col" key={item?.key}>
+                  {item.title}
+                </th>
+              ))}
+            {/* <th scope="col">#</th>
             <th scope="col">Task Name</th>
             <th scope="col">Topic</th>
             <th scope="col">Priority</th>
             <th scope="col">Status</th>
-            <th scope="col">info</th>
+            <th scope="col">info</th> */}
           </tr>
         </thead>
         <tbody>
-          {columns &&
-            columns?.length > 0 &&
-            columns.map((todo: ITodoItem, index: number) => (
+          {valuesArray &&
+            valuesArray?.length > 0 &&
+            valuesArray.map((value: any, rowIndex: number) => (
               <tr
-                key={todo.id}
-                className={todo.completed ? "row-completed" : ""}
+                key={
+                  uniqueKey && value[uniqueKey] ? value[uniqueKey] : rowIndex
+                }
+                className={value.completed ? "row-completed" : ""}
               >
-                <th scope="row">{index + 1}</th>
-                <td>{todo.nameTodo}</td>
+                <th scope="row">{value.title}</th>
+              </tr>
+            ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+{
+  /* <td>{todo.nameTodo}</td>
                 <td>{todo.topic}</td>
                 <td>
                   <span className={`badge priority-${todo.priority}`}>
@@ -88,11 +125,5 @@ export const TodoTable: React.FC<TableProps> = ({
                   {todo.nameTodo}
                   {todo.nameTodo}
                   {todo.nameTodo}
-                </td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
-    </div>
-  );
-};
+                </td> */
+}

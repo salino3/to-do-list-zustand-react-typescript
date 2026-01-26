@@ -14,9 +14,14 @@ const HomePage: React.FC = () => {
 
   const rowsTable: Row[] = [
     {
+      key: "id",
+      title: "",
+    },
+    {
       key: "nameTodo",
       title: "To do",
       tooltip: (item: string) => item,
+      render: (item: string) => item,
     },
   ];
   return (
