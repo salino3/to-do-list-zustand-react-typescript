@@ -28,4 +28,5 @@ export interface ITodoItem {
 
 export interface PropsProvider {
   todoList: ITodoItem[];
+  addTodo: (todo: ITodoItem) => unknown;
 }
