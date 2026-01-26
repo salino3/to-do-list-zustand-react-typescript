@@ -60,9 +60,9 @@ export const TodoTable: React.FC<TableProps> = ({
         <caption>List of To-Dos</caption>
         <thead>
           <tr>
-            {rows &&
-              rows.length > 0 &&
-              rows.map((item: any) => (
+            {columns &&
+              columns.length > 0 &&
+              columns.map((item: any) => (
                 <th scope="col" key={item?.key}>
                   {item?.title}
                 </th>
@@ -70,18 +70,18 @@ export const TodoTable: React.FC<TableProps> = ({
           </tr>
         </thead>
         <tbody>
-          {columns &&
-            columns?.length > 0 &&
-            columns.map((values: any, rowIndex: number) => (
+          {rows &&
+            rows?.length > 0 &&
+            rows.map((values: any, rowIndex: number) => (
               <tr
                 key={
                   uniqueKey && values[uniqueKey] ? values[uniqueKey] : rowIndex
                 }
                 className={values.completed ? "row-completed" : ""}
               >
-                {rows &&
-                  rows?.length > 0 &&
-                  rows.map((row, colIndex) => {
+                {columns &&
+                  columns?.length > 0 &&
+                  columns.map((row, colIndex) => {
                     const content =
                       row && row.render
                         ? row.render(values[row.key], values)

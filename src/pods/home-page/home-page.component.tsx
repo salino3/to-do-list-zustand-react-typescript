@@ -13,7 +13,7 @@ const HomePage: React.FC = () => {
   const [pageSize, setPageSize] = useState<number>(10);
   const [flag, setFlag] = useState<boolean>(false);
 
-  const rowsTable: Row[] = [
+  const columnsTable: Row[] = [
     {
       key: "nameTodo",
       title: "To do",
@@ -65,7 +65,7 @@ const HomePage: React.FC = () => {
       <br />
       <TodoTable
         uniqueKey="id"
-        rows={rowsTable || []}
+        columns={columnsTable || []}
         setPage={setPage}
         setPageSize={setPageSize}
         page={page}
@@ -73,7 +73,7 @@ const HomePage: React.FC = () => {
         setFlag={setFlag}
         rowPerPages={[5, 10, 25]}
         totalData={todoList?.length || 0}
-        columns={todoList || []}
+        rows={todoList || []}
         initialFilters={initialFilters}
       />
     </div>
