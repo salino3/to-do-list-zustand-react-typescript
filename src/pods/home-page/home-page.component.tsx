@@ -67,7 +67,7 @@ const HomePage: React.FC = () => {
         <button>Click</button>
       </Link>
       <button onClick={() => addData()}>Add data</button>
-      <button onClick={() => setFlag((prev) => !prev)}>test data</button>
+      <button onClick={() => setFlag(() => !flag)}>test data</button>
       <br />
       <TodoTable
         uniqueKey="id"

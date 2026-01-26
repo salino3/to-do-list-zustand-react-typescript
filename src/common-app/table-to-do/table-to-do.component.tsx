@@ -1,6 +1,5 @@
 import type React from "react";
 import { memo } from "react";
-
 import "./table-to-do.styles.scss";
 
 export interface FilteringValuesFilter {
@@ -43,17 +42,17 @@ interface TableProps {
 
 export const TodoTable: React.FC<TableProps> = memo(
   ({
-    totalData = 0,
+    // totalData = 0,
     columns,
     rows,
     uniqueKey,
-    page = 1,
-    pageSize = 10,
-    setFlag,
-    setPage,
-    setPageSize,
-    rowPerPages = [5, 10, 25, 50],
-    initialFilters,
+    // page = 1,
+    // pageSize = 10,
+    // setFlag,
+    // setPage,
+    // setPageSize,
+    // rowPerPages = [5, 10, 25, 50],
+    // initialFilters,
   }) => {
     console.log("clog1", rows);
     console.log("clog2", columns);
