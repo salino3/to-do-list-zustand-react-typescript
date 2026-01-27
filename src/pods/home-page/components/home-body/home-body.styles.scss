@@ -12,11 +12,30 @@
 
   .table-container {
     .containerActions {
-      .spanToggle {
-        background-color: black;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 0.2rem;
+
+      .deleteItem,
+      .spanToggle,
+      .updateItem {
         cursor: pointer;
         padding: 2px;
         border-radius: 3px;
+      }
+
+      .deleteItem {
+        background-color: var(--color-03);
+      }
+
+      .spanToggle {
+        background-color: var(--color-bg);
+      }
+
+      .updateItem {
+        background-color: var(--color-btn);
       }
     }
     .priority-high {

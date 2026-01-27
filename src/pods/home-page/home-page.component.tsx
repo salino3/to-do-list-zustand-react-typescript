@@ -19,10 +19,10 @@ const HomePage: React.FC = () => {
         nameTodo: "Test todo",
         web: "httpszzzz",
         tel: "093",
-        priority: "low",
+        priority: "high",
         reminderDate: 0,
         place: "",
-        completed: true,
+        completed: false,
         completedAt: 11,
         createdAt: 11,
         updatedAt: 22,
@@ -42,7 +42,6 @@ const HomePage: React.FC = () => {
       <button onClick={() => setFlag(() => !flag)}>test data</button>
       <br />
       <HomeBody
-        flag={flag}
         page={page}
         pageSize={pageSize}
         setFlag={setFlag}
