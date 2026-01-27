@@ -5,19 +5,4 @@
   align-items: center;
   height: 100%;
   z-index: 0;
-
-  .table-container {
-    .priority-high {
-      background-color: var(--danger);
-      color: var(--text-primary);
-    }
-    .priority-medium {
-      background-color: var(--warning);
-      color: var(--text-primary);
-    }
-    .priority-low {
-      background-color: var(--quite);
-      color: var(--text-primary);
-    }
-  }
 }
