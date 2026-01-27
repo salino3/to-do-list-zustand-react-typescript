@@ -20,7 +20,7 @@ export interface ITodoItem {
 
   // Scheduling
   reminderDate?: number | null;
-  priority: "low" | "medium" | "high" | ""; // Added for better sorting
+  priority: "low" | "medium" | "high"; // Added for better sorting
 
   // Metadata
   tags?: string[]; // Added for filtering

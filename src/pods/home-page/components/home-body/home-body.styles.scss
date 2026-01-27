@@ -3,10 +3,22 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  overflow-y: auto;
+  width: 1200px;
+  max-width: 95vw;
+  min-width: 300px;
   height: 100%;
   z-index: 0;
 
   .table-container {
+    .containerActions {
+      .spanToggle {
+        background-color: black;
+        cursor: pointer;
+        padding: 2px;
+        border-radius: 3px;
+      }
+    }
     .priority-high {
       background-color: var(--danger);
       color: var(--text-primary);

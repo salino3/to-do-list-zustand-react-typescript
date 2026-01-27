@@ -45,19 +45,26 @@
     tbody {
       z-index: 0;
       tr {
+        box-sizing: border-box;
         z-index: 0 !important;
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         th {
+          box-sizing: border-box;
+
           padding: 12px 8px;
           z-index: 0;
         }
 
         td {
+          box-sizing: border-box;
+
           padding: 12px 8px;
           position: relative;
           z-index: 2 !important;
+
           .table_x03_spanTooltip {
             z-index: 50 !important;
+            box-sizing: border-box;
 
             display: none;
             flex-direction: row;
@@ -84,6 +91,10 @@
           min-width: 30px;
           z-index: 50 !important;
         }
+
+        // .table_x02_web {
+        //   max-height: 1px;
+        // }
       }
     }
   }

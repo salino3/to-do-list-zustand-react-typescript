@@ -39,6 +39,10 @@ export const HomeBody: React.FC<Props> = (props) => {
     };
 
     return [...list].sort((a, b) => {
+      if (a.completed !== b.completed) {
+        return a.completed ? 1 : -1;
+      }
+
       const weightA = priorityWeight[a.priority] ?? 0;
       const weightB = priorityWeight[b.priority] ?? 0;
 
@@ -60,23 +64,20 @@ export const HomeBody: React.FC<Props> = (props) => {
         key: "web",
         title: "Web",
         tooltip: (item: string) => item,
-        render: (item: string) => item,
+        render: (item: string) => <a href={item}>{item}</a>,
       },
       {
-        key: "completed",
-        title: "Task",
-        render: (item: boolean, row: ITodoItem) => (
-          <span
-            onClick={() => setTodo && setTodo(row)}
-            style={{
-              background: "black",
-              padding: "2px 1px",
-              borderRadius: "3px",
-              cursor: "pointer",
-            }}
-          >
-            {item ? "✅ Done" : "⏳ Pending"} - {row?.priority}
-          </span>
+        key: "actions",
+        title: "Actions",
+        render: (_: undefined, row: ITodoItem) => (
+          <div className="containerActions">
+            <span
+              className="spanToggle"
+              onClick={() => setTodo && setTodo(row)}
+            >
+              {row.completed ? "✅" : "⏳"}
+            </span>
+          </div>
         ),
       },
     ],

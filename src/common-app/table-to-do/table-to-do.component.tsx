@@ -111,6 +111,7 @@ export const TodoTable: React.FC<TableProps> = memo(
                             }_${colIndex}`}
                             className={`
                             ${valueClass}
+                            table_x02_${column.key} 
                             table_x02_${column.key}_${
                               uniqueKey && values[uniqueKey]
                                 ? values[uniqueKey]
