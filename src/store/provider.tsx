@@ -13,6 +13,13 @@ export const useProvider = create<PropsProvider>()(
         set((state) => {
           state.todoList.push(todo as ITodoItem);
         }),
+      setTodo: (todo: ITodoItem) =>
+        set(({ todoList }) => {
+          const item = todoList.find((i) => i.id === todo.id);
+          if (item) {
+            item.completed = !item.completed;
+          }
+        }),
     })),
     {
       name: "to-do-storage",

@@ -1,60 +1,32 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-import { initialFilters, useProviderSelector } from "../../store";
-import { TodoTable, type Row } from "../../common-app";
+import { useProviderSelector } from "../../store";
+import { HomeBody } from "./components";
 import { routesApp } from "../../router";
 import "./home.styles.scss";
 
-const ROW_PER_PAGES = [5, 10, 25];
-
 const HomePage: React.FC = () => {
-  const { todoList, addTodo } = useProviderSelector("todoList", "addTodo");
+  const { addTodo } = useProviderSelector("addTodo");
 
   const [page, setPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(10);
   const [flag, setFlag] = useState<boolean>(false);
 
-  const columnsTable: Row[] = useMemo(
-    () => [
-      {
-        key: "nameTodo",
-        title: "To do",
-        tooltip: (item: string) => item,
-        render: (item: string) => item,
-      },
-      {
-        key: "web",
-        title: "Web",
-        tooltip: (item: string) => item,
-        render: (item: string) => item,
-      },
-      {
-        key: "completed",
-        title: "Task",
-        render: (item: boolean, row) => {
-          console.log("clog6", row);
-          return item ? "✅ Done" : "⏳ Pending";
-        },
-      },
-    ],
-    [],
-  );
-
   function addData() {
     addTodo &&
       addTodo({
         nameTodo: "Test todo",
-        web: "httpsxxxx",
+        web: "httpszzzz",
         tel: "093",
+        topic: "",
+        reminderDate: -190000040449,
         priority: "low",
-        reminderDate: 0,
         place: "",
-        completed: true,
+        completed: false,
         completedAt: 11,
         createdAt: 11,
         updatedAt: 22,
-        topic: "",
 
         id: uuidv4(),
       });
@@ -69,18 +41,12 @@ const HomePage: React.FC = () => {
       <button onClick={() => addData()}>Add data</button>
       <button onClick={() => setFlag(() => !flag)}>test data</button>
       <br />
-      <TodoTable
-        uniqueKey="id"
-        columns={columnsTable || []}
-        setPage={setPage}
-        setPageSize={setPageSize}
+      <HomeBody
         page={page}
         pageSize={pageSize}
         setFlag={setFlag}
-        rowPerPages={ROW_PER_PAGES}
-        totalData={todoList?.length || 0}
-        rows={todoList || []}
-        initialFilters={initialFilters}
+        setPage={setPage}
+        setPageSize={setPageSize}
       />
     </div>
   );

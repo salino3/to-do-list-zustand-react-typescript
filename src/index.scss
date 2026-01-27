@@ -11,16 +11,19 @@
   --color-primary: #7c4dff;
   --color-secondary: #00e5ff;
   --color-error: #ff5252;
+  --color-btn: #2c1515;
 
   // Text Colors
   --text-main: #e1e1e6;
   --text-dim: #a8a8b3;
   --text-primary: #ffffff;
+  --color-03: pink;
 
   // Semantic Colors
   --success: #10b981;
   --danger: #f43f5e;
   --warning: #f59e0b;
+  --quite: #3743e9;
 
   // Shadows & Radii
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -61,6 +64,10 @@ h6,
 p {
   padding: 0;
   margin: 0;
+}
+
+a:link {
+  color: inherit;
 }
 
 html {

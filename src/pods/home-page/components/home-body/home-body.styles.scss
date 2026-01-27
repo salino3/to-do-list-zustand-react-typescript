@@ -1,0 +1,54 @@
+.rootHomeBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow-y: auto;
+  width: 1200px;
+  max-width: 95vw;
+  min-width: 300px;
+  height: 100%;
+  z-index: 0;
+
+  .table-container {
+    .containerActions {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 0.2rem;
+
+      .deleteItem,
+      .spanToggle,
+      .updateItem {
+        cursor: pointer;
+        padding: 2px;
+        border-radius: 3px;
+      }
+
+      .deleteItem {
+        background-color: var(--color-03);
+      }
+
+      .spanToggle {
+        background-color: var(--color-bg);
+      }
+
+      .updateItem {
+        background-color: var(--color-btn);
+      }
+    }
+    .priority-high {
+      background-color: var(--danger);
+      color: var(--text-primary);
+    }
+    .priority-medium {
+      background-color: var(--warning);
+      color: var(--text-primary);
+    }
+    .priority-low {
+      background-color: var(--quite);
+      color: var(--text-primary);
+    }
+  }
+}
