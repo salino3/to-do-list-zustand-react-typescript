@@ -13,7 +13,11 @@ import "./home.styles.scss";
 const ROW_PER_PAGES = [5, 10, 25];
 
 const HomePage: React.FC = () => {
-  const { todoList, addTodo } = useProviderSelector("todoList", "addTodo");
+  const { todoList, addTodo, setTodo } = useProviderSelector(
+    "todoList",
+    "addTodo",
+    "setTodo",
+  );
 
   const [page, setPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(10);
@@ -36,20 +40,19 @@ const HomePage: React.FC = () => {
       {
         key: "completed",
         title: "Task",
-        render: (item: boolean, row: ITodoItem) => {
-          console.log("clog6", row);
-          return (
-            <span
-              style={{
-                background: "black",
-                padding: "2px 1px",
-                borderRadius: "3px",
-              }}
-            >
-              {item ? "✅ Done" : "⏳ Pending"}
-            </span>
-          );
-        },
+        render: (item: boolean, row: ITodoItem) => (
+          <span
+            onClick={() => setTodo && setTodo(row)}
+            style={{
+              background: "black",
+              padding: "2px 1px",
+              borderRadius: "3px",
+              cursor: "pointer",
+            }}
+          >
+            {item ? "✅ Done" : "⏳ Pending"}
+          </span>
+        ),
       },
     ],
     [],

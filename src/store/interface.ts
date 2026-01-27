@@ -28,5 +28,6 @@ export interface ITodoItem {
 
 export interface PropsProvider {
   todoList: ITodoItem[];
-  addTodo: (todo: ITodoItem) => unknown;
+  addTodo: (todo: ITodoItem) => void;
+  setTodo: (todo: ITodoItem) => void;
 }
