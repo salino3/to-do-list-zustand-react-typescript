@@ -1,8 +1,12 @@
 import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-import { initialFilters, useProviderSelector } from "../../store";
-import { TodoTable, type Row } from "../../common-app";
+import {
+  initialFilters,
+  useProviderSelector,
+  type ITodoItem,
+} from "../../store";
+import { TodoTable, type Columns } from "../../common-app";
 import { routesApp } from "../../router";
 import "./home.styles.scss";
 
@@ -15,7 +19,7 @@ const HomePage: React.FC = () => {
   const [pageSize, setPageSize] = useState<number>(10);
   const [flag, setFlag] = useState<boolean>(false);
 
-  const columnsTable: Row[] = useMemo(
+  const columnsTable: Columns[] = useMemo(
     () => [
       {
         key: "nameTodo",
@@ -32,9 +36,19 @@ const HomePage: React.FC = () => {
       {
         key: "completed",
         title: "Task",
-        render: (item: boolean, row) => {
+        render: (item: boolean, row: ITodoItem) => {
           console.log("clog6", row);
-          return item ? "✅ Done" : "⏳ Pending";
+          return (
+            <span
+              style={{
+                background: "black",
+                padding: "2px 1px",
+                borderRadius: "3px",
+              }}
+            >
+              {item ? "✅ Done" : "⏳ Pending"}
+            </span>
+          );
         },
       },
     ],
@@ -47,7 +61,7 @@ const HomePage: React.FC = () => {
         nameTodo: "Test todo",
         web: "httpsxxxx",
         tel: "093",
-        priority: "low",
+        priority: "medium",
         reminderDate: 0,
         place: "",
         completed: true,
