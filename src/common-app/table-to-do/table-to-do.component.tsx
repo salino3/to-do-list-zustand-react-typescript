@@ -92,7 +92,7 @@ export const TodoTable: React.FC<TableProps> = memo(
                         const content =
                           column && column.render
                             ? column.render(values[column.key], values)
-                            : values[column.key];
+                            : (values[column.key] ?? "-");
                         const tooltip =
                           column && column.tooltip
                             ? column.tooltip(values[column.key], values)

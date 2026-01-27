@@ -57,14 +57,51 @@ export const HomeBody: React.FC<Props> = memo((props) => {
       {
         key: "nameTodo",
         title: "To do",
-        tooltip: (item: string) => item,
-        render: (item: string) => item,
       },
       {
         key: "web",
         title: "Web",
-        tooltip: (item: string) => item,
-        render: (item: string) => <a href={item}>{item}</a>,
+        // tooltip: (item: string) => item,
+        render: (item: string) => <a href={item}>🌐</a>,
+      },
+      {
+        key: "tel",
+        title: "Tel",
+        render: (item: string) => <a href={"tel:" + item}>🕿</a>,
+      },
+      // Conditional Topic Column - 'showTopic'
+      ...(false // <--- test example
+        ? [
+            {
+              key: "topic",
+              title: "Topic",
+              render: (item: string) => (item ? `📑 ${item}` : "-"),
+            },
+          ]
+        : []),
+      {
+        key: "place",
+        title: "Place",
+        render: (item: string) => <a href={item}>🗺️</a>,
+      },
+      {
+        // ⏰
+        key: "reminderDate",
+        title: "R. Date",
+        render: (item: number) => {
+          if (item === null || item === undefined) return "-";
+
+          const date = new Date(item);
+
+          return date.toLocaleString("es-ES", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: false,
+          });
+        },
       },
       {
         key: "actions",
@@ -74,7 +111,7 @@ export const HomeBody: React.FC<Props> = memo((props) => {
           return (
             <div className="containerActions">
               <button className="deleteItem" onClick={() => alert(row.id)}>
-                Delete
+                🗑️
               </button>
               <span
                 className="spanToggle"
@@ -83,7 +120,7 @@ export const HomeBody: React.FC<Props> = memo((props) => {
                 {row.completed ? "✅" : "⏳"}
               </span>
               <Link className="updateItem" to={routesApp.detailsTodo(row.id)}>
-                Update
+                📝
               </Link>
             </div>
           );

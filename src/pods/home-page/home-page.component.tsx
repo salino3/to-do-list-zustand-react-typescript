@@ -19,14 +19,14 @@ const HomePage: React.FC = () => {
         nameTodo: "Test todo",
         web: "httpszzzz",
         tel: "093",
-        priority: "high",
-        reminderDate: 0,
+        topic: "",
+        reminderDate: -190000040449,
+        priority: "low",
         place: "",
         completed: false,
         completedAt: 11,
         createdAt: 11,
         updatedAt: 22,
-        topic: "",
 
         id: uuidv4(),
       });

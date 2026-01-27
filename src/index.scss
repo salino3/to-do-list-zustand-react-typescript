@@ -66,8 +66,8 @@ p {
   margin: 0;
 }
 
-a {
-  color: var(--color-secondary);
+a:link {
+  color: inherit;
 }
 
 html {
