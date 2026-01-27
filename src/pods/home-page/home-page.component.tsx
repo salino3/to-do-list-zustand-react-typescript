@@ -23,6 +23,23 @@ const HomePage: React.FC = () => {
   const [pageSize, setPageSize] = useState<number>(10);
   const [flag, setFlag] = useState<boolean>(false);
 
+  function sortedTodoList(list: ITodoItem[] = []): ITodoItem[] {
+    // 1. Define the order weights
+    const priorityWeight: Record<string, number> = {
+      high: 3,
+      medium: 2,
+      low: 1,
+    };
+
+    return [...list].sort((a, b) => {
+      const weightA = priorityWeight[a.priority] ?? 0;
+      const weightB = priorityWeight[b.priority] ?? 0;
+
+      // To sort High to Low, do B - A
+      return weightB - weightA;
+    });
+  }
+
   const columnsTable: Columns[] = useMemo(
     () => [
       {
@@ -50,7 +67,7 @@ const HomePage: React.FC = () => {
               cursor: "pointer",
             }}
           >
-            {item ? "✅ Done" : "⏳ Pending"}
+            {item ? "✅ Done" : "⏳ Pending"}- {row?.priority}
           </span>
         ),
       },
@@ -62,9 +79,9 @@ const HomePage: React.FC = () => {
     addTodo &&
       addTodo({
         nameTodo: "Test todo",
-        web: "httpsxxxx",
+        web: "httpszzzz",
         tel: "093",
-        priority: "medium",
+        priority: "low",
         reminderDate: 0,
         place: "",
         completed: true,
@@ -96,7 +113,7 @@ const HomePage: React.FC = () => {
         setFlag={setFlag}
         rowPerPages={ROW_PER_PAGES}
         totalData={todoList?.length || 0}
-        rows={todoList || []}
+        rows={sortedTodoList(todoList || [])}
         initialFilters={initialFilters}
       />
     </div>
