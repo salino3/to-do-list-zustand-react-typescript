@@ -1,14 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
-import { useProviderSelector } from "../../store";
 import { HomeBody } from "./components";
 import { routesApp } from "../../router";
 import "./home.styles.scss";
 
 const HomePage: React.FC = () => {
-  const { addTodo } = useProviderSelector("addTodo");
-
   const [page, setPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(10);
   const [flag, setFlag] = useState<boolean>(false);
