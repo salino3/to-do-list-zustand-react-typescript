@@ -24,16 +24,22 @@ const routes: PropsRoutes[] = [
     element: <HomePage />,
     visibility: "public",
   },
-
   {
     path: routesApp?.detailsTodo(":id"),
     element: lazyLoad(
       import("../pods/details-todo-page/details-todo-page.component"),
       "DetailsTodoPage",
     ),
-    visibility: "private",
+    visibility: "public",
   },
-
+  {
+    path: routesApp?.createTodo,
+    element: lazyLoad(
+      import("../pods/details-todo-page/details-todo-page.component"),
+      "DetailsTodoPage",
+    ),
+    visibility: "public",
+  },
   {
     path: routesApp?.error404,
     element: <Navigate to={routesApp?.root} />,

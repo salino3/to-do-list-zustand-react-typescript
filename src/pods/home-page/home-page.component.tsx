@@ -34,9 +34,9 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="rootHomePage">
-      HomePage
-      <Link to={routesApp?.detailsTodo("test-route")}>
-        <button>Click</button>
+      Home Page
+      <Link to={routesApp?.createTodo}>
+        <button>Create To do Form</button>
       </Link>
       <button onClick={() => addData()}>Add data</button>
       <button onClick={() => setFlag(() => !flag)}>test data</button>

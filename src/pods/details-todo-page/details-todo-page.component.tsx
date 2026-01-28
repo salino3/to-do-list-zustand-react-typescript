@@ -4,12 +4,12 @@ import { FormTodo } from "./componentes";
 import "./details-todo-page.styles.scss";
 
 export const DetailsTodoPage: React.FC = () => {
-  const { id } = useParams();
+  const { id = "" } = useParams();
   return (
     <div className="rootDetailsTodoPage">
       <h1>{id ? "Update" : "Create"} To do</h1>
       <h2>{id}</h2>
-      <FormTodo />
+      <FormTodo id={id} />
     </div>
   );
 };

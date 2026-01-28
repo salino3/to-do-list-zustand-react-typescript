@@ -9,18 +9,19 @@ interface Props {
   id: string;
   type: React.HTMLInputTypeAttribute | undefined;
   pl: string | undefined;
+  lbl: string;
 }
 
 export const CustomInput: React.FC<Props> = (props) => {
-  const { value, handleChange, id, name, type, pl } = props;
+  const { value, handleChange, id, name, type, pl, lbl } = props;
 
   return (
     <div className={`boxInput boxInput${name}`}>
-      <label htmlFor={(id || name) + "ID"}>Name</label>
+      <label htmlFor={(id || name) + "ID"}>{lbl}</label>
       <input
         type={type}
         id={(id || name) + "ID"}
-        name="nameTodo"
+        name={name}
         value={value ?? ""}
         onChange={handleChange}
         placeholder={pl || name}
