@@ -38,7 +38,7 @@ interface TableProps {
   setPage?: React.Dispatch<React.SetStateAction<number>>;
   setPageSize?: React.Dispatch<React.SetStateAction<number>>;
   rowPerPages?: number[];
-  initialFilters: any;
+  initialTableFilters: any;
 }
 
 export const TodoTable: React.FC<TableProps> = memo(
@@ -53,7 +53,7 @@ export const TodoTable: React.FC<TableProps> = memo(
     // setPage,
     // setPageSize,
     // rowPerPages = [5, 10, 25, 50],
-    // initialFilters,
+    // initialTableFilters,
   }) => {
     console.log("clog1", rows);
     console.log("clog2", columns);
