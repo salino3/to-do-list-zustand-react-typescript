@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { intialValuesTodoForm, type ITodoItem } from "../../../../store";
+import { CustomInput } from "../../../../common";
 import "./form-todo.styles.scss";
 
 export const FormTodo: React.FC = () => {
@@ -17,16 +18,14 @@ export const FormTodo: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit} id="formDetailsTodoPage">
-      <div className="boxInput boxInputNameTodo">
-        <label htmlFor="nameTodoID">Name</label>
-        <input
-          type="text"
-          id="nameTodoID"
-          name="nameTodo"
-          value={formData.nameTodo}
-          onChange={handleChange("nameTodo")}
-        />
-      </div>
+      <CustomInput
+        name={"nameTodo"}
+        id={"nameTodo"}
+        value={formData.nameTodo}
+        type="text"
+        handleChange={handleChange("nameTodo")}
+        pl="Name To do"
+      />
     </form>
   );
 };
