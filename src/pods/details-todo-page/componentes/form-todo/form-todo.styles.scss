@@ -1,0 +1,16 @@
+#formDetailsTodoPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+  gap: 1rem;
+
+  .boxInput {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100%;
+  }
+}

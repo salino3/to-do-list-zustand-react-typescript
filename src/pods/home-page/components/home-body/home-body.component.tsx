@@ -1,7 +1,7 @@
 import React, { memo, useMemo } from "react";
 import { Link } from "react-router-dom";
 import {
-  initialFilters,
+  initialTableFilters,
   useProviderSelector,
   type ITodoItem,
 } from "../../../../store";
@@ -142,7 +142,7 @@ export const HomeBody: React.FC<Props> = memo((props) => {
         rowPerPages={ROW_PER_PAGES}
         totalData={todoList?.length || 0}
         rows={sortedTodoList(todoList || [])}
-        initialFilters={initialFilters}
+        initialTableFilters={initialTableFilters}
       />
     </div>
   );
