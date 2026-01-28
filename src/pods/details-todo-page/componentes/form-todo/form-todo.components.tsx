@@ -1,7 +1,8 @@
-import { memo, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { memo, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import {
+  initialTableFilters,
   intialValuesTodoForm,
   useProviderSelector,
   type ITodoItem,
@@ -11,15 +12,11 @@ import { CustomButton, CustomInput } from "../../../../common";
 import { routesApp } from "../../../../router";
 import "./form-todo.styles.scss";
 
-interface Props {
-  id: string;
-}
-
-export const FormTodo: React.FC<Props> = memo((props) => {
-  const { id } = props;
+export const FormTodo: React.FC = memo(() => {
+  const { id = "" } = useParams();
 
   const navigate = useNavigate();
-  const { addTodo } = useProviderSelector("addTodo");
+  const { todoList, addTodo } = useProviderSelector("todoList", "addTodo");
   const { fnPromise } = useAppUtilities();
 
   const [formData, setFormData] = useState<ITodoItem>(
@@ -47,11 +44,21 @@ export const FormTodo: React.FC<Props> = memo((props) => {
           addTodo({
             ...formData,
             id: uuidv4(),
-            reminderDate: new Date().getMilliseconds(),
+            reminderDate: new Date().getTime(),
           }),
       ).then(() => navigate(routesApp.root));
     }
   }
+
+  //
+  useEffect(() => {
+    if (id) {
+      const filteredTodo: ITodoItem =
+        (todoList?.find((todo) => todo.id === id) as ITodoItem) ??
+        initialTableFilters;
+      setFormData(filteredTodo);
+    }
+  });
 
   return (
     <form onSubmit={handleSubmit} id="formDetailsTodoPage">
