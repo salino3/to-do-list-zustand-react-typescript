@@ -13,32 +13,12 @@ const HomePage: React.FC = () => {
   const [pageSize, setPageSize] = useState<number>(10);
   const [flag, setFlag] = useState<boolean>(false);
 
-  function addData() {
-    addTodo &&
-      addTodo({
-        nameTodo: "Test todo",
-        web: "httpszzzz",
-        tel: "093",
-        topic: "",
-        reminderDate: -190000040449,
-        priority: "low",
-        place: "",
-        completed: false,
-        completedAt: 11,
-        createdAt: 11,
-        updatedAt: 22,
-
-        id: uuidv4(),
-      });
-  }
-
   return (
     <div className="rootHomePage">
       Home Page
       <Link to={routesApp?.createTodo}>
         <button>Create To do Form</button>
       </Link>
-      <button onClick={() => addData()}>Add data</button>
       <button onClick={() => setFlag(() => !flag)}>test data</button>
       <br />
       <HomeBody
