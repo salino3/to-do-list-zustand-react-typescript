@@ -1,1 +1,0 @@
-import{n as e}from"./index-D_vsa7b6.js";var t=e();const n=()=>(0,t.jsx)(`div`,{className:`rootDetailsTodoPage`,children:`rootDetailsTodoPage`});export{n as DetailsTodoPage};
