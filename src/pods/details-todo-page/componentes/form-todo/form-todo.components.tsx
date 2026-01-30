@@ -62,24 +62,26 @@ export const FormTodo: React.FC = memo(() => {
 
   return (
     <form onSubmit={handleSubmit} id="formDetailsTodoPage">
-      <CustomInput
-        name={"nameTodo"}
-        id={"nameTodo"}
-        value={formData.nameTodo}
-        lbl="Nmae To do"
-        type="text"
-        handleChange={handleChange("nameTodo")}
-        pl="Name To do"
-      />
-      <CustomInput
-        name={"web"}
-        id={"web"}
-        value={formData.web}
-        lbl="Web"
-        type="web"
-        handleChange={handleChange("web")}
-        pl="Name To do"
-      />
+      <div className="containerInputs">
+        <CustomInput
+          name={"nameTodo"}
+          id={"nameTodo"}
+          value={formData.nameTodo}
+          lbl="Nmae To do"
+          type="text"
+          handleChange={handleChange("nameTodo")}
+          pl="Name To do"
+        />
+        <CustomInput
+          name={"web"}
+          id={"web"}
+          value={formData.web}
+          lbl="Web"
+          type="web"
+          handleChange={handleChange("web")}
+          pl="Name To do"
+        />
+      </div>
 
       <div className="boxButtons">
         <CustomButton text="Submit" type="submit" />
