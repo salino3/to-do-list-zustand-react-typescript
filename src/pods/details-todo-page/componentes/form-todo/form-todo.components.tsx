@@ -153,8 +153,13 @@ export const FormTodo: React.FC = memo(() => {
           value={formData.priority}
           lbl="Priority"
           handleChange={handleChange("priority")}
+          click={(e: React.MouseEvent<HTMLSelectElement> | undefined) =>
+            e!.stopPropagation()
+          }
           pl="Priority"
           selectList={selectList}
+          ariaRq
+          ariaLabeInput="Choose the to do priority"
         />
       </div>
 

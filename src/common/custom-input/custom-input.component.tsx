@@ -26,6 +26,9 @@ interface Props {
   select?: boolean;
   click?: React.MouseEventHandler<HTMLSelectElement> | undefined;
   selectList?: SelectList[];
+  ariaRq?: boolean | undefined;
+  readonly?: boolean | undefined;
+  ariaLabeInput?: string;
 }
 
 export const CustomInput: React.FC<Props> = (props) => {
@@ -40,6 +43,9 @@ export const CustomInput: React.FC<Props> = (props) => {
     select = false,
     click,
     selectList,
+    ariaRq,
+    readonly,
+    ariaLabeInput,
   } = props;
 
   return (
@@ -47,21 +53,17 @@ export const CustomInput: React.FC<Props> = (props) => {
       <label htmlFor={(id || name) + "ID"}>{lbl}</label>
       {select ? (
         <select
-          // className={`${checkError ? "inputError" : ""}
-          //     ${readonly ? "readonly" : ""}
-          //   `}
           id={name + "ID"}
           name={name}
           value={value ?? ""}
           onClick={click}
           onChange={handleChange}
-          // aria-label={ariaLabeInput}
-          // readOnly={readonly}
-          // aria-required={ariaRq}
+          aria-label={ariaLabeInput}
+          aria-required={ariaRq}
           style={{ color: value === "" || !value ? "gray" : "black" }}
         >
           <option value="" disabled hidden>
-            Priority
+            {pl}
           </option>
           {selectList &&
             selectList?.length > 0 &&
@@ -83,6 +85,8 @@ export const CustomInput: React.FC<Props> = (props) => {
           value={value ?? ""}
           onChange={handleChange}
           placeholder={pl || name}
+          readOnly={readonly}
+          aria-required={ariaRq}
         />
       )}
     </div>
