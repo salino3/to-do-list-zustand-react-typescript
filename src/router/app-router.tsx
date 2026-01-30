@@ -1,4 +1,4 @@
-import React, { lazy, type JSX } from "react";
+import React, { lazy, type JSX, Suspense } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { ContainerLayout } from "../layout";
 import { routesApp } from ".";
@@ -49,14 +49,16 @@ const routes: PropsRoutes[] = [
 
 export const AppRoutes: React.FC = () => {
   return (
-    <ContainerLayout>
-      <Routes>
-        {routes &&
-          routes?.length > 0 &&
-          routes.map(({ path, element }) => {
-            return <Route key={path} path={path} element={element} />;
-          })}
-      </Routes>
-    </ContainerLayout>
+    <Suspense fallback={null}>
+      <ContainerLayout>
+        <Routes>
+          {routes &&
+            routes?.length > 0 &&
+            routes.map(({ path, element }) => {
+              return <Route key={path} path={path} element={element} />;
+            })}
+        </Routes>
+      </ContainerLayout>
+    </Suspense>
   );
 };

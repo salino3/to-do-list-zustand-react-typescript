@@ -1,4 +1,4 @@
-import React, { startTransition, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ModalApp } from "../../common-app";
 import { FormTodo } from "./componentes";
@@ -12,9 +12,7 @@ export const DetailsTodoPage: React.FC = () => {
   const triggerBtnRef = useRef<HTMLButtonElement>(null);
 
   const handleOpenChange = (newOpenState: boolean) => {
-    startTransition(() => {
-      setIsOpen(newOpenState);
-    });
+    setIsOpen(newOpenState);
 
     // Manual Focus Restoration: If closing, return focus to the trigger button
     if (!newOpenState) {
