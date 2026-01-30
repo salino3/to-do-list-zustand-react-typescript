@@ -23,7 +23,6 @@ interface Props {
   type?: React.HTMLInputTypeAttribute | undefined;
   pl: string | undefined;
   lbl: string;
-  select?: boolean;
   click?: React.MouseEventHandler<HTMLSelectElement> | undefined;
   selectList?: SelectList[];
   ariaRq?: boolean | undefined;
@@ -41,7 +40,7 @@ export const CustomInput: React.FC<Props> = (props) => {
     type,
     pl,
     lbl,
-    select = false,
+
     click,
     selectList,
     ariaRq,
@@ -55,7 +54,7 @@ export const CustomInput: React.FC<Props> = (props) => {
   return (
     <div className={`boxInput boxInput${name}`}>
       <label htmlFor={(id || name) + "ID"}>{lbl}</label>
-      {select ? (
+      {!type ? (
         <select
           id={name + "ID"}
           name={name}
