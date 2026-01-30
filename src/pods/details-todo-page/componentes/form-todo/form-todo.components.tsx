@@ -81,6 +81,42 @@ export const FormTodo: React.FC = memo(() => {
           handleChange={handleChange("web")}
           pl="Name To do"
         />
+        <CustomInput
+          name={"tel"}
+          id={"tel"}
+          value={formData.tel}
+          lbl="Telephone"
+          type="tel"
+          handleChange={handleChange("tel")}
+          pl="Telephone"
+        />
+        <CustomInput
+          name={"email"}
+          id={"email"}
+          value={formData.email}
+          lbl="Email"
+          type="email"
+          handleChange={handleChange("email")}
+          pl="Email"
+        />
+        <CustomInput
+          name={"Topic"}
+          id={"topic"}
+          value={formData.topic}
+          lbl="Topic"
+          type="text"
+          handleChange={handleChange("topic")}
+          pl="Topic"
+        />
+        <CustomInput
+          name={"Place"}
+          id={"place"}
+          value={formData.place}
+          lbl="place"
+          type="text"
+          handleChange={handleChange("place")}
+          pl="Place"
+        />
       </div>
 
       <div className="boxButtons">
