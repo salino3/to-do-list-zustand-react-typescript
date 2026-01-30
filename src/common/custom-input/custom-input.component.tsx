@@ -23,9 +23,12 @@ interface Props {
   type?: React.HTMLInputTypeAttribute | undefined;
   pl: string | undefined;
   lbl: string;
-  select?: boolean;
   click?: React.MouseEventHandler<HTMLSelectElement> | undefined;
   selectList?: SelectList[];
+  ariaRq?: boolean | undefined;
+  readonly?: boolean | undefined;
+  ariaLabeInput?: string;
+  error?: string;
 }
 
 export const CustomInput: React.FC<Props> = (props) => {
@@ -37,31 +40,35 @@ export const CustomInput: React.FC<Props> = (props) => {
     type,
     pl,
     lbl,
-    select = false,
+
     click,
     selectList,
+    ariaRq,
+    readonly,
+    ariaLabeInput,
+    error,
   } = props;
+
+  const errorId = `${name}-error-msg`;
 
   return (
     <div className={`boxInput boxInput${name}`}>
       <label htmlFor={(id || name) + "ID"}>{lbl}</label>
-      {select ? (
+      {!type ? (
         <select
-          // className={`${checkError ? "inputError" : ""}
-          //     ${readonly ? "readonly" : ""}
-          //   `}
           id={name + "ID"}
           name={name}
           value={value ?? ""}
           onClick={click}
           onChange={handleChange}
-          // aria-label={ariaLabeInput}
-          // readOnly={readonly}
-          // aria-required={ariaRq}
+          aria-label={ariaLabeInput}
+          aria-required={ariaRq}
           style={{ color: value === "" || !value ? "gray" : "black" }}
+          aria-invalid={!!error}
+          aria-describedby={error ? errorId : undefined}
         >
           <option value="" disabled hidden>
-            Priority
+            {pl}
           </option>
           {selectList &&
             selectList?.length > 0 &&
@@ -83,8 +90,19 @@ export const CustomInput: React.FC<Props> = (props) => {
           value={value ?? ""}
           onChange={handleChange}
           placeholder={pl || name}
+          readOnly={readonly}
+          aria-required={ariaRq}
+          aria-invalid={!!error}
+          aria-describedby={error ? errorId : undefined}
         />
       )}
+      <div className="boxErrorMessage">
+        {error && (
+          <span id={errorId} role="alert">
+            {error}
+          </span>
+        )}
+      </div>
     </div>
   );
 };

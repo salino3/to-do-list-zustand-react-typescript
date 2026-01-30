@@ -4,26 +4,14 @@ import { v4 as uuidv4 } from "uuid";
 import {
   initialTableFilters,
   intialValuesTodoForm,
-  Priority,
   useProviderSelector,
   type ITodoItem,
 } from "../../../../store";
 import { useAppUtilities } from "../../../../hooks";
-import { CustomButton, CustomInput, type SelectList } from "../../../../common";
+import { CustomButton, CustomInput } from "../../../../common";
 import { routesApp } from "../../../../router";
+import { listInputs } from "./data-component";
 import "./form-todo.styles.scss";
-
-const selectList: SelectList[] = [
-  {
-    optgroup: "Priority",
-    content: Object.values(Priority).map((c) => {
-      return {
-        key: c,
-        text: c === "" ? "..." : c.charAt(0).toUpperCase() + c.slice(1),
-      };
-    }),
-  },
-];
 
 export const FormTodo: React.FC = memo(() => {
   const { id = "" } = useParams();
@@ -34,6 +22,7 @@ export const FormTodo: React.FC = memo(() => {
     "addTodo",
     "updateDataTodo",
   );
+
   const { fnPromise } = useAppUtilities();
 
   const [formData, setFormData] = useState<ITodoItem>(
@@ -83,79 +72,23 @@ export const FormTodo: React.FC = memo(() => {
   return (
     <form onSubmit={handleSubmit} id="formDetailsTodoPage">
       <div className="containerInputs">
-        <CustomInput
-          name={"nameTodo"}
-          id={"nameTodo"}
-          value={formData.nameTodo}
-          lbl="Nmae To do"
-          type="text"
-          handleChange={handleChange("nameTodo")}
-          pl="Name To do"
-        />
-        <CustomInput
-          name={"web"}
-          id={"web"}
-          value={formData.web}
-          lbl="Web"
-          type="web"
-          handleChange={handleChange("web")}
-          pl="Name To do"
-        />
-        <CustomInput
-          name={"tel"}
-          id={"tel"}
-          value={formData.tel}
-          lbl="Telephone"
-          type="tel"
-          handleChange={handleChange("tel")}
-          pl="Telephone"
-        />
-        <CustomInput
-          name={"email"}
-          id={"email"}
-          value={formData.email}
-          lbl="Email"
-          type="email"
-          handleChange={handleChange("email")}
-          pl="Email"
-        />
-        <CustomInput
-          name={"Topic"}
-          id={"topic"}
-          value={formData.topic}
-          lbl="Topic"
-          type="text"
-          handleChange={handleChange("topic")}
-          pl="Topic"
-        />
-        <CustomInput
-          name={"Place"}
-          id={"place"}
-          value={formData.place}
-          lbl="Place"
-          type="text"
-          handleChange={handleChange("place")}
-          pl="Place"
-        />
-        <CustomInput
-          name={"reminderDate"}
-          id={"place"}
-          value={formData.reminderDate}
-          lbl="R. Date"
-          type="datetime-local"
-          handleChange={handleChange("reminderDate")}
-          pl="R. Date"
-        />
-        <CustomInput
-          select
-          name={"priority"}
-          id={"priority"}
-          value={formData.priority}
-          lbl="Priority"
-          handleChange={handleChange("priority")}
-          pl="Priority"
-          selectList={selectList}
-        />
+        {listInputs &&
+          listInputs.length > 0 &&
+          listInputs.map((input) => (
+            <CustomInput
+              name={input.name}
+              id={input.name}
+              value={(formData[input.name as keyof ITodoItem] as any) ?? ""}
+              lbl={input.lbl}
+              handleChange={handleChange(input.name as keyof ITodoItem)}
+              click={input.click}
+              pl={input.pl}
+              selectList={input.selectList}
+              ariaRq={input.ariaRq}
+              type={input.type}
+              ariaLabeInput={input.ariaLabeInput}
+            />
+          ))}
       </div>
 
       <div className="boxButtons">
