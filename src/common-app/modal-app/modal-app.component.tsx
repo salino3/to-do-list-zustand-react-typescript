@@ -1,42 +1,51 @@
 import type React from "react";
 import * as Dialog from "@radix-ui/react-dialog";
-import "./Modal.css";
+import "./modal-app.styles.scss";
 
-export const ModalApp: React.FC = () => (
-  <Dialog.Root>
-    {/* The trigger automatically handles aria-haspopup and aria-expanded */}
-    <Dialog.Trigger className="Button">Open Settings</Dialog.Trigger>
+interface Props {
+  open: boolean;
+  onOpenChange: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-    <Dialog.Portal>
-      {/* Overlay covers the background */}
-      <Dialog.Overlay className="DialogOverlay" />
+export const ModalApp: React.FC<Props> = (props) => {
+  const { open, onOpenChange } = props;
 
-      <Dialog.Content className="DialogContent">
-        <Dialog.Title className="DialogTitle">User Settings</Dialog.Title>
-        <Dialog.Description className="DialogDescription">
-          Make changes to your profile here. Click save when you're done.
-        </Dialog.Description>
+  return (
+    <Dialog.Root open={open} onOpenChange={onOpenChange}>
+      {/* The trigger automatically handles aria-haspopup and aria-expanded */}
+      <Dialog.Trigger className="Button">Open Settings</Dialog.Trigger>
 
-        {/* Your custom form or content */}
-        <div style={{ marginTop: "20px" }}>
-          <label htmlFor="name">Name</label>
-          <input id="name" type="text" />
-        </div>
+      <Dialog.Portal>
+        {/* Overlay covers the background */}
+        <Dialog.Overlay className="DialogOverlay" />
 
-        <div className="Actions">
+        <Dialog.Content className="DialogContent">
+          <Dialog.Title className="DialogTitle">User Settings</Dialog.Title>
+          <Dialog.Description className="DialogDescription">
+            Make changes to your profile here. Click save when you're done.
+          </Dialog.Description>
+
+          {/* Your custom form or content */}
+          <div style={{ marginTop: "20px" }}>
+            <label htmlFor="name">Name</label>
+            <input id="name" type="text" />
+          </div>
+
+          <div className="Actions">
+            <Dialog.Close asChild>
+              <button className="Button secondary">Cancel</button>
+            </Dialog.Close>
+            <button className="Button primary">Save changes</button>
+          </div>
+
+          {/* Accessibility check: The close icon button must have an aria-label */}
           <Dialog.Close asChild>
-            <button className="Button secondary">Cancel</button>
+            <button className="IconButton" aria-label="Close">
+              X
+            </button>
           </Dialog.Close>
-          <button className="Button primary">Save changes</button>
-        </div>
-
-        {/* Accessibility check: The close icon button must have an aria-label */}
-        <Dialog.Close asChild>
-          <button className="IconButton" aria-label="Close">
-            X
-          </button>
-        </Dialog.Close>
-      </Dialog.Content>
-    </Dialog.Portal>
-  </Dialog.Root>
-);
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
+  );
+};
