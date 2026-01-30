@@ -4,7 +4,7 @@ import "./modal-app.styles.scss";
 
 interface Props {
   open: boolean;
-  onOpenChange: React.Dispatch<React.SetStateAction<boolean>>;
+  onOpenChange: (newOpenState: boolean) => void;
 }
 
 export const ModalApp: React.FC<Props> = (props) => {
@@ -12,8 +12,6 @@ export const ModalApp: React.FC<Props> = (props) => {
 
   return (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
-      {/* The trigger automatically handles aria-haspopup and aria-expanded */}
-
       <Dialog.Portal>
         {/* Overlay covers the background */}
         <Dialog.Overlay className="DialogOverlay" />
