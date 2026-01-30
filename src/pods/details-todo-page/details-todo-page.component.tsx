@@ -13,7 +13,7 @@ export const DetailsTodoPage: React.FC = () => {
     <div className="rootDetailsTodoPage">
       <h1>{id ? "Update" : "Create"} To do</h1>
       <h2>{id}</h2>
-      <button onClick={() => setIsOpen(true)}>Edit Item</button>
+      <button onClick={() => setIsOpen(true)}>Open Modal</button>
 
       {isOpen && <ModalApp open={isOpen} onOpenChange={setIsOpen} />}
       <FormTodo />

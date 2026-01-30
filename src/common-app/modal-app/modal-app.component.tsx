@@ -13,7 +13,6 @@ export const ModalApp: React.FC<Props> = (props) => {
   return (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
       {/* The trigger automatically handles aria-haspopup and aria-expanded */}
-      <Dialog.Trigger className="Button">Open Settings</Dialog.Trigger>
 
       <Dialog.Portal>
         {/* Overlay covers the background */}
