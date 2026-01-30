@@ -5,14 +5,14 @@ const OFFLINE_URL = '/to-do-list-zustand-react-typescript/404.html';
 // List of files to precache automatically
 const urlsToCache = [
   ...[
-  "/to-do-list-zustand-react-typescript/assets/details-todo-page-CLuiS7l3.css",
-  "/to-do-list-zustand-react-typescript/assets/details-todo-page.component-CX6Hi7W8.js",
+  "/to-do-list-zustand-react-typescript/assets/details-todo-page-D6vXfHzE.css",
+  "/to-do-list-zustand-react-typescript/assets/details-todo-page.component-uVt-0xfc.js",
   "/to-do-list-zustand-react-typescript/assets/home-page-hibq1Fjl.css",
-  "/to-do-list-zustand-react-typescript/assets/home-page.component-Bcfdm-On.js",
+  "/to-do-list-zustand-react-typescript/assets/home-page.component-CWupb5YY.js",
   "/to-do-list-zustand-react-typescript/assets/index-aQHlGYWB.css",
-  "/to-do-list-zustand-react-typescript/assets/index-BfVWbfL3.js",
+  "/to-do-list-zustand-react-typescript/assets/index-C_ah2L2s.js",
+  "/to-do-list-zustand-react-typescript/assets/store-2edgKaQx.js",
   "/to-do-list-zustand-react-typescript/assets/store-Dj4s00fc.css",
-  "/to-do-list-zustand-react-typescript/assets/store-DjSG1uuu.js",
   "/to-do-list-zustand-react-typescript/index.html"
 ],
   OFFLINE_URL
