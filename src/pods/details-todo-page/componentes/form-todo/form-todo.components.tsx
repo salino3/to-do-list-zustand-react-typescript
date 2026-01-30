@@ -4,13 +4,26 @@ import { v4 as uuidv4 } from "uuid";
 import {
   initialTableFilters,
   intialValuesTodoForm,
+  Priority,
   useProviderSelector,
   type ITodoItem,
 } from "../../../../store";
 import { useAppUtilities } from "../../../../hooks";
-import { CustomButton, CustomInput } from "../../../../common";
+import { CustomButton, CustomInput, type SelectList } from "../../../../common";
 import { routesApp } from "../../../../router";
 import "./form-todo.styles.scss";
+
+const selectList: SelectList[] = [
+  {
+    optgroup: "Priority",
+    content: Object.values(Priority).map((c) => {
+      return {
+        key: c,
+        text: c === "" ? "..." : c.charAt(0).toUpperCase() + c.slice(1),
+      };
+    }),
+  },
+];
 
 export const FormTodo: React.FC = memo(() => {
   const { id = "" } = useParams();
@@ -26,7 +39,9 @@ export const FormTodo: React.FC = memo(() => {
   //
   const handleChange =
     (key: keyof ITodoItem) =>
-    (e: React.ChangeEvent<HTMLInputElement> | undefined) => {
+    (
+      e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement> | undefined,
+    ) => {
       setFormData((prev: ITodoItem) => ({
         ...prev,
         [key]: e?.target.value,
@@ -124,6 +139,16 @@ export const FormTodo: React.FC = memo(() => {
           type="datetime-local"
           handleChange={handleChange("reminderDate")}
           pl="R. Date"
+        />
+        <CustomInput
+          select
+          name={"priority"}
+          id={"priority"}
+          value={formData.priority}
+          lbl="Priority"
+          handleChange={handleChange("priority")}
+          pl="Priority"
+          selectList={selectList}
         />
       </div>
 
