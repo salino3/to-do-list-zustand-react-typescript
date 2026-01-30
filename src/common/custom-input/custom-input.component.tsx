@@ -29,6 +29,7 @@ interface Props {
   ariaRq?: boolean | undefined;
   readonly?: boolean | undefined;
   ariaLabeInput?: string;
+  error?: string;
 }
 
 export const CustomInput: React.FC<Props> = (props) => {
@@ -46,7 +47,10 @@ export const CustomInput: React.FC<Props> = (props) => {
     ariaRq,
     readonly,
     ariaLabeInput,
+    error,
   } = props;
+
+  const errorId = `${name}-error-msg`;
 
   return (
     <div className={`boxInput boxInput${name}`}>
@@ -61,6 +65,8 @@ export const CustomInput: React.FC<Props> = (props) => {
           aria-label={ariaLabeInput}
           aria-required={ariaRq}
           style={{ color: value === "" || !value ? "gray" : "black" }}
+          aria-invalid={!!error}
+          aria-describedby={error ? errorId : undefined}
         >
           <option value="" disabled hidden>
             {pl}
@@ -87,8 +93,17 @@ export const CustomInput: React.FC<Props> = (props) => {
           placeholder={pl || name}
           readOnly={readonly}
           aria-required={ariaRq}
+          aria-invalid={!!error}
+          aria-describedby={error ? errorId : undefined}
         />
       )}
+      <div className="boxErrorMessage">
+        {error && (
+          <span id={errorId} role="alert">
+            {error}
+          </span>
+        )}
+      </div>
     </div>
   );
 };
