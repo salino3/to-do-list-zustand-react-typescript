@@ -66,7 +66,7 @@ export const listInputs: ListInput[] = [
     ariaLabeInput: "Text the email relationated with the task",
   },
   {
-    name: "place",
+    name: "topic",
     selectList: [],
     ariaRq: false,
     pl: "Topic",
