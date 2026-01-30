@@ -1,6 +1,5 @@
 import type React from "react";
 import "./custom-input.styles.scss";
-import type { ITodoItem } from "../../store";
 
 interface Props {
   value: string | number | readonly string[] | undefined;
