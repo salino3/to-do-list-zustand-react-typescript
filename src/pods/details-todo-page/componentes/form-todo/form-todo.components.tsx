@@ -72,7 +72,7 @@ export const FormTodo: React.FC = memo(() => {
         initialTableFilters;
       setFormData(filteredTodo);
     }
-  });
+  }, [id]);
 
   return (
     <form onSubmit={handleSubmit} id="formDetailsTodoPage">
