@@ -27,9 +27,9 @@ export const DetailsTodoPage: React.FC = () => {
       <h1>{id ? "Update" : "Create"} To do</h1>
       <h2>{id}</h2>
       {/* Attach the ref to the button */}
-      <button ref={triggerBtnRef} onClick={() => setIsOpen(true)}>
+      {/* <button ref={triggerBtnRef} onClick={() => setIsOpen(true)}>
         Open Settings
-      </button>
+      </button> */}
       {isOpen && <ModalApp open={isOpen} onOpenChange={handleOpenChange} />}
       <FormTodo />
     </div>
