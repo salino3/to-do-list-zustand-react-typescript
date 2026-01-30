@@ -11,12 +11,14 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="rootHomePage">
-      Home Page
-      <Link to={routesApp?.createTodo}>
-        <button>Create To do Form</button>
-      </Link>
-      <button onClick={() => setFlag(() => !flag)}>test data</button>
-      <br />
+      <h1>To dos</h1>
+      <header>
+        <Link to={routesApp?.createTodo}>
+          <button>Create To do Form</button>
+        </Link>
+        <button onClick={() => setFlag(() => !flag)}>test data</button>
+      </header>
+
       <HomeBody
         page={page}
         pageSize={pageSize}

@@ -4,4 +4,9 @@
   justify-content: center;
   align-items: flex-start;
   height: 100%;
+
+  input,
+  select {
+    width: 300px;
+  }
 }
