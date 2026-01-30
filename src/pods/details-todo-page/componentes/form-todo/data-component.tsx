@@ -15,7 +15,7 @@ interface ListInput {
 }
 
 //
-const selectList: SelectList[] = [
+const priorityOptions: SelectList[] = [
   {
     optgroup: "Priority",
     content: Object.values(Priority).map((c) => {
@@ -98,7 +98,7 @@ export const listInputs: ListInput[] = [
     click: (e: React.MouseEvent<HTMLSelectElement> | undefined) =>
       e!.stopPropagation(),
     pl: "Priority",
-    selectList: selectList,
+    selectList: priorityOptions,
     ariaRq: true,
     type: "",
     ariaLabeInput: "Choose the to do priority",
