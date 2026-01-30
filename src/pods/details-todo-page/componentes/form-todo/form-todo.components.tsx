@@ -112,10 +112,19 @@ export const FormTodo: React.FC = memo(() => {
           name={"Place"}
           id={"place"}
           value={formData.place}
-          lbl="place"
+          lbl="Place"
           type="text"
           handleChange={handleChange("place")}
           pl="Place"
+        />
+        <CustomInput
+          name={"reminderDate"}
+          id={"place"}
+          value={formData.reminderDate}
+          lbl="R. Date"
+          type="date"
+          handleChange={handleChange("reminderDate")}
+          pl="R. Date"
         />
       </div>
 

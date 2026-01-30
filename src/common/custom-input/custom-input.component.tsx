@@ -2,7 +2,7 @@ import type React from "react";
 import "./custom-input.styles.scss";
 
 interface Props {
-  value: string | number | readonly string[] | undefined;
+  value: string | number | readonly string[] | undefined | null;
   handleChange: React.ChangeEventHandler<HTMLInputElement> | undefined;
   name: string;
   id: string;
