@@ -44,7 +44,6 @@ export const FormTodo: React.FC = memo(() => {
           addTodo({
             ...formData,
             id: uuidv4(),
-            reminderDate: new Date().getTime(),
           }),
       ).then(() => navigate(routesApp.root));
     }
@@ -122,7 +121,7 @@ export const FormTodo: React.FC = memo(() => {
           id={"place"}
           value={formData.reminderDate}
           lbl="R. Date"
-          type="date"
+          type="datetime-local"
           handleChange={handleChange("reminderDate")}
           pl="R. Date"
         />
