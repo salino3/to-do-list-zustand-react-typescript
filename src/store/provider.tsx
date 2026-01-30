@@ -20,6 +20,12 @@ export const useProvider = create<PropsProvider>()(
             item.completed = !item.completed;
           }
         }),
+      updateDataTodo: (todo: ITodoItem) =>
+        set((state) => ({
+          todoList: state.todoList.map((t: ITodoItem) =>
+            t.id === todo.id ? todo : t,
+          ),
+        })),
     })),
     {
       name: "to-do-storage",

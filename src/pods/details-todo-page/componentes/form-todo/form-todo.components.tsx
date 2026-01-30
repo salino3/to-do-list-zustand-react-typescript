@@ -29,7 +29,11 @@ export const FormTodo: React.FC = memo(() => {
   const { id = "" } = useParams();
 
   const navigate = useNavigate();
-  const { todoList, addTodo } = useProviderSelector("todoList", "addTodo");
+  const { todoList, addTodo, updateDataTodo } = useProviderSelector(
+    "todoList",
+    "addTodo",
+    "updateDataTodo",
+  );
   const { fnPromise } = useAppUtilities();
 
   const [formData, setFormData] = useState<ITodoItem>(
@@ -52,7 +56,9 @@ export const FormTodo: React.FC = memo(() => {
   function handleSubmit(e: React.FormEvent<HTMLFormElement> | undefined) {
     e?.preventDefault();
     if (id) {
-      alert("Update: " + JSON.stringify(formData));
+      fnPromise(updateDataTodo && updateDataTodo(formData)).then(() =>
+        navigate(routesApp.root),
+      );
     } else {
       fnPromise(
         addTodo &&
