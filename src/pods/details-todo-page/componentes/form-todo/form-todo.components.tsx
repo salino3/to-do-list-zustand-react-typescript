@@ -4,15 +4,14 @@ import { v4 as uuidv4 } from "uuid";
 import {
   initialTableFilters,
   intialValuesTodoForm,
-  Priority,
   useProviderSelector,
   type ITodoItem,
 } from "../../../../store";
 import { useAppUtilities } from "../../../../hooks";
 import { CustomButton, CustomInput } from "../../../../common";
 import { routesApp } from "../../../../router";
-import "./form-todo.styles.scss";
 import { listInputs } from "./data-component";
+import "./form-todo.styles.scss";
 
 export const FormTodo: React.FC = memo(() => {
   const { id = "" } = useParams();
@@ -23,6 +22,7 @@ export const FormTodo: React.FC = memo(() => {
     "addTodo",
     "updateDataTodo",
   );
+
   const { fnPromise } = useAppUtilities();
 
   const [formData, setFormData] = useState<ITodoItem>(
