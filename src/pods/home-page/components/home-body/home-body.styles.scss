@@ -11,44 +11,57 @@
   z-index: 0;
 
   .table-container {
-    .containerActions {
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-start;
-      align-items: center;
-      gap: 0.2rem;
+    .custom-table {
+      overflow-x: auto;
+      position: relative;
+      tbody {
+        .table_x02_actions {
+          position: sticky;
+          right: 0; // Stick to the right side
+          z-index: 2; // Stay above other scrolling cells
+        }
+        td {
+          .containerActions {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 0.2rem;
+            .deleteItem,
+            .spanToggle,
+            .updateItem {
+              cursor: pointer;
+              padding: 2px;
+              border-radius: 3px;
+            }
 
-      .deleteItem,
-      .spanToggle,
-      .updateItem {
-        cursor: pointer;
-        padding: 2px;
-        border-radius: 3px;
-      }
+            .deleteItem {
+              background-color: var(--color-03);
+            }
 
-      .deleteItem {
-        background-color: var(--color-03);
-      }
+            .spanToggle {
+              background-color: var(--color-bg);
+            }
 
-      .spanToggle {
-        background-color: var(--color-bg);
-      }
+            .updateItem {
+              background-color: var(--color-btn);
+            }
+          }
+        }
 
-      .updateItem {
-        background-color: var(--color-btn);
+        .priority-high {
+          background-color: var(--danger);
+          color: var(--text-primary);
+        }
+        .priority-medium {
+          background-color: var(--warning);
+          color: var(--text-primary);
+        }
+        .priority-low {
+          background-color: var(--quite);
+          color: var(--text-primary);
+        }
       }
-    }
-    .priority-high {
-      background-color: var(--danger);
-      color: var(--text-primary);
-    }
-    .priority-medium {
-      background-color: var(--warning);
-      color: var(--text-primary);
-    }
-    .priority-low {
-      background-color: var(--quite);
-      color: var(--text-primary);
     }
   }
 }
