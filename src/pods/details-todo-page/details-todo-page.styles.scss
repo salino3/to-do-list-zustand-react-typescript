@@ -1,4 +1,35 @@
 .rootDetailsTodoPage {
+  header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    .boxLink {
+      position: absolute;
+      align-self: flex-start;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      a {
+        font-size: 2rem;
+        width: min-content;
+        text-decoration: none;
+      }
+    }
+
+    h1 {
+      white-space: nowrap;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

@@ -1,8 +1,9 @@
 import React, { useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { ModalApp } from "../../common-app";
 import { FormTodo } from "./componentes";
 import "./details-todo-page.styles.scss";
+import { routesApp } from "../../router";
 
 export const DetailsTodoPage: React.FC = () => {
   const { id = "" } = useParams();
@@ -24,8 +25,13 @@ export const DetailsTodoPage: React.FC = () => {
 
   return (
     <div className="rootDetailsTodoPage">
-      <h1>{id ? "Update" : "Create"} To do</h1>
-      <h2>{id}</h2>
+      <header>
+        <div className="boxLink">
+          <Link to={routesApp.root}>⬅️</Link>
+        </div>
+        <h1>{id ? "Update" : "Create"} To do</h1>
+      </header>
+
       {/* Attach the ref to the button */}
       {/* <button ref={triggerBtnRef} onClick={() => setIsOpen(true)}>
         Open Settings
