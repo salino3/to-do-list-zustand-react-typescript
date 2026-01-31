@@ -16,6 +16,23 @@
       position: relative;
       tbody {
         tr {
+          &.completedRow {
+            opacity: 0.4;
+          }
+
+          &.priority-high {
+            background-color: var(--danger);
+            color: var(--text-primary);
+          }
+          &.priority-medium {
+            background-color: var(--warning);
+            color: var(--text-primary);
+          }
+          &.priority-low {
+            background-color: var(--quite);
+            color: var(--text-primary);
+          }
+
           .table_x02_actions {
             position: sticky;
             right: 0; // Stick to the right side
@@ -64,19 +81,6 @@
               }
             }
           }
-        }
-
-        .priority-high {
-          background-color: var(--danger);
-          color: var(--text-primary);
-        }
-        .priority-medium {
-          background-color: var(--warning);
-          color: var(--text-primary);
-        }
-        .priority-low {
-          background-color: var(--quite);
-          color: var(--text-primary);
         }
       }
     }

@@ -144,6 +144,9 @@ export const HomeBody: React.FC<Props> = memo((props) => {
         totalData={todoList?.length || 0}
         rows={sortedTodoList(todoList || [])}
         initialTableFilters={initialTableFilters}
+        customStylesTableRowElement={(item: ITodoItem) =>
+          !!item.completed ? "completedRow" : ""
+        }
       />
     </div>
   );
