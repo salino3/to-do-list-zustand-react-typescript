@@ -84,6 +84,7 @@ html {
 body {
   // font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji",
   //   sans-serif, Arial, Helvetica, sans-serif !important;
-
+  background-color: var(--color-bg);
+  color: var(--text-primary);
   font-family: Arial, Helvetica, sans-serif !important;
 }

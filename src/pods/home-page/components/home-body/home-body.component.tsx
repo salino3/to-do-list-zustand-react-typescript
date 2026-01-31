@@ -105,6 +105,7 @@ export const HomeBody: React.FC<Props> = memo((props) => {
       {
         key: "actions",
         title: "Actions",
+        valueClass: (_: undefined, row: ITodoItem) => `actions-${row.priority}`,
         render: (_: undefined, row: ITodoItem) => {
           console.log("clog!!!");
           return (
@@ -143,6 +144,9 @@ export const HomeBody: React.FC<Props> = memo((props) => {
         totalData={todoList?.length || 0}
         rows={sortedTodoList(todoList || [])}
         initialTableFilters={initialTableFilters}
+        customStylesTableRowElement={(item: ITodoItem) =>
+          !!item.completed ? "completedRow" : ""
+        }
       />
     </div>
   );

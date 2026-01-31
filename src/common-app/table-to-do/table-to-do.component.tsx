@@ -39,6 +39,7 @@ interface TableProps {
   setPageSize?: React.Dispatch<React.SetStateAction<number>>;
   rowPerPages?: number[];
   initialTableFilters: any;
+  customStylesTableRowElement?: (values: any) => string;
 }
 
 export const TodoTable: React.FC<TableProps> = memo(
@@ -54,6 +55,7 @@ export const TodoTable: React.FC<TableProps> = memo(
     // setPageSize,
     // rowPerPages = [5, 10, 25, 50],
     // initialTableFilters,
+    customStylesTableRowElement,
   }) => {
     console.log("clog1", rows);
     console.log("clog2", columns);
@@ -79,7 +81,9 @@ export const TodoTable: React.FC<TableProps> = memo(
               rows.map((values: any, rowIndex: number) => {
                 return (
                   <tr
-                    className={`priority-${values.priority}`}
+                    className={`priority-${values.priority}
+                      ${customStylesTableRowElement && customStylesTableRowElement(values)}
+                       `}
                     key={
                       uniqueKey && values[uniqueKey]
                         ? values[uniqueKey]
