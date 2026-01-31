@@ -6,19 +6,17 @@
     align-items: center;
     width: 100%;
     position: relative;
-    .boxLink {
+
+    a {
       position: absolute;
       align-self: flex-start;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-
-      a {
-        font-size: 2rem;
-        width: min-content;
-        text-decoration: none;
-      }
+      font-size: 2rem;
+      width: min-content;
+      text-decoration: none;
     }
 
     h1 {

@@ -26,9 +26,7 @@ export const DetailsTodoPage: React.FC = () => {
   return (
     <div className="rootDetailsTodoPage">
       <header>
-        <div className="boxLink">
-          <Link to={routesApp.root}>⬅️</Link>
-        </div>
+        <Link to={routesApp.root}>⬅️</Link>
         <h1>{id ? "Update" : "Create"} To do</h1>
       </header>
 
