@@ -19,14 +19,28 @@
           position: sticky;
           right: 0; // Stick to the right side
           z-index: 2; // Stay above other scrolling cells
+          // border: solid 1px black;
         }
         td {
+          &.actions-high {
+            background-color: var(--danger);
+            color: var(--text-primary);
+          }
+          &.actions-medium {
+            background-color: var(--warning);
+            color: var(--text-primary);
+          }
+          &.actions-low {
+            background-color: var(--quite);
+            color: var(--text-primary);
+          }
           .containerActions {
             display: flex;
             flex-direction: row;
             justify-content: center;
             align-items: center;
             gap: 0.2rem;
+
             .deleteItem,
             .spanToggle,
             .updateItem {
