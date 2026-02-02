@@ -6,24 +6,23 @@ import "./modal-delete-todo.styles.scss";
 
 interface Props {
   open: ITodoItem;
-  setIsOpen: React.Dispatch<React.SetStateAction<ITodoItem | null>>;
+  onOpenChange: (newOpenState: boolean) => void;
+  // setIsOpen: React.Dispatch<React.SetStateAction<ITodoItem | null>>;
 }
 
 export const ModalDeleteTodo = forwardRef<HTMLDivElement, Props>(
   (props, ref) => {
-    const { open, setIsOpen } = props;
+    const { open, onOpenChange } = props;
 
     const { deleteTodo } = useProviderSelector("deleteTodo");
 
     const { fnPromise } = useAppUtilities();
 
     function fnDeleteTodo(id: string) {
-      const idTodo: string = id;
+      // const idTodo: string = id;
       if (id) {
         fnPromise(deleteTodo && deleteTodo(id)).then(() => {
-          alert("To do " + idTodo + " deleted!");
-
-          setIsOpen(null);
+          onOpenChange(true);
         });
       }
     }

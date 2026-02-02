@@ -47,6 +47,13 @@ export const HomeBody: React.FC<Props> = memo((props) => {
         const btn = triggerBtnsRef.current.get(isOpen?.id);
         btn?.focus();
       }, 0);
+    } else {
+      setTimeout(() => {
+        const table = document.querySelector(".custom-table") as HTMLElement;
+        if (table) {
+          table.focus();
+        }
+      }, 0);
     }
   };
 
@@ -72,6 +79,7 @@ export const HomeBody: React.FC<Props> = memo((props) => {
       {
         key: "nameTodo",
         title: "To do",
+        render: (item: string) => <span tabIndex={0}>{item}</span>,
       },
       {
         key: "web",
@@ -108,14 +116,18 @@ export const HomeBody: React.FC<Props> = memo((props) => {
 
           const date = new Date(item);
 
-          return date.toLocaleString("es-ES", {
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
-            hour12: false,
-          });
+          return (
+            <span tabIndex={0}>
+              {date.toLocaleString("es-ES", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: false,
+              })}
+            </span>
+          );
         },
       },
       {
@@ -178,7 +190,7 @@ export const HomeBody: React.FC<Props> = memo((props) => {
       />
       {isOpen && (
         <ModalApp open={isOpen} onOpenChange={handleOpenChange}>
-          <ModalDeleteTodo open={isOpen} setIsOpen={setIsOpen} />
+          <ModalDeleteTodo open={isOpen} onOpenChange={handleOpenChange} />
         </ModalApp>
       )}
     </div>

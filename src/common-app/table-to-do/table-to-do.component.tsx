@@ -62,7 +62,11 @@ export const TodoTable: React.FC<TableProps> = memo(
 
     return (
       <div className="table-container">
-        <table className="custom-table">
+        <table
+          aria-label="To-do list table. Use tab to navigate through the table."
+          tabIndex={-1}
+          className="custom-table"
+        >
           <caption>List of To-Dos</caption>
           <thead>
             <tr>
