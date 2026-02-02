@@ -31,4 +31,5 @@ export interface PropsProvider {
   addTodo: (todo: ITodoItem) => void;
   setTodo: (todo: ITodoItem) => void;
   updateDataTodo: (todo: ITodoItem) => void;
+  deleteTodo: (id: string) => void;
 }

@@ -1,11 +1,16 @@
-import React, { memo, useMemo } from "react";
+import React, { memo, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   initialTableFilters,
   useProviderSelector,
   type ITodoItem,
 } from "../../../../store";
-import { TodoTable, type Columns } from "../../../../common-app";
+import {
+  ModalApp,
+  ModalDeleteTodo,
+  TodoTable,
+  type Columns,
+} from "../../../../common-app";
 import { routesApp } from "../../../../router";
 import "./home-body.styles.scss";
 
@@ -28,27 +33,43 @@ export const HomeBody: React.FC<Props> = memo((props) => {
     "setTodo",
   );
 
+  const [isOpen, setIsOpen] = useState<ITodoItem | null>(null);
+
+  const triggerBtnsRef = useRef<Map<string, HTMLButtonElement>>(new Map());
+
+  const handleOpenChange = (newOpenState: boolean) => {
+    setIsOpen(null);
+
+    setTimeout(() => {
+      // Manual Focus Restoration: If closing, return focus to the trigger button
+      if (!newOpenState && isOpen?.id) {
+        // Get the specific button from our Map using the ID
+        const btn = triggerBtnsRef.current.get(isOpen?.id);
+        btn?.focus();
+      } else {
+        const table = document.querySelector(".custom-table") as HTMLElement;
+        if (table) {
+          table.focus();
+        }
+      }
+    }, 0);
+  };
+
   //
-  function sortedTodoList(list: ITodoItem[] = []): ITodoItem[] {
-    // 1. Define the order weights
+  const sortedTodoList = useMemo(() => {
     const priorityWeight: Record<string, number> = {
       high: 3,
       medium: 2,
       low: 1,
     };
 
-    return [...list].sort((a, b) => {
-      if (a.completed !== b.completed) {
-        return a.completed ? 1 : -1;
-      }
-
-      const weightA = priorityWeight[a.priority] ?? 0;
-      const weightB = priorityWeight[b.priority] ?? 0;
-
-      // To sort High to Low, do B - A
-      return weightB - weightA;
+    return [...(todoList || [])].sort((a: ITodoItem, b: ITodoItem) => {
+      if (a.completed !== b.completed) return a.completed ? 1 : -1;
+      return (
+        (priorityWeight[b.priority] ?? 0) - (priorityWeight[a.priority] ?? 0)
+      );
     });
-  }
+  }, [todoList]);
 
   //
   const columnsTable: Columns[] = useMemo(
@@ -56,6 +77,7 @@ export const HomeBody: React.FC<Props> = memo((props) => {
       {
         key: "nameTodo",
         title: "To do",
+        render: (item: string) => <span tabIndex={0}>{item}</span>,
       },
       {
         key: "web",
@@ -92,14 +114,18 @@ export const HomeBody: React.FC<Props> = memo((props) => {
 
           const date = new Date(item);
 
-          return date.toLocaleString("es-ES", {
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
-            hour12: false,
-          });
+          return (
+            <span tabIndex={0}>
+              {date.toLocaleString("es-ES", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: false,
+              })}
+            </span>
+          );
         },
       },
       {
@@ -110,15 +136,26 @@ export const HomeBody: React.FC<Props> = memo((props) => {
           console.log("clog!!!");
           return (
             <div className="containerActions">
-              <button className="deleteItem" onClick={() => alert(row.id)}>
+              <button
+                className="deleteItem"
+                ref={(el) => {
+                  if (el) {
+                    triggerBtnsRef.current.set(row.id, el);
+                  } else {
+                    triggerBtnsRef.current.delete(row.id);
+                  }
+                }}
+                onClick={() => setIsOpen(row)}
+              >
                 🗑️
               </button>
-              <span
+              <button
+                type="button"
                 className="spanToggle"
                 onClick={() => setTodo && setTodo(row)}
               >
                 {row.completed ? "✅" : "⏳"}
-              </span>
+              </button>
               <Link className="updateItem" to={routesApp.detailsTodo(row.id)}>
                 📝
               </Link>
@@ -129,6 +166,8 @@ export const HomeBody: React.FC<Props> = memo((props) => {
     ],
     [],
   );
+
+  console.log("triggerBtnsRef", triggerBtnsRef);
 
   return (
     <div className="rootHomeBody">
@@ -142,12 +181,17 @@ export const HomeBody: React.FC<Props> = memo((props) => {
         setFlag={setFlag}
         rowPerPages={ROW_PER_PAGES}
         totalData={todoList?.length || 0}
-        rows={sortedTodoList(todoList || [])}
+        rows={sortedTodoList || []}
         initialTableFilters={initialTableFilters}
         customStylesTableRowElement={(item: ITodoItem) =>
           !!item.completed ? "completedRow" : ""
         }
       />
+      {isOpen && (
+        <ModalApp open={isOpen} onOpenChange={handleOpenChange}>
+          <ModalDeleteTodo open={isOpen} onOpenChange={handleOpenChange} />
+        </ModalApp>
+      )}
     </div>
   );
 });

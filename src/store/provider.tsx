@@ -26,6 +26,10 @@ export const useProvider = create<PropsProvider>()(
             t.id === todo.id ? todo : t,
           ),
         })),
+      deleteTodo: (id: string) =>
+        set(({ todoList }) => ({
+          todoList: todoList.filter((t: ITodoItem) => t.id !== id),
+        })),
     })),
     {
       name: "to-do-storage",

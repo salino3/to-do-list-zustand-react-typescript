@@ -13,8 +13,8 @@ const HomePage: React.FC = () => {
     <div className="rootHomePage">
       <h1>To dos</h1>
       <header>
-        <Link to={routesApp?.createTodo}>
-          <button>Create To do Form</button>
+        <Link to={routesApp?.createTodo} className="button-link">
+          Create To do Form
         </Link>
         <button onClick={() => setFlag(() => !flag)}>test data</button>
       </header>
