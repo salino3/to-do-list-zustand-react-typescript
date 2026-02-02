@@ -1,11 +1,10 @@
 .rootModalDeleteTodo {
-  // Content/Dialog Box styles
   &.DialogContent {
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     position: fixed;
-    top: 50%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 90vw;
@@ -25,17 +24,10 @@
       color: #1a1a1a;
     }
 
-    .DialogDescription {
-      margin: 12px 0 20px;
-      color: #666;
-      font-size: 0.9rem;
-      line-height: 1.5;
-    }
-
     .IconButton {
       position: absolute;
-      top: 15px;
-      right: 15px;
+      top: 10px;
+      right: 10px;
       padding: 8px;
       border-radius: 50%;
       border: none;
@@ -44,10 +36,29 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      max-height: 35px;
+      max-width: 35px;
+      height: 100%;
+      width: 100%;
 
       &:hover {
         background-color: #f5f5f5;
       }
+    }
+
+    .DialogDescription {
+      margin: 12px 0 20px;
+      color: #666;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .Actions {
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+      justify-content: flex-start;
+      align-items: center;
     }
   }
 }

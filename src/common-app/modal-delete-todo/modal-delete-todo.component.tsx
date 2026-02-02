@@ -12,32 +12,27 @@ export const ModalDeleteTodo = forwardRef<HTMLDivElement, Props>(
     const { open } = props;
     return (
       <Dialog.Content ref={ref} className="rootModalDeleteTodo DialogContent">
-        <Dialog.Title className="DialogTitle">
-          User Settings: {open && open?.id}
-        </Dialog.Title>
-        <Dialog.Description className="DialogDescription">
-          Make changes to your profile here. Click save when you're done.
-        </Dialog.Description>
-
-        {/* Your custom form or content */}
-        <div style={{ marginTop: "20px" }}>
-          <label htmlFor="name">Name</label>
-          <input id="name" type="text" />
-        </div>
-
-        <div className="Actions">
-          <Dialog.Close asChild>
-            <button className="Button secondary">Cancel</button>
-          </Dialog.Close>
-          <button className="Button primary">Save changes</button>
-        </div>
-
         {/* Accessibility check: The close icon button must have an aria-label */}
         <Dialog.Close asChild>
           <button className="IconButton" aria-label="Close">
             X
           </button>
         </Dialog.Close>
+        <Dialog.Title className="DialogTitle">
+          User Settings: <strong>{open && open?.nameTodo}</strong>
+        </Dialog.Title>
+
+        <Dialog.Description className="DialogDescription">
+          Are you sure you want delete this To do?
+        </Dialog.Description>
+
+        <div className="Actions">
+          <Dialog.Close asChild>
+            <button className="Button secondary">Cancel</button>
+          </Dialog.Close>
+
+          <button className="Button primary">Confirm</button>
+        </div>
       </Dialog.Content>
     );
   },
