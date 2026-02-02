@@ -30,16 +30,18 @@ export const HomeBody: React.FC<Props> = memo((props) => {
 
   const [isOpen, setIsOpen] = useState<ITodoItem | null>(null);
 
-  const triggerBtnRef = useRef<HTMLButtonElement>(null);
+  const triggerBtnsRef = useRef<Map<string, HTMLButtonElement>>(new Map());
 
   const handleOpenChange = (newOpenState: boolean) => {
     setIsOpen(null);
 
     // Manual Focus Restoration: If closing, return focus to the trigger button
-    if (!newOpenState) {
+    if (!newOpenState && isOpen?.id) {
       setTimeout(() => {
-        triggerBtnRef.current?.focus();
-      }, 0); // Timeout ensures the DOM is ready before focusing
+        // Get the specific button from our Map using the ID
+        const btn = triggerBtnsRef.current.get(isOpen?.id);
+        btn?.focus();
+      }, 0);
     }
   };
 
@@ -127,7 +129,13 @@ export const HomeBody: React.FC<Props> = memo((props) => {
             <div className="containerActions">
               <button
                 className="deleteItem"
-                ref={triggerBtnRef}
+                ref={(el) => {
+                  if (el) {
+                    triggerBtnsRef.current.set(row.id, el);
+                  } else {
+                    triggerBtnsRef.current.delete(row.id);
+                  }
+                }}
                 onClick={() => setIsOpen(row)}
               >
                 🗑️
@@ -148,6 +156,8 @@ export const HomeBody: React.FC<Props> = memo((props) => {
     ],
     [],
   );
+
+  console.log("triggerBtnsRef", triggerBtnsRef);
 
   return (
     <div className="rootHomeBody">
