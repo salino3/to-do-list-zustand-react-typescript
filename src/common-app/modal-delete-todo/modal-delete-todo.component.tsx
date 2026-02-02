@@ -7,7 +7,6 @@ import "./modal-delete-todo.styles.scss";
 interface Props {
   open: ITodoItem;
   onOpenChange: (newOpenState: boolean) => void;
-  // setIsOpen: React.Dispatch<React.SetStateAction<ITodoItem | null>>;
 }
 
 export const ModalDeleteTodo = forwardRef<HTMLDivElement, Props>(

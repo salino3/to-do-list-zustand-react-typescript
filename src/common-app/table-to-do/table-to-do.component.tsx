@@ -26,7 +26,6 @@ export interface Columns {
 }
 
 //
-
 interface TableProps {
   totalData: number;
   columns: any[];

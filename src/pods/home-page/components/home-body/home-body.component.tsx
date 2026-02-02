@@ -40,21 +40,19 @@ export const HomeBody: React.FC<Props> = memo((props) => {
   const handleOpenChange = (newOpenState: boolean) => {
     setIsOpen(null);
 
-    // Manual Focus Restoration: If closing, return focus to the trigger button
-    if (!newOpenState && isOpen?.id) {
-      setTimeout(() => {
+    setTimeout(() => {
+      // Manual Focus Restoration: If closing, return focus to the trigger button
+      if (!newOpenState && isOpen?.id) {
         // Get the specific button from our Map using the ID
         const btn = triggerBtnsRef.current.get(isOpen?.id);
         btn?.focus();
-      }, 0);
-    } else {
-      setTimeout(() => {
+      } else {
         const table = document.querySelector(".custom-table") as HTMLElement;
         if (table) {
           table.focus();
         }
-      }, 0);
-    }
+      }
+    }, 0);
   };
 
   //
