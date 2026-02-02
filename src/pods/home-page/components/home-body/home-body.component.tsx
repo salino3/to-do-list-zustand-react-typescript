@@ -46,26 +46,20 @@ export const HomeBody: React.FC<Props> = memo((props) => {
   };
 
   //
-  function sortedTodoList(list: ITodoItem[] = []): ITodoItem[] {
-    // 1. Define the order weights
+  const sortedTodoList = useMemo(() => {
     const priorityWeight: Record<string, number> = {
       high: 3,
       medium: 2,
       low: 1,
     };
 
-    return [...list].sort((a, b) => {
-      if (a.completed !== b.completed) {
-        return a.completed ? 1 : -1;
-      }
-
-      const weightA = priorityWeight[a.priority] ?? 0;
-      const weightB = priorityWeight[b.priority] ?? 0;
-
-      // To sort High to Low, do B - A
-      return weightB - weightA;
+    return [...(todoList || [])].sort((a: ITodoItem, b: ITodoItem) => {
+      if (a.completed !== b.completed) return a.completed ? 1 : -1;
+      return (
+        (priorityWeight[b.priority] ?? 0) - (priorityWeight[a.priority] ?? 0)
+      );
     });
-  }
+  }, [todoList]);
 
   //
   const columnsTable: Columns[] = useMemo(
@@ -171,7 +165,7 @@ export const HomeBody: React.FC<Props> = memo((props) => {
         setFlag={setFlag}
         rowPerPages={ROW_PER_PAGES}
         totalData={todoList?.length || 0}
-        rows={sortedTodoList(todoList || [])}
+        rows={sortedTodoList || []}
         initialTableFilters={initialTableFilters}
         customStylesTableRowElement={(item: ITodoItem) =>
           !!item.completed ? "completedRow" : ""
