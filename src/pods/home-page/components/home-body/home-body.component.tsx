@@ -150,6 +150,7 @@ export const HomeBody: React.FC<Props> = memo((props) => {
                 🗑️
               </button>
               <button
+                type="button"
                 className="spanToggle"
                 onClick={() => setTodo && setTodo(row)}
               >
