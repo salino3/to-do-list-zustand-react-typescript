@@ -5,7 +5,12 @@ import {
   useProviderSelector,
   type ITodoItem,
 } from "../../../../store";
-import { ModalApp, TodoTable, type Columns } from "../../../../common-app";
+import {
+  ModalApp,
+  ModalDeleteTodo,
+  TodoTable,
+  type Columns,
+} from "../../../../common-app";
 import { routesApp } from "../../../../router";
 import "./home-body.styles.scss";
 
@@ -171,7 +176,11 @@ export const HomeBody: React.FC<Props> = memo((props) => {
           !!item.completed ? "completedRow" : ""
         }
       />
-      {isOpen && <ModalApp open={isOpen} onOpenChange={handleOpenChange} />}
+      {isOpen && (
+        <ModalApp open={isOpen} onOpenChange={handleOpenChange}>
+          <ModalDeleteTodo open={isOpen} />
+        </ModalApp>
+      )}
     </div>
   );
 });
