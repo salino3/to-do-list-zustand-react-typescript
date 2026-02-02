@@ -1,9 +1,10 @@
 import type React from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import "./modal-app.styles.scss";
+import type { ITodoItem } from "../../store";
 
 interface Props {
-  open: boolean;
+  open: ITodoItem;
   onOpenChange: (newOpenState: boolean) => void;
 }
 
@@ -11,13 +12,15 @@ export const ModalApp: React.FC<Props> = (props) => {
   const { open, onOpenChange } = props;
 
   return (
-    <Dialog.Root open={open} onOpenChange={onOpenChange}>
+    <Dialog.Root open={!!open} onOpenChange={onOpenChange}>
       <Dialog.Portal>
         {/* Overlay covers the background */}
         <Dialog.Overlay className="DialogOverlay" />
 
         <Dialog.Content className="DialogContent">
-          <Dialog.Title className="DialogTitle">User Settings</Dialog.Title>
+          <Dialog.Title className="DialogTitle">
+            User Settings: {open && open?.id}
+          </Dialog.Title>
           <Dialog.Description className="DialogDescription">
             Make changes to your profile here. Click save when you're done.
           </Dialog.Description>

@@ -1,11 +1,11 @@
-import React, { memo, useMemo } from "react";
+import React, { memo, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   initialTableFilters,
   useProviderSelector,
   type ITodoItem,
 } from "../../../../store";
-import { TodoTable, type Columns } from "../../../../common-app";
+import { ModalApp, TodoTable, type Columns } from "../../../../common-app";
 import { routesApp } from "../../../../router";
 import "./home-body.styles.scss";
 
@@ -27,6 +27,21 @@ export const HomeBody: React.FC<Props> = memo((props) => {
     "addTodo",
     "setTodo",
   );
+
+  const [isOpen, setIsOpen] = useState<ITodoItem | null>(null);
+
+  const triggerBtnRef = useRef<HTMLButtonElement>(null);
+
+  const handleOpenChange = (newOpenState: boolean) => {
+    setIsOpen(null);
+
+    // Manual Focus Restoration: If closing, return focus to the trigger button
+    if (!newOpenState) {
+      setTimeout(() => {
+        triggerBtnRef.current?.focus();
+      }, 0); // Timeout ensures the DOM is ready before focusing
+    }
+  };
 
   //
   function sortedTodoList(list: ITodoItem[] = []): ITodoItem[] {
@@ -110,15 +125,19 @@ export const HomeBody: React.FC<Props> = memo((props) => {
           console.log("clog!!!");
           return (
             <div className="containerActions">
-              <button className="deleteItem" onClick={() => alert(row.id)}>
+              <button
+                className="deleteItem"
+                ref={triggerBtnRef}
+                onClick={() => setIsOpen(row)}
+              >
                 🗑️
               </button>
-              <span
+              <button
                 className="spanToggle"
                 onClick={() => setTodo && setTodo(row)}
               >
                 {row.completed ? "✅" : "⏳"}
-              </span>
+              </button>
               <Link className="updateItem" to={routesApp.detailsTodo(row.id)}>
                 📝
               </Link>
@@ -148,6 +167,7 @@ export const HomeBody: React.FC<Props> = memo((props) => {
           !!item.completed ? "completedRow" : ""
         }
       />
+      {isOpen && <ModalApp open={isOpen} onOpenChange={handleOpenChange} />}
     </div>
   );
 });
