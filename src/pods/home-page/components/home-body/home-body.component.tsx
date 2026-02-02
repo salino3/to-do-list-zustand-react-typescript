@@ -178,7 +178,7 @@ export const HomeBody: React.FC<Props> = memo((props) => {
       />
       {isOpen && (
         <ModalApp open={isOpen} onOpenChange={handleOpenChange}>
-          <ModalDeleteTodo open={isOpen} />
+          <ModalDeleteTodo open={isOpen} setIsOpen={setIsOpen} />
         </ModalApp>
       )}
     </div>

@@ -1,15 +1,33 @@
 import { forwardRef } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
-import type { ITodoItem } from "../../store";
+import { useProviderSelector, type ITodoItem } from "../../store";
+import { useAppUtilities } from "../../hooks";
 import "./modal-delete-todo.styles.scss";
 
 interface Props {
   open: ITodoItem;
+  setIsOpen: React.Dispatch<React.SetStateAction<ITodoItem | null>>;
 }
 
 export const ModalDeleteTodo = forwardRef<HTMLDivElement, Props>(
   (props, ref) => {
-    const { open } = props;
+    const { open, setIsOpen } = props;
+
+    const { deleteTodo } = useProviderSelector("deleteTodo");
+
+    const { fnPromise } = useAppUtilities();
+
+    function fnDeleteTodo(id: string) {
+      const idTodo: string = id;
+      if (id) {
+        fnPromise(deleteTodo && deleteTodo(id)).then(() => {
+          alert("To do " + idTodo + " deleted!");
+
+          setIsOpen(null);
+        });
+      }
+    }
+
     return (
       <Dialog.Content ref={ref} className="rootModalDeleteTodo DialogContent">
         {/* Accessibility check: The close icon button must have an aria-label */}
@@ -31,7 +49,12 @@ export const ModalDeleteTodo = forwardRef<HTMLDivElement, Props>(
             <button className="Button secondary">Cancel</button>
           </Dialog.Close>
 
-          <button className="Button primary">Confirm</button>
+          <button
+            onClick={() => fnDeleteTodo(open.id)}
+            className="Button primary"
+          >
+            Confirm
+          </button>
         </div>
       </Dialog.Content>
     );
