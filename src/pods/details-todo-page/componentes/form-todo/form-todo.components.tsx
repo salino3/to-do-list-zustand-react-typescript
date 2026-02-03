@@ -35,17 +35,12 @@ export const FormTodo: React.FC = memo(() => {
     (
       e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement> | undefined,
     ) => {
-      if (key === "reminderDate") {
-        setFormData((prev: ITodoItem) => ({
-          ...prev,
-          [key]: new Date(e?.target.value ?? "").getTime(),
-        }));
-      } else {
-        setFormData((prev: ITodoItem) => ({
-          ...prev,
-          [key]: e?.target.value,
-        }));
-      }
+      setFormData((prev: ITodoItem) => ({
+        ...prev,
+        [key]: key.includes("eminderDate")
+          ? new Date(e?.target.value ?? "").getTime()
+          : e?.target.value,
+      }));
     };
 
   //

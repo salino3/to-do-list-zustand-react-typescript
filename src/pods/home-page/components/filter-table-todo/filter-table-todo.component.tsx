@@ -20,17 +20,12 @@ export const FilterTableTodo: React.FC<Props> = memo((props) => {
     (
       e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement> | undefined,
     ) => {
-      if (key === "startReminderDate" || key === "endReminderDate") {
-        setFilterFormTable((prev: FilterFormTable) => ({
-          ...prev,
-          [key]: new Date(e?.target.value ?? "").getTime(),
-        }));
-      } else {
-        setFilterFormTable((prev: FilterFormTable) => ({
-          ...prev,
-          [key]: e?.target.value,
-        }));
-      }
+      setFilterFormTable((prev: FilterFormTable) => ({
+        ...prev,
+        [key]: key.includes("eminderDate")
+          ? new Date(e?.target.value ?? "").getTime()
+          : e?.target.value,
+      }));
     };
 
   return (
