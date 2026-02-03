@@ -100,6 +100,7 @@ export const HomeBody: React.FC<Props> = memo((props) => {
         key: "reminderDate",
         title: "R. Date",
         render: (item: number) => {
+          console.log("date", item);
           if (item === null || item === undefined) return "-";
 
           const date = new Date(item);

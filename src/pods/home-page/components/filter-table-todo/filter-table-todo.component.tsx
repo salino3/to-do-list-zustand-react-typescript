@@ -1,6 +1,7 @@
 import { memo } from "react";
-import { CustomInput } from "../../../../common";
 import type { FilterFormTable } from "../../../../store";
+import { useAppUtilities } from "../../../../hooks";
+import { CustomInput } from "../../../../common";
 import "./filter-table-todo.styles.scss";
 
 interface Props {
@@ -9,6 +10,8 @@ interface Props {
 }
 
 export const FilterTableTodo: React.FC<Props> = memo((props) => {
+  const { dateConverter } = useAppUtilities();
+
   const { filterFormTable, setFilterFormTable } = props;
 
   //
@@ -17,10 +20,17 @@ export const FilterTableTodo: React.FC<Props> = memo((props) => {
     (
       e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement> | undefined,
     ) => {
-      setFilterFormTable((prev: FilterFormTable) => ({
-        ...prev,
-        [key]: e?.target.value,
-      }));
+      if (key === "startReminderDate" || key === "endReminderDate") {
+        setFilterFormTable((prev: FilterFormTable) => ({
+          ...prev,
+          [key]: new Date(e?.target.value ?? "").getTime(),
+        }));
+      } else {
+        setFilterFormTable((prev: FilterFormTable) => ({
+          ...prev,
+          [key]: e?.target.value,
+        }));
+      }
     };
 
   return (
@@ -38,7 +48,7 @@ export const FilterTableTodo: React.FC<Props> = memo((props) => {
       <CustomInput
         id="startReminderDate"
         handleChange={handleChangeFilter("startReminderDate")}
-        value={filterFormTable.startReminderDate}
+        value={dateConverter(filterFormTable.startReminderDate)}
         lbl="Start Reminder Date"
         name="startReminderDate"
         pl="Start Reminder Date"
