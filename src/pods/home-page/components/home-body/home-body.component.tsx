@@ -63,7 +63,11 @@ export const HomeBody: React.FC<Props> = memo((props) => {
 
   //
   const sortedTodoList = useMemo(() => {
-    const filteredData = [];
+    const filteredData = todoList?.filter((todo: ITodoItem) =>
+      todo.nameTodo
+        .toLowerCase()
+        .includes(filterFormTable.nameTodo.toLowerCase()),
+    );
 
     const priorityWeight: Record<string, number> = {
       high: 3,
@@ -71,7 +75,7 @@ export const HomeBody: React.FC<Props> = memo((props) => {
       low: 1,
     };
 
-    return [...(todoList || [])].sort((a: ITodoItem, b: ITodoItem) => {
+    return [...(filteredData || [])].sort((a: ITodoItem, b: ITodoItem) => {
       if (a.completed !== b.completed) return a.completed ? 1 : -1;
       return (
         (priorityWeight[b.priority] ?? 0) - (priorityWeight[a.priority] ?? 0)
