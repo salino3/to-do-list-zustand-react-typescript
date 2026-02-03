@@ -13,6 +13,7 @@ import {
   TodoTable,
   type Columns,
 } from "../../../../common-app";
+import { FilterTableTodo } from "../filter-table-todo";
 import { routesApp } from "../../../../router";
 import "./home-body.styles.scss";
 
@@ -35,13 +36,12 @@ export const HomeBody: React.FC<Props> = memo((props) => {
     "setTodo",
   );
 
+  const triggerBtnsRef = useRef<Map<string, HTMLButtonElement>>(new Map());
+  const [isOpen, setIsOpen] = useState<ITodoItem | null>(null);
+
   const [filterFormTable, setFilterFormTable] = useState<FilterFormTable>(
     initialTableFilters as FilterFormTable,
   );
-
-  const [isOpen, setIsOpen] = useState<ITodoItem | null>(null);
-
-  const triggerBtnsRef = useRef<Map<string, HTMLButtonElement>>(new Map());
 
   const handleOpenChange = (newOpenState: boolean) => {
     setIsOpen(null);
@@ -60,28 +60,6 @@ export const HomeBody: React.FC<Props> = memo((props) => {
       }
     }, 0);
   };
-
-  //
-  const sortedTodoList = useMemo(() => {
-    const filteredData = todoList?.filter((todo: ITodoItem) =>
-      todo.nameTodo
-        .toLowerCase()
-        .includes(filterFormTable.nameTodo.toLowerCase()),
-    );
-
-    const priorityWeight: Record<string, number> = {
-      high: 3,
-      medium: 2,
-      low: 1,
-    };
-
-    return [...(filteredData || [])].sort((a: ITodoItem, b: ITodoItem) => {
-      if (a.completed !== b.completed) return a.completed ? 1 : -1;
-      return (
-        (priorityWeight[b.priority] ?? 0) - (priorityWeight[a.priority] ?? 0)
-      );
-    });
-  }, [todoList, filterFormTable]);
 
   //
   const columnsTable: Columns[] = useMemo(
@@ -180,28 +158,32 @@ export const HomeBody: React.FC<Props> = memo((props) => {
   );
 
   //
-  const handleChangeFilter =
-    (key: keyof FilterFormTable) =>
-    (
-      e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement> | undefined,
-    ) => {
-      setFilterFormTable((prev: FilterFormTable) => ({
-        ...prev,
-        [key]: e?.target.value,
-      }));
+  const sortedTodoList = useMemo(() => {
+    const filteredData = todoList?.filter((todo: ITodoItem) =>
+      todo.nameTodo
+        .toLowerCase()
+        .includes(filterFormTable.nameTodo.toLowerCase()),
+    );
+
+    const priorityWeight: Record<string, number> = {
+      high: 3,
+      medium: 2,
+      low: 1,
     };
+
+    return [...(filteredData || [])].sort((a: ITodoItem, b: ITodoItem) => {
+      if (a.completed !== b.completed) return a.completed ? 1 : -1;
+      return (
+        (priorityWeight[b.priority] ?? 0) - (priorityWeight[a.priority] ?? 0)
+      );
+    });
+  }, [todoList, filterFormTable]);
 
   return (
     <div className="rootHomeBody">
-      <CustomInput
-        id="nameTodo"
-        handleChange={handleChangeFilter("nameTodo")}
-        value={filterFormTable.nameTodo}
-        lbl="Name To do"
-        name="nameTodo"
-        pl="Name To do"
-        type="text"
-        ariaLabeInput="Input filter name To do"
+      <FilterTableTodo
+        filterFormTable={filterFormTable}
+        setFilterFormTable={setFilterFormTable}
       />
       <TodoTable
         uniqueKey="id"
