@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import {
   initialTableFilters,
   useProviderSelector,
+  type FilterFormTable,
   type ITodoItem,
 } from "../../../../store";
 import {
@@ -11,6 +12,7 @@ import {
   TodoTable,
   type Columns,
 } from "../../../../common-app";
+import { FilterTableTodo } from "../filter-table-todo";
 import { routesApp } from "../../../../router";
 import "./home-body.styles.scss";
 
@@ -33,9 +35,12 @@ export const HomeBody: React.FC<Props> = memo((props) => {
     "setTodo",
   );
 
+  const triggerBtnsRef = useRef<Map<string, HTMLButtonElement>>(new Map());
   const [isOpen, setIsOpen] = useState<ITodoItem | null>(null);
 
-  const triggerBtnsRef = useRef<Map<string, HTMLButtonElement>>(new Map());
+  const [filterFormTable, setFilterFormTable] = useState<FilterFormTable>(
+    initialTableFilters as FilterFormTable,
+  );
 
   const handleOpenChange = (newOpenState: boolean) => {
     setIsOpen(null);
@@ -54,22 +59,6 @@ export const HomeBody: React.FC<Props> = memo((props) => {
       }
     }, 0);
   };
-
-  //
-  const sortedTodoList = useMemo(() => {
-    const priorityWeight: Record<string, number> = {
-      high: 3,
-      medium: 2,
-      low: 1,
-    };
-
-    return [...(todoList || [])].sort((a: ITodoItem, b: ITodoItem) => {
-      if (a.completed !== b.completed) return a.completed ? 1 : -1;
-      return (
-        (priorityWeight[b.priority] ?? 0) - (priorityWeight[a.priority] ?? 0)
-      );
-    });
-  }, [todoList]);
 
   //
   const columnsTable: Columns[] = useMemo(
@@ -110,6 +99,7 @@ export const HomeBody: React.FC<Props> = memo((props) => {
         key: "reminderDate",
         title: "R. Date",
         render: (item: number) => {
+          console.log("date", item);
           if (item === null || item === undefined) return "-";
 
           const date = new Date(item);
@@ -133,7 +123,7 @@ export const HomeBody: React.FC<Props> = memo((props) => {
         title: "Actions",
         valueClass: (_: undefined, row: ITodoItem) => `actions-${row.priority}`,
         render: (_: undefined, row: ITodoItem) => {
-          console.log("clog!!!");
+          // console.log("clog!!!");
           return (
             <div className="containerActions">
               <button
@@ -167,10 +157,50 @@ export const HomeBody: React.FC<Props> = memo((props) => {
     [],
   );
 
-  console.log("triggerBtnsRef", triggerBtnsRef);
+  //
+  const sortedTodoList = useMemo(() => {
+    // 1. Pre-calculate filter values
+    const search = filterFormTable.nameTodo?.toLowerCase();
+    const start = filterFormTable.startReminderDate;
+    const end = filterFormTable.endReminderDate;
+
+    // Sort values
+    const priorityWeight: Record<string, number> = {
+      high: 3,
+      medium: 2,
+      low: 1,
+    };
+
+    // 2. Filter everything in a single chain
+    return (todoList || [])
+      .filter((todo) => {
+        // Name check
+        if (search && !todo.nameTodo.toLowerCase().includes(search))
+          return false;
+
+        // Date checks
+        if (start || end) {
+          if (typeof todo.reminderDate !== "number") return false;
+          if (start && todo.reminderDate < start) return false;
+          if (end && todo.reminderDate > end) return false;
+        }
+
+        return true;
+      })
+      .sort((a: ITodoItem, b: ITodoItem) => {
+        if (a.completed !== b.completed) return a.completed ? 1 : -1;
+        return (
+          (priorityWeight[b.priority] ?? 0) - (priorityWeight[a.priority] ?? 0)
+        );
+      });
+  }, [todoList, filterFormTable]);
 
   return (
     <div className="rootHomeBody">
+      <FilterTableTodo
+        filterFormTable={filterFormTable}
+        setFilterFormTable={setFilterFormTable}
+      />
       <TodoTable
         uniqueKey="id"
         columns={columnsTable || []}

@@ -23,7 +23,7 @@ export const FormTodo: React.FC = memo(() => {
     "updateDataTodo",
   );
 
-  const { fnPromise } = useAppUtilities();
+  const { fnPromise, dateConverter } = useAppUtilities();
 
   const [formData, setFormData] = useState<ITodoItem>(
     intialValuesTodoForm as ITodoItem,
@@ -37,7 +37,9 @@ export const FormTodo: React.FC = memo(() => {
     ) => {
       setFormData((prev: ITodoItem) => ({
         ...prev,
-        [key]: e?.target.value,
+        [key]: key.includes("eminderDate")
+          ? new Date(e?.target.value ?? "").getTime()
+          : e?.target.value,
       }));
     };
 
@@ -76,9 +78,16 @@ export const FormTodo: React.FC = memo(() => {
           listInputs.length > 0 &&
           listInputs.map((input) => (
             <CustomInput
+              key={input.name}
               name={input.name}
               id={input.name}
-              value={(formData[input.name as keyof ITodoItem] as any) ?? ""}
+              value={
+                input.name === "reminderDate"
+                  ? dateConverter(
+                      (formData[input.name as keyof ITodoItem] as any) ?? "",
+                    )
+                  : ((formData[input.name as keyof ITodoItem] as any) ?? "")
+              }
               lbl={input.lbl}
               handleChange={handleChange(input.name as keyof ITodoItem)}
               click={input.click}
