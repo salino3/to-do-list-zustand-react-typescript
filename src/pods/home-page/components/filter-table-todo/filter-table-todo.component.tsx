@@ -55,6 +55,16 @@ export const FilterTableTodo: React.FC<Props> = memo((props) => {
         type="datetime-local"
         ariaLabeInput="Input filter Start Reminder Date"
       />
+      <CustomInput
+        id="endReminderDate"
+        handleChange={handleChangeFilter("endReminderDate")}
+        value={dateConverter(filterFormTable.endReminderDate)}
+        lbl="End Reminder Date"
+        name="endReminderDate"
+        pl="End Reminder Date"
+        type="datetime-local"
+        ariaLabeInput="Input filter End Reminder Date"
+      />
     </div>
   );
 });

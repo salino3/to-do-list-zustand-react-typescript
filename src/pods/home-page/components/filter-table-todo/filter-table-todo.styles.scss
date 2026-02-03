@@ -1,2 +1,7 @@
 .rootFilterTableTodo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(308px, 1fr));
+  gap: 1rem;
+  width: 100%;
+  place-items: center;
 }
