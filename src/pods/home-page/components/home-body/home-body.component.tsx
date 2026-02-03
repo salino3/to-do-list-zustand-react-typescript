@@ -159,23 +159,39 @@ export const HomeBody: React.FC<Props> = memo((props) => {
 
   //
   const sortedTodoList = useMemo(() => {
-    console.log("filterFormTable", filterFormTable);
     let filteredData: ITodoItem[] | undefined = todoList || [];
     if (filterFormTable.nameTodo) {
-      filteredData = todoList?.filter((todo: ITodoItem) =>
+      filteredData = filteredData?.filter((todo: ITodoItem) =>
         todo.nameTodo
           .toLowerCase()
           .includes(filterFormTable.nameTodo.toLowerCase()),
       );
     }
 
-    if (filterFormTable && filterFormTable.startReminderDate) {
+    if (filterFormTable.startReminderDate && filterFormTable.endReminderDate) {
       const startDate = filterFormTable.startReminderDate;
+      const endDate = filterFormTable.endReminderDate;
 
-      filteredData = todoList?.filter(
+      filteredData = filteredData?.filter(
         (todo: ITodoItem) =>
           typeof todo.reminderDate === "number" &&
-          todo.reminderDate > startDate,
+          todo.reminderDate >= startDate &&
+          todo.reminderDate <= endDate,
+      );
+    } else if (filterFormTable.startReminderDate) {
+      const startDate = filterFormTable.startReminderDate;
+
+      filteredData = filteredData?.filter(
+        (todo: ITodoItem) =>
+          typeof todo.reminderDate === "number" &&
+          todo.reminderDate >= startDate,
+      );
+    } else if (filterFormTable.endReminderDate) {
+      const endDate = filterFormTable.endReminderDate;
+
+      filteredData = filteredData?.filter(
+        (todo: ITodoItem) =>
+          typeof todo.reminderDate === "number" && todo.reminderDate <= endDate,
       );
     }
 
