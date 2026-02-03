@@ -6,7 +6,6 @@ import {
   type FilterFormTable,
   type ITodoItem,
 } from "../../../../store";
-import { CustomInput } from "../../../../common";
 import {
   ModalApp,
   ModalDeleteTodo,
@@ -161,11 +160,24 @@ export const HomeBody: React.FC<Props> = memo((props) => {
   //
   const sortedTodoList = useMemo(() => {
     console.log("filterFormTable", filterFormTable);
-    const filteredData = todoList?.filter((todo: ITodoItem) =>
-      todo.nameTodo
-        .toLowerCase()
-        .includes(filterFormTable.nameTodo.toLowerCase()),
-    );
+    let filteredData: ITodoItem[] = todoList || [];
+    if (filterFormTable.nameTodo) {
+      filteredData = todoList?.filter((todo: ITodoItem) =>
+        todo.nameTodo
+          .toLowerCase()
+          .includes(filterFormTable.nameTodo.toLowerCase()),
+      );
+    }
+
+    if (filterFormTable && filterFormTable.startReminderDate) {
+      const startDate = filterFormTable.startReminderDate;
+
+      filteredData = todoList?.filter(
+        (todo: ITodoItem) =>
+          typeof todo.reminderDate === "number" &&
+          todo.reminderDate > startDate,
+      );
+    }
 
     const priorityWeight: Record<string, number> = {
       high: 3,
