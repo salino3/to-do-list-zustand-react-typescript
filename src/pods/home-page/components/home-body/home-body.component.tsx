@@ -159,40 +159,40 @@ export const HomeBody: React.FC<Props> = memo((props) => {
 
   //
   const sortedTodoList = useMemo(() => {
-    let filteredData: ITodoItem[] | undefined = todoList || [];
-
     // 1. Pre-calculate filter values
     const search = filterFormTable.nameTodo?.toLowerCase();
     const start = filterFormTable.startReminderDate;
     const end = filterFormTable.endReminderDate;
 
-    // 2. Filter everything in a single chain
-    filteredData = filteredData.filter((todo) => {
-      // Name check
-      if (search && !todo.nameTodo.toLowerCase().includes(search)) return false;
-
-      // Date checks
-      if (start || end) {
-        if (typeof todo.reminderDate !== "number") return false;
-        if (start && todo.reminderDate < start) return false;
-        if (end && todo.reminderDate > end) return false;
-      }
-
-      return true;
-    });
-
+    // Sort values
     const priorityWeight: Record<string, number> = {
       high: 3,
       medium: 2,
       low: 1,
     };
 
-    return [...(filteredData || [])].sort((a: ITodoItem, b: ITodoItem) => {
-      if (a.completed !== b.completed) return a.completed ? 1 : -1;
-      return (
-        (priorityWeight[b.priority] ?? 0) - (priorityWeight[a.priority] ?? 0)
-      );
-    });
+    // 2. Filter everything in a single chain
+    return (todoList || [])
+      .filter((todo) => {
+        // Name check
+        if (search && !todo.nameTodo.toLowerCase().includes(search))
+          return false;
+
+        // Date checks
+        if (start || end) {
+          if (typeof todo.reminderDate !== "number") return false;
+          if (start && todo.reminderDate < start) return false;
+          if (end && todo.reminderDate > end) return false;
+        }
+
+        return true;
+      })
+      .sort((a: ITodoItem, b: ITodoItem) => {
+        if (a.completed !== b.completed) return a.completed ? 1 : -1;
+        return (
+          (priorityWeight[b.priority] ?? 0) - (priorityWeight[a.priority] ?? 0)
+        );
+      });
   }, [todoList, filterFormTable]);
 
   return (
