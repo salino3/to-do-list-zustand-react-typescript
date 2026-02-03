@@ -160,40 +160,26 @@ export const HomeBody: React.FC<Props> = memo((props) => {
   //
   const sortedTodoList = useMemo(() => {
     let filteredData: ITodoItem[] | undefined = todoList || [];
-    if (filterFormTable.nameTodo) {
-      filteredData = filteredData?.filter((todo: ITodoItem) =>
-        todo.nameTodo
-          .toLowerCase()
-          .includes(filterFormTable.nameTodo.toLowerCase()),
-      );
-    }
 
-    if (filterFormTable.startReminderDate && filterFormTable.endReminderDate) {
-      const startDate = filterFormTable.startReminderDate;
-      const endDate = filterFormTable.endReminderDate;
+    // 1. Pre-calculate filter values
+    const search = filterFormTable.nameTodo?.toLowerCase();
+    const start = filterFormTable.startReminderDate;
+    const end = filterFormTable.endReminderDate;
 
-      filteredData = filteredData?.filter(
-        (todo: ITodoItem) =>
-          typeof todo.reminderDate === "number" &&
-          todo.reminderDate >= startDate &&
-          todo.reminderDate <= endDate,
-      );
-    } else if (filterFormTable.startReminderDate) {
-      const startDate = filterFormTable.startReminderDate;
+    // 2. Filter everything in a single chain
+    filteredData = filteredData.filter((todo) => {
+      // Name check
+      if (search && !todo.nameTodo.toLowerCase().includes(search)) return false;
 
-      filteredData = filteredData?.filter(
-        (todo: ITodoItem) =>
-          typeof todo.reminderDate === "number" &&
-          todo.reminderDate >= startDate,
-      );
-    } else if (filterFormTable.endReminderDate) {
-      const endDate = filterFormTable.endReminderDate;
+      // Date checks
+      if (start || end) {
+        if (typeof todo.reminderDate !== "number") return false;
+        if (start && todo.reminderDate < start) return false;
+        if (end && todo.reminderDate > end) return false;
+      }
 
-      filteredData = filteredData?.filter(
-        (todo: ITodoItem) =>
-          typeof todo.reminderDate === "number" && todo.reminderDate <= endDate,
-      );
-    }
+      return true;
+    });
 
     const priorityWeight: Record<string, number> = {
       high: 3,
