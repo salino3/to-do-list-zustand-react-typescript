@@ -56,8 +56,8 @@ export const TodoTable: React.FC<TableProps> = memo(
     // initialTableFilters,
     customStylesTableRowElement,
   }) => {
-    console.log("clog1", rows);
-    console.log("clog2", columns);
+    // console.log("clog1", rows);
+    // console.log("clog2", columns);
 
     return (
       <div className="table-container">

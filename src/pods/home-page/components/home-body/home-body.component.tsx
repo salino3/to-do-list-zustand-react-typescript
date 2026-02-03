@@ -123,7 +123,7 @@ export const HomeBody: React.FC<Props> = memo((props) => {
         title: "Actions",
         valueClass: (_: undefined, row: ITodoItem) => `actions-${row.priority}`,
         render: (_: undefined, row: ITodoItem) => {
-          console.log("clog!!!");
+          // console.log("clog!!!");
           return (
             <div className="containerActions">
               <button
@@ -159,6 +159,7 @@ export const HomeBody: React.FC<Props> = memo((props) => {
 
   //
   const sortedTodoList = useMemo(() => {
+    console.log("filterFormTable", filterFormTable);
     const filteredData = todoList?.filter((todo: ITodoItem) =>
       todo.nameTodo
         .toLowerCase()

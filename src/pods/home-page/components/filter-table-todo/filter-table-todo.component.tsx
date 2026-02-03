@@ -38,7 +38,7 @@ export const FilterTableTodo: React.FC<Props> = memo((props) => {
       <CustomInput
         id="startReminderDate"
         handleChange={handleChangeFilter("startReminderDate")}
-        value={filterFormTable.nameTodo}
+        value={filterFormTable.startReminderDate}
         lbl="Start Reminder Date"
         name="startReminderDate"
         pl="Start Reminder Date"
