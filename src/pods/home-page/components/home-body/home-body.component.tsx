@@ -160,7 +160,7 @@ export const HomeBody: React.FC<Props> = memo((props) => {
   //
   const sortedTodoList = useMemo(() => {
     console.log("filterFormTable", filterFormTable);
-    let filteredData: ITodoItem[] = todoList || [];
+    let filteredData: ITodoItem[] | undefined = todoList || [];
     if (filterFormTable.nameTodo) {
       filteredData = todoList?.filter((todo: ITodoItem) =>
         todo.nameTodo
