@@ -1,3 +1,7 @@
+export interface PriorityPros {
+  priority: "low" | "medium" | "high";
+}
+
 export interface ITodoItem {
   id: string; // Changed to string for UUIDs
   nameTodo: string;
@@ -32,4 +36,14 @@ export interface PropsProvider {
   setTodo: (todo: ITodoItem) => void;
   updateDataTodo: (todo: ITodoItem) => void;
   deleteTodo: (id: string) => void;
+}
+
+export interface FilterFormTable {
+  nameTodo: string;
+  web: string;
+  tel: string;
+  priority: "low" | "medium" | "high";
+  reminderDate: number | null;
+  place: string;
+  completed: boolean | null;
 }

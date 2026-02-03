@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import {
   initialTableFilters,
   useProviderSelector,
+  type FilterFormTable,
   type ITodoItem,
 } from "../../../../store";
+import { CustomInput } from "../../../../common";
 import {
   ModalApp,
   ModalDeleteTodo,
@@ -33,6 +35,10 @@ export const HomeBody: React.FC<Props> = memo((props) => {
     "setTodo",
   );
 
+  const [filterFormTable, setFilterFormTable] = useState<FilterFormTable>(
+    initialTableFilters as FilterFormTable,
+  );
+
   const [isOpen, setIsOpen] = useState<ITodoItem | null>(null);
 
   const triggerBtnsRef = useRef<Map<string, HTMLButtonElement>>(new Map());
@@ -57,6 +63,8 @@ export const HomeBody: React.FC<Props> = memo((props) => {
 
   //
   const sortedTodoList = useMemo(() => {
+    const filteredData = [];
+
     const priorityWeight: Record<string, number> = {
       high: 3,
       medium: 2,
@@ -69,7 +77,7 @@ export const HomeBody: React.FC<Props> = memo((props) => {
         (priorityWeight[b.priority] ?? 0) - (priorityWeight[a.priority] ?? 0)
       );
     });
-  }, [todoList]);
+  }, [todoList, filterFormTable]);
 
   //
   const columnsTable: Columns[] = useMemo(
@@ -167,10 +175,30 @@ export const HomeBody: React.FC<Props> = memo((props) => {
     [],
   );
 
-  console.log("triggerBtnsRef", triggerBtnsRef);
+  //
+  const handleChangeFilter =
+    (key: keyof FilterFormTable) =>
+    (
+      e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement> | undefined,
+    ) => {
+      setFilterFormTable((prev: FilterFormTable) => ({
+        ...prev,
+        [key]: e?.target.value,
+      }));
+    };
 
   return (
     <div className="rootHomeBody">
+      <CustomInput
+        id="nameTodo"
+        handleChange={handleChangeFilter("nameTodo")}
+        value={filterFormTable.nameTodo}
+        lbl="Name To do"
+        name="nameTodo"
+        pl="Name To do"
+        type="text"
+        ariaLabeInput="Input filter name To do"
+      />
       <TodoTable
         uniqueKey="id"
         columns={columnsTable || []}

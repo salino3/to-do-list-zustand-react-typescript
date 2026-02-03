@@ -2,7 +2,7 @@ export const initialTableFilters = {
   nameTodo: "",
   web: "",
   tel: "",
-  priority: "",
+  priority: "low",
   reminderDate: 0,
   place: "",
   completed: null,
