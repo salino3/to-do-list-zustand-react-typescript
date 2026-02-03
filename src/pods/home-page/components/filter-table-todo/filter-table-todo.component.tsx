@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { CustomInput } from "../../../../common";
 import type { FilterFormTable } from "../../../../store";
 import "./filter-table-todo.styles.scss";
@@ -7,7 +8,7 @@ interface Props {
   setFilterFormTable: React.Dispatch<React.SetStateAction<FilterFormTable>>;
 }
 
-export const FilterTableTodo: React.FC<Props> = (props) => {
+export const FilterTableTodo: React.FC<Props> = memo((props) => {
   const { filterFormTable, setFilterFormTable } = props;
 
   //
@@ -34,6 +35,16 @@ export const FilterTableTodo: React.FC<Props> = (props) => {
         type="text"
         ariaLabeInput="Input filter name To do"
       />
+      <CustomInput
+        id="startReminderDate"
+        handleChange={handleChangeFilter("startReminderDate")}
+        value={filterFormTable.nameTodo}
+        lbl="Start Reminder Date"
+        name="startReminderDate"
+        pl="Start Reminder Date"
+        type="datetime-local"
+        ariaLabeInput="Input filter Start Reminder Date"
+      />
     </div>
   );
-};
+});

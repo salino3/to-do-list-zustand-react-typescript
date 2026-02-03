@@ -43,7 +43,8 @@ export interface FilterFormTable {
   web: string;
   tel: string;
   priority: "low" | "medium" | "high";
-  reminderDate: number | null;
+  startReminderDate: number | null;
+  endReminderDate: number | null;
   place: string;
   completed: boolean | null;
 }
