@@ -13,9 +13,9 @@ export const useProvider = create<PropsProvider>()(
   persist(
     immer((set) => ({
       todoList: [],
-      addTodo: (todo: ITodoFormState) =>{
+      addTodo: async (todo: ITodoFormState) =>{
         const { calendar, ...todoToSave } = todo;
-       return fnPromise(
+       return await fnPromise(
 
           set((state) => {       
             state.todoList.push( todoToSave  as ITodoItem);

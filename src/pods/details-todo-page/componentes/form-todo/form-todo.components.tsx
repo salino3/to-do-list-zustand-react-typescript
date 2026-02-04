@@ -52,13 +52,13 @@ export const FormTodo: React.FC = memo(() => {
     };
 
   //
-  function handleSubmit(e: React.FormEvent<HTMLFormElement> | undefined) {
+async   function handleSubmit(e: React.FormEvent<HTMLFormElement> | undefined) {
     e?.preventDefault();
 
 console.log("clog1", formData);
 
     if (id) {
-      fnPromise(updateDataTodo && updateDataTodo(formData)).then(() =>
+     await fnPromise(updateDataTodo && updateDataTodo(formData)).then(() =>
         navigate(routesApp.root),
       );
     } else {
