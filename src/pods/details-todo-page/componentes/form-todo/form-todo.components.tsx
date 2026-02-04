@@ -6,6 +6,7 @@ import {
   intialValuesTodoForm,
   useProviderSelector,
   type ITodoItem,
+  type ITodoFormState,
 } from "../../../../store";
 import { useAppUtilities } from "../../../../hooks";
 import { CustomButton, CustomInput } from "../../../../common";
@@ -23,10 +24,10 @@ export const FormTodo: React.FC = memo(() => {
     "updateDataTodo",
   );
 
-  const { fnPromise, dateConverter } = useAppUtilities();
+  const { fnPromise, dateConverter , generateGoogleCalendarUrl} = useAppUtilities();
 
-  const [formData, setFormData] = useState<ITodoItem>(
-    intialValuesTodoForm as ITodoItem,
+  const [formData, setFormData] = useState<ITodoFormState>(
+    intialValuesTodoForm as ITodoFormState
   );
 
   //
@@ -67,17 +68,23 @@ console.log("clog1", formData);
             ...formData,
             id: uuidv4(),
           }),
-      ).then(() => navigate(routesApp.root));
+      )
+      .then(() => {
+        if(formData.calendar  ) {
+          window.open(generateGoogleCalendarUrl(formData), "_blank");
+        }
+      })
+      .then(() => navigate(routesApp.root));
     }
   }
 
   //
   useEffect(() => {
     if (id) {
-      const filteredTodo: ITodoItem =
+      const filteredTodo: ITodoItem  =
         (todoList?.find((todo) => todo.id === id) as ITodoItem) ??
         initialTableFilters;
-      setFormData(filteredTodo);
+      setFormData(filteredTodo as ITodoFormState);
     }
   }, [id]);
 
