@@ -27,13 +27,26 @@ export const useAppUtilities = () => {
     // For a simple reminder, we can just make the end time 30 mins later
     const end = formatForGoogle(Number(todo.reminderDate ?? 0) + 30 * 60000);
   
-    const params = new URLSearchParams({
-      text: todo.nameTodo,
-      dates: `${start}/${end}`,
-      details: "Created from my Todo App",
-      sf: "true",
-      output: "xml",
-    });
+// Build a rich description string
+const descriptionParts = [
+  todo.description ? `Description: ${todo.description}` : "",
+  todo.note ? `Notes: ${todo.note}` : "",
+  todo.topic ? `Topic: ${todo.topic}` : "",
+  todo.web ? `Link: ${todo.web}` : "",
+  todo.email ? `Email: ${todo.email}` : "",
+  todo.tel ? `Tel: ${todo.tel}` : "",
+  `Priority: ${todo.priority.toUpperCase()}`,
+].filter(Boolean).join("\n\n");
+
+const params = new URLSearchParams({
+  text: `[${todo.priority.toUpperCase()}] ${todo.nameTodo}`, 
+  dates: `${start}/${end}`,
+  details: descriptionParts,
+  location: todo.place || "", 
+  sprop: "name:MyTodoApp",
+  sf: "true",
+  output: "xml",
+});
   
     return `${baseUrl}&${params.toString()}`;
   };
