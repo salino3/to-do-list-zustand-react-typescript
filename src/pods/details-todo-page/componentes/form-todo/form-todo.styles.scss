@@ -13,6 +13,23 @@
     align-items: flex-end;
     grid-template-columns: 1fr;
 
+    .boxInputcalendar {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      width: 100%;
+
+       #calendarID  {
+        height: 1.8rem;
+        width: 1.8rem;
+        outline: none;
+        cursor: pointer;
+    
+      }
+    }
+
     @media screen and (min-width: 768px) {
       grid-template-columns: 1fr 1fr;
     }

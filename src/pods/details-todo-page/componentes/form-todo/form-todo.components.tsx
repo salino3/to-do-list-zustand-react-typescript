@@ -56,19 +56,19 @@ export const FormTodo: React.FC = memo(() => {
 
 console.log("clog1", formData);
 
-    // if (id) {
-    //   fnPromise(updateDataTodo && updateDataTodo(formData)).then(() =>
-    //     navigate(routesApp.root),
-    //   );
-    // } else {
-    //   fnPromise(
-    //     addTodo &&
-    //       addTodo({
-    //         ...formData,
-    //         id: uuidv4(),
-    //       }),
-    //   ).then(() => navigate(routesApp.root));
-    // }
+    if (id) {
+      fnPromise(updateDataTodo && updateDataTodo(formData)).then(() =>
+        navigate(routesApp.root),
+      );
+    } else {
+      fnPromise(
+        addTodo &&
+          addTodo({
+            ...formData,
+            id: uuidv4(),
+          }),
+      ).then(() => navigate(routesApp.root));
+    }
   }
 
   //

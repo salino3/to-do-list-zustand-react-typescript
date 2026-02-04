@@ -106,7 +106,7 @@ export const listInputs: ListInput[] = [
   },
   {
     name: "calendar",
-    lbl: "Google calendar",
+    lbl: "Google calendar: (Optional)",
      ariaRq: false,
     type: "checkbox",
     ariaLabeInput: "Choose if add the task to your Google calendar",
