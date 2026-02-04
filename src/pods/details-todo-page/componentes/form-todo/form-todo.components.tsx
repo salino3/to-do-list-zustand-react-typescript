@@ -35,30 +35,40 @@ export const FormTodo: React.FC = memo(() => {
     (
       e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement> | undefined,
     ) => {
-      setFormData((prev: ITodoItem) => ({
-        ...prev,
-        [key]: key.includes("eminderDate")
-          ? new Date(e?.target.value ?? "").getTime()
-          : e?.target.value,
-      }));
+      if(key === "calendar" as keyof ITodoItem) {
+        setFormData((prev: ITodoItem) => ({
+          ...prev,
+          calendar: (e?.target as HTMLInputElement).checked ?? false,
+        }));
+      } else {  
+        setFormData((prev: ITodoItem) => ({
+          ...prev,
+          [key]: key.includes("eminderDate")
+            ? new Date(e?.target.value ?? "").getTime()
+            : e?.target.value,
+        }));
+      }
     };
 
   //
   function handleSubmit(e: React.FormEvent<HTMLFormElement> | undefined) {
     e?.preventDefault();
-    if (id) {
-      fnPromise(updateDataTodo && updateDataTodo(formData)).then(() =>
-        navigate(routesApp.root),
-      );
-    } else {
-      fnPromise(
-        addTodo &&
-          addTodo({
-            ...formData,
-            id: uuidv4(),
-          }),
-      ).then(() => navigate(routesApp.root));
-    }
+
+console.log("clog1", formData);
+
+    // if (id) {
+    //   fnPromise(updateDataTodo && updateDataTodo(formData)).then(() =>
+    //     navigate(routesApp.root),
+    //   );
+    // } else {
+    //   fnPromise(
+    //     addTodo &&
+    //       addTodo({
+    //         ...formData,
+    //         id: uuidv4(),
+    //       }),
+    //   ).then(() => navigate(routesApp.root));
+    // }
   }
 
   //

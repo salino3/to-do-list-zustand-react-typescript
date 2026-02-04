@@ -3,12 +3,12 @@ import { Priority } from "../../../../store";
 
 interface ListInput {
   name: string;
-  selectList: SelectList[];
+  selectList?: SelectList[];
   ariaRq: boolean;
   click?:
     | ((e: React.MouseEvent<HTMLSelectElement> | undefined) => void)
     | undefined;
-  pl: string;
+  pl?: string;
   lbl: string;
   type: string;
   ariaLabeInput: string;
@@ -31,8 +31,7 @@ const priorityOptions: SelectList[] = [
 export const listInputs: ListInput[] = [
   {
     name: "nameTodo",
-    selectList: [],
-    ariaRq: false,
+     ariaRq: false,
     pl: "Name To do",
     lbl: "Name To do",
     type: "text",
@@ -40,8 +39,7 @@ export const listInputs: ListInput[] = [
   },
   {
     name: "web",
-    selectList: [],
-    ariaRq: false,
+     ariaRq: false,
     pl: "Web",
     lbl: "Web",
     type: "text",
@@ -49,8 +47,7 @@ export const listInputs: ListInput[] = [
   },
   {
     name: "tel",
-    selectList: [],
-    ariaRq: false,
+     ariaRq: false,
     pl: "Telephone",
     lbl: "Telephone",
     type: "tel",
@@ -58,8 +55,7 @@ export const listInputs: ListInput[] = [
   },
   {
     name: "email",
-    selectList: [],
-    ariaRq: false,
+     ariaRq: false,
     pl: "Email",
     lbl: "Email",
     type: "email",
@@ -67,8 +63,7 @@ export const listInputs: ListInput[] = [
   },
   {
     name: "topic",
-    selectList: [],
-    ariaRq: false,
+     ariaRq: false,
     pl: "Topic",
     lbl: "Topic",
     type: "text",
@@ -76,8 +71,7 @@ export const listInputs: ListInput[] = [
   },
   {
     name: "place",
-    selectList: [],
-    ariaRq: false,
+     ariaRq: false,
     pl: "Place",
     lbl: "Place",
     type: "text",
@@ -85,8 +79,7 @@ export const listInputs: ListInput[] = [
   },
   {
     name: "reminderDate",
-    selectList: [],
-    ariaRq: true,
+     ariaRq: true,
     pl: "Reminder Date",
     lbl: "Reminder Date",
     type: "datetime-local",
@@ -103,4 +96,20 @@ export const listInputs: ListInput[] = [
     type: "",
     ariaLabeInput: "Choose the to do priority",
   },
+  {
+    name: "status",
+     ariaRq: false,
+    pl: "Status",
+    lbl: "Status",
+    type: "text",
+    ariaLabeInput: "What's the status for this task",
+  },
+  {
+    name: "calendar",
+    lbl: "Google calendar",
+     ariaRq: false,
+    type: "checkbox",
+    ariaLabeInput: "Choose if add the task to your Google calendar",
+  },
+ 
 ];
