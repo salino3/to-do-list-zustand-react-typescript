@@ -3,16 +3,25 @@ import { useShallow } from "zustand/react/shallow";
 import { immer } from "zustand/middleware/immer";
 import { createJSONStorage, persist } from "zustand/middleware";
 import { dbIDBStorage } from "./db";
-import type { ITodoItem, PropsProvider } from "./interface";
+import { useAppUtilities } from "../hooks";
+import type { ITodoFormState, ITodoItem, PropsProvider } from "./interface";
+
+const {fnPromise,  generateGoogleCalendarUrl} = useAppUtilities();
+
 
 export const useProvider = create<PropsProvider>()(
   persist(
     immer((set) => ({
       todoList: [],
-      addTodo: (todo: ITodoItem) =>
-        set((state) => {
-          state.todoList.push(todo as ITodoItem);
-        }),
+      addTodo: async (todo: ITodoFormState) =>{
+        const { calendar, ...todoToSave } = todo;
+       return await fnPromise(
+
+          set((state) => {       
+            state.todoList.push( todoToSave  as ITodoItem);
+          })
+        ).then(() =>  calendar && window.open(generateGoogleCalendarUrl(todo), "_blank"))
+      },
       setTodo: (todo: ITodoItem) =>
         set(({ todoList }) => {
           const item = todoList.find((i) => i.id === todo.id);

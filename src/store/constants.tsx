@@ -33,4 +33,5 @@ export const intialValuesTodoForm = {
   reminderDate: null,
   priority: Priority.LOW,
   tags: [],
+  calendar: false,
 };

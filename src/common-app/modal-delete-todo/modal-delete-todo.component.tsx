@@ -17,10 +17,10 @@ export const ModalDeleteTodo = forwardRef<HTMLDivElement, Props>(
 
     const { fnPromise } = useAppUtilities();
 
-    function fnDeleteTodo(id: string) {
+   async function fnDeleteTodo(id: string) {
       // const idTodo: string = id;
       if (id) {
-        fnPromise(deleteTodo && deleteTodo(id)).then(() => {
+       await fnPromise(deleteTodo && deleteTodo(id)).then(() => {
           onOpenChange(true);
         });
       }

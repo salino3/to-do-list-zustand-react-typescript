@@ -30,9 +30,13 @@ export interface ITodoItem {
   tags?: string[]; // Added for filtering
 }
 
+export type ITodoFormState = ITodoItem & {
+  calendar: boolean;
+};
+
 export interface PropsProvider {
   todoList: ITodoItem[];
-  addTodo: (todo: ITodoItem) => void;
+  addTodo: (todo: ITodoFormState) => Promise<false | void | Window | null>;
   setTodo: (todo: ITodoItem) => void;
   updateDataTodo: (todo: ITodoItem) => void;
   deleteTodo: (id: string) => void;
