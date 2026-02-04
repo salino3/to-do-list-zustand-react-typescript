@@ -36,7 +36,7 @@ export type ITodoFormState = ITodoItem & {
 
 export interface PropsProvider {
   todoList: ITodoItem[];
-  addTodo: (todo: ITodoItem) => void;
+  addTodo: (todo: ITodoFormState) => void;
   setTodo: (todo: ITodoItem) => void;
   updateDataTodo: (todo: ITodoItem) => void;
   deleteTodo: (id: string) => void;

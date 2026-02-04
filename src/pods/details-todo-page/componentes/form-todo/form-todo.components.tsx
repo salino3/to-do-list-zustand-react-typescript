@@ -24,7 +24,7 @@ export const FormTodo: React.FC = memo(() => {
     "updateDataTodo",
   );
 
-  const { fnPromise, dateConverter , generateGoogleCalendarUrl} = useAppUtilities();
+  const { fnPromise, dateConverter } = useAppUtilities();
 
   const [formData, setFormData] = useState<ITodoFormState>(
     intialValuesTodoForm as ITodoFormState
@@ -69,11 +69,6 @@ console.log("clog1", formData);
             id: uuidv4(),
           }),
       )
-      .then(() => {
-        if(formData.calendar  ) {
-          window.open(generateGoogleCalendarUrl(formData), "_blank");
-        }
-      })
       .then(() => navigate(routesApp.root));
     }
   }
@@ -109,7 +104,7 @@ console.log("clog1", formData);
               handleChange={handleChange(input.name as keyof ITodoItem)}
               click={input.click}
               pl={input.pl}
-              selectList={input.selectList}
+              selectList={input?.selectList }
               ariaRq={input.ariaRq}
               type={input.type}
               ariaLabeInput={input.ariaLabeInput}
