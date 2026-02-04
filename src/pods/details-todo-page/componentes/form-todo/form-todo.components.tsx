@@ -37,12 +37,12 @@ export const FormTodo: React.FC = memo(() => {
       e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement> | undefined,
     ) => {
       if(key === "calendar" as keyof ITodoItem) {
-        setFormData((prev: ITodoItem) => ({
+        setFormData((prev: ITodoFormState) => ({
           ...prev,
           calendar: (e?.target as HTMLInputElement).checked ?? false,
         }));
       } else {  
-        setFormData((prev: ITodoItem) => ({
+        setFormData((prev: ITodoFormState) => ({
           ...prev,
           [key]: key.includes("eminderDate")
             ? new Date(e?.target.value ?? "").getTime()
@@ -52,10 +52,8 @@ export const FormTodo: React.FC = memo(() => {
     };
 
   //
-async   function handleSubmit(e: React.FormEvent<HTMLFormElement> | undefined) {
+async function handleSubmit(e: React.FormEvent<HTMLFormElement> | undefined) {
     e?.preventDefault();
-
-console.log("clog1", formData);
 
     if (id) {
      await fnPromise(updateDataTodo && updateDataTodo(formData)).then(() =>
@@ -88,7 +86,9 @@ console.log("clog1", formData);
         {listInputs &&
           listInputs.length > 0 &&
           listInputs.map((input) => (
-            <CustomInput
+           (id && input.name !== "calendar" || 
+            !id)
+            &&        <CustomInput
               key={input.name}
               name={input.name}
               id={input.name}
