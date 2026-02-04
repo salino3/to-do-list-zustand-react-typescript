@@ -15,7 +15,7 @@ export const useProvider = create<PropsProvider>()(
       todoList: [],
       addTodo: (todo: ITodoFormState) =>{
         const { calendar, ...todoToSave } = todo;
-        fnPromise(
+       return fnPromise(
 
           set((state) => {       
             state.todoList.push( todoToSave  as ITodoItem);

@@ -62,13 +62,12 @@ console.log("clog1", formData);
         navigate(routesApp.root),
       );
     } else {
-      fnPromise(
+     
         addTodo &&
           addTodo({
             ...formData,
             id: uuidv4(),
-          }),
-      )
+          })     
       .then(() => navigate(routesApp.root));
     }
   }
