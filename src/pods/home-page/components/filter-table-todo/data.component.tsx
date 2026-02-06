@@ -1,17 +1,4 @@
-import { Priority, type ListInput, type SelectList } from "../../../../store";
-
-//
-const priorityOptions: SelectList[] = [
-  {
-    optgroup: "Priority",
-    content: Object.values(Priority).map((c) => {
-      return {
-        key: c,
-        text: c === "" ? "..." : c.charAt(0).toUpperCase() + c.slice(1),
-      };
-    }),
-  },
-];
+import type { ListInput } from "../../../../store";
 
 //
 export const listInputs: ListInput[] = [
@@ -71,17 +58,7 @@ export const listInputs: ListInput[] = [
     type: "datetime-local",
     ariaLabeInput: "Select a reminder date for this task",
   },
-  {
-    name: "priority",
-    lbl: "Priority",
-    click: (e: React.MouseEvent<HTMLSelectElement> | undefined) =>
-      e!.stopPropagation(),
-    pl: "Priority",
-    selectList: priorityOptions,
-    ariaRq: true,
-    type: "",
-    ariaLabeInput: "Choose the to do priority",
-  },
+
   {
     name: "status",
     ariaRq: false,

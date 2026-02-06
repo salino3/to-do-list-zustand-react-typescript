@@ -52,3 +52,27 @@ export interface FilterFormTable {
   place: string;
   completed: boolean | null;
 }
+
+//
+export interface Content {
+  key: string;
+  text: string;
+}
+
+export interface SelectList {
+  optgroup: string;
+  content: Content[];
+}
+
+export interface ListInput {
+  name: string;
+  selectList?: SelectList[];
+  ariaRq: boolean;
+  click?:
+    | ((e: React.MouseEvent<HTMLSelectElement> | undefined) => void)
+    | undefined;
+  pl?: string;
+  lbl: string;
+  type: string;
+  ariaLabeInput: string;
+}
