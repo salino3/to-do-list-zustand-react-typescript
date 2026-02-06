@@ -51,6 +51,7 @@ export interface FilterFormTable {
   endReminderDate: number | null;
   place: string;
   completed: boolean | null;
+  tags?: string[];
 }
 
 //

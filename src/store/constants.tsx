@@ -5,8 +5,10 @@ export const initialTableFilters = {
   priority: "low",
   startReminderDate: null,
   endReminderDate: null,
+  // TODO: Add these 3 inputs for filtering
   place: "",
   completed: null,
+  tags: [],
 };
 
 export const Priority = {

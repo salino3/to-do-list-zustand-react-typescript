@@ -224,6 +224,9 @@ export const HomeBody: React.FC<Props> = memo((props) => {
         customStylesTableRowElement={(item: ITodoItem) =>
           !!item.completed ? "completedRow" : ""
         }
+        clearFilter={() =>
+          setFilterFormTable(initialTableFilters as FilterFormTable)
+        }
       />
       {isOpen && (
         <ModalApp open={isOpen} onOpenChange={handleOpenChange}>

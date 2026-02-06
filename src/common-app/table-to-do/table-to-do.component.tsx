@@ -1,5 +1,6 @@
 import type React from "react";
 import { memo } from "react";
+import { CustomButton } from "../../common/custom-button";
 import "./table-to-do.styles.scss";
 
 export interface FilteringValuesFilter {
@@ -39,6 +40,7 @@ interface TableProps {
   rowPerPages?: number[];
   initialTableFilters: any;
   customStylesTableRowElement?: (values: any) => string;
+  clearFilter: () => void;
 }
 
 export const TodoTable: React.FC<TableProps> = memo(
@@ -55,6 +57,7 @@ export const TodoTable: React.FC<TableProps> = memo(
     // rowPerPages = [5, 10, 25, 50],
     // initialTableFilters,
     customStylesTableRowElement,
+    clearFilter,
   }) => {
     // console.log("clog1", rows);
     // console.log("clog2", columns);
@@ -66,7 +69,15 @@ export const TodoTable: React.FC<TableProps> = memo(
           tabIndex={-1}
           className="custom-table"
         >
-          <caption>List of To-Dos</caption>
+          <caption>
+            List of To-Dos &nbsp;
+            <CustomButton
+              customStyles="button-link"
+              type="button"
+              click={clearFilter}
+              text="Clear Filters"
+            />
+          </caption>
           <thead>
             <tr>
               {columns &&
