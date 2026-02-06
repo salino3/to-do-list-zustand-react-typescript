@@ -2,8 +2,8 @@ import { memo } from "react";
 import type { FilterFormTable, ListInput } from "../../../../store";
 import { useAppUtilities } from "../../../../hooks";
 import { CustomInput } from "../../../../common";
-import "./filter-table-todo.styles.scss";
 import { listFiltersInputs } from "./data.component";
+import "./filter-table-todo.styles.scss";
 
 interface Props {
   filterFormTable: FilterFormTable;
@@ -11,9 +11,9 @@ interface Props {
 }
 
 export const FilterTableTodo: React.FC<Props> = memo((props) => {
-  const { dateConverter } = useAppUtilities();
-
   const { filterFormTable, setFilterFormTable } = props;
+
+  const { dateConverter } = useAppUtilities();
 
   //
   const handleChangeFilter =
