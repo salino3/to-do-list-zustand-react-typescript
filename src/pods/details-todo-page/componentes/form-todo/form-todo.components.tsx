@@ -7,6 +7,7 @@ import {
   useProviderSelector,
   type ITodoItem,
   type ITodoFormState,
+  type ListInput,
 } from "../../../../store";
 import { useAppUtilities } from "../../../../hooks";
 import { CustomButton, CustomInput } from "../../../../common";
@@ -27,7 +28,7 @@ export const FormTodo: React.FC = memo(() => {
   const { fnPromise, dateConverter } = useAppUtilities();
 
   const [formData, setFormData] = useState<ITodoFormState>(
-    intialValuesTodoForm as ITodoFormState
+    intialValuesTodoForm as ITodoFormState,
   );
 
   //
@@ -36,12 +37,12 @@ export const FormTodo: React.FC = memo(() => {
     (
       e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement> | undefined,
     ) => {
-      if(key === "calendar" as keyof ITodoItem) {
+      if (key === ("calendar" as keyof ITodoItem)) {
         setFormData((prev: ITodoFormState) => ({
           ...prev,
           calendar: (e?.target as HTMLInputElement).checked ?? false,
         }));
-      } else {  
+      } else {
         setFormData((prev: ITodoFormState) => ({
           ...prev,
           [key]: key.includes("eminderDate")
@@ -52,28 +53,26 @@ export const FormTodo: React.FC = memo(() => {
     };
 
   //
-async function handleSubmit(e: React.FormEvent<HTMLFormElement> | undefined) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement> | undefined) {
     e?.preventDefault();
 
     if (id) {
-     await fnPromise(updateDataTodo && updateDataTodo(formData)).then(() =>
+      await fnPromise(updateDataTodo && updateDataTodo(formData)).then(() =>
         navigate(routesApp.root),
       );
     } else {
-     
-        addTodo &&
-          addTodo({
-            ...formData,
-            id: uuidv4(),
-          })     
-      .then(() => navigate(routesApp.root));
+      addTodo &&
+        addTodo({
+          ...formData,
+          id: uuidv4(),
+        }).then(() => navigate(routesApp.root));
     }
   }
 
   //
   useEffect(() => {
     if (id) {
-      const filteredTodo: ITodoItem  =
+      const filteredTodo: ITodoItem =
         (todoList?.find((todo) => todo.id === id) as ITodoItem) ??
         initialTableFilters;
       setFormData(filteredTodo as ITodoFormState);
@@ -85,30 +84,32 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement> | undefined) {
       <div className="containerInputs">
         {listInputs &&
           listInputs.length > 0 &&
-          listInputs.map((input) => (
-           (id && input.name !== "calendar" || 
-            !id)
-            &&        <CustomInput
-              key={input.name}
-              name={input.name}
-              id={input.name}
-              value={
-                input.name === "reminderDate"
-                  ? dateConverter(
-                      (formData[input.name as keyof ITodoItem] as any) ?? "",
-                    )
-                  : ((formData[input.name as keyof ITodoItem] as any) ?? "")
-              }
-              lbl={input.lbl}
-              handleChange={handleChange(input.name as keyof ITodoItem)}
-              click={input.click}
-              pl={input.pl}
-              selectList={input?.selectList }
-              ariaRq={input.ariaRq}
-              type={input.type}
-              ariaLabeInput={input.ariaLabeInput}
-            />
-          ))}
+          listInputs.map(
+            (input: ListInput) =>
+              ((id && input.name !== "calendar") || !id) && (
+                <CustomInput
+                  key={input.name}
+                  name={input.name}
+                  id={input.name}
+                  value={
+                    input.name === "reminderDate"
+                      ? dateConverter(
+                          (formData[input.name as keyof ITodoItem] as any) ??
+                            "",
+                        )
+                      : ((formData[input.name as keyof ITodoItem] as any) ?? "")
+                  }
+                  lbl={input.lbl}
+                  handleChange={handleChange(input.name as keyof ITodoItem)}
+                  click={input.click}
+                  pl={input.pl}
+                  selectList={input?.selectList}
+                  ariaRq={input.ariaRq}
+                  type={input.type}
+                  ariaLabeInput={input.ariaLabeInput}
+                />
+              ),
+          )}
       </div>
 
       <div className="boxButtons">

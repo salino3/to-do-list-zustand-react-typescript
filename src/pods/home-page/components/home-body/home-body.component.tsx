@@ -160,9 +160,11 @@ export const HomeBody: React.FC<Props> = memo((props) => {
   //
   const sortedTodoList = useMemo(() => {
     // 1. Pre-calculate filter values
-    const search = filterFormTable.nameTodo?.toLowerCase();
-    const start = filterFormTable.startReminderDate;
-    const end = filterFormTable.endReminderDate;
+    const searchName: string = filterFormTable.nameTodo?.toLowerCase();
+    const searchWeb: string = filterFormTable.web?.toLowerCase();
+    const searchTel: string = filterFormTable.tel?.toLowerCase();
+    const start: number | null = filterFormTable.startReminderDate;
+    const end: number | null = filterFormTable.endReminderDate;
 
     // Sort values
     const priorityWeight: Record<string, number> = {
@@ -175,7 +177,13 @@ export const HomeBody: React.FC<Props> = memo((props) => {
     return (todoList || [])
       .filter((todo) => {
         // Name check
-        if (search && !todo.nameTodo.toLowerCase().includes(search))
+        if (searchName && !todo.nameTodo.toLowerCase().includes(searchName))
+          return false;
+        // Web check
+        if (searchWeb && !todo.web!.toLowerCase().includes(searchWeb))
+          return false;
+        // Tel check
+        if (searchTel && !todo.tel!.toLowerCase().includes(searchTel))
           return false;
 
         // Date checks

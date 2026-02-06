@@ -1,7 +1,8 @@
 import { memo } from "react";
-import type { FilterFormTable } from "../../../../store";
+import type { FilterFormTable, ListInput } from "../../../../store";
 import { useAppUtilities } from "../../../../hooks";
 import { CustomInput } from "../../../../common";
+import { listFiltersInputs } from "./data.component";
 import "./filter-table-todo.styles.scss";
 
 interface Props {
@@ -10,9 +11,9 @@ interface Props {
 }
 
 export const FilterTableTodo: React.FC<Props> = memo((props) => {
-  const { dateConverter } = useAppUtilities();
-
   const { filterFormTable, setFilterFormTable } = props;
+
+  const { dateConverter } = useAppUtilities();
 
   //
   const handleChangeFilter =
@@ -30,36 +31,35 @@ export const FilterTableTodo: React.FC<Props> = memo((props) => {
 
   return (
     <div className="rootFilterTableTodo">
-      <CustomInput
-        id="nameTodo"
-        handleChange={handleChangeFilter("nameTodo")}
-        value={filterFormTable.nameTodo}
-        lbl="Name To do"
-        name="nameTodo"
-        pl="Name To do"
-        type="text"
-        ariaLabeInput="Input filter name To do"
-      />
-      <CustomInput
-        id="startReminderDate"
-        handleChange={handleChangeFilter("startReminderDate")}
-        value={dateConverter(filterFormTable.startReminderDate)}
-        lbl="Start Reminder Date"
-        name="startReminderDate"
-        pl="Start Reminder Date"
-        type="datetime-local"
-        ariaLabeInput="Input filter Start Reminder Date"
-      />
-      <CustomInput
-        id="endReminderDate"
-        handleChange={handleChangeFilter("endReminderDate")}
-        value={dateConverter(filterFormTable.endReminderDate)}
-        lbl="End Reminder Date"
-        name="endReminderDate"
-        pl="End Reminder Date"
-        type="datetime-local"
-        ariaLabeInput="Input filter End Reminder Date"
-      />
+      {listFiltersInputs &&
+        listFiltersInputs.length > 0 &&
+        listFiltersInputs.map((input: ListInput) => (
+          <CustomInput
+            key={input.name}
+            name={input.name}
+            id={input.name}
+            value={
+              input.name.includes("eminderDate")
+                ? dateConverter(
+                    (filterFormTable[
+                      input.name as keyof FilterFormTable
+                    ] as any) ?? "",
+                  )
+                : ((filterFormTable[
+                    input.name as keyof FilterFormTable
+                  ] as any) ?? "")
+            }
+            lbl={input.lbl}
+            handleChange={handleChangeFilter(
+              input.name as keyof FilterFormTable,
+            )}
+            pl={input.pl}
+            selectList={input?.selectList}
+            ariaRq={input.ariaRq}
+            type={input.type}
+            ariaLabeInput={input.ariaLabeInput}
+          />
+        ))}
     </div>
   );
 });

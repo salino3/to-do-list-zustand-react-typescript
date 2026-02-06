@@ -1,15 +1,6 @@
 import type React from "react";
+import type { Content, SelectList } from "../../store";
 import "./custom-input.styles.scss";
-
-interface Content {
-  key: string;
-  text: string;
-}
-
-export interface SelectList {
-  optgroup: string;
-  content: Content[];
-}
 
 interface Props {
   value: string | number | readonly string[] | null | undefined;
@@ -40,7 +31,6 @@ export const CustomInput: React.FC<Props> = (props) => {
     type,
     pl,
     lbl,
-
     click,
     selectList,
     ariaRq,
