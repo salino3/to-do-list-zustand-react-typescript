@@ -8,7 +8,7 @@ export const listFiltersInputs: ListInput[] = [
     pl: "Name To do",
     lbl: "Name To do",
     type: "text",
-    ariaLabeInput: "Text the name task",
+    ariaLabeInput: "Search the name task",
   },
   {
     name: "web",
@@ -16,7 +16,7 @@ export const listFiltersInputs: ListInput[] = [
     pl: "Web",
     lbl: "Web",
     type: "text",
-    ariaLabeInput: "Text the web relationated with the task",
+    ariaLabeInput: "Search the web relationated with the task",
   },
   {
     name: "tel",
@@ -24,7 +24,7 @@ export const listFiltersInputs: ListInput[] = [
     pl: "Telephone",
     lbl: "Telephone",
     type: "tel",
-    ariaLabeInput: "Text the telephone relationated with the task",
+    ariaLabeInput: "Search the telephone relationated with the task",
   },
   {
     name: "email",
@@ -32,7 +32,7 @@ export const listFiltersInputs: ListInput[] = [
     pl: "Email",
     lbl: "Email",
     type: "email",
-    ariaLabeInput: "Text the email relationated with the task",
+    ariaLabeInput: "Search the email relationated with the task",
   },
   {
     name: "startReminderDate",
