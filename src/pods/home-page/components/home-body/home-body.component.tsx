@@ -162,6 +162,7 @@ export const HomeBody: React.FC<Props> = memo((props) => {
     // 1. Pre-calculate filter values
     const searchName = filterFormTable.nameTodo?.toLowerCase();
     const searchWeb = filterFormTable.web?.toLowerCase();
+    const searchTel = filterFormTable.tel?.toLowerCase();
     const start = filterFormTable.startReminderDate;
     const end = filterFormTable.endReminderDate;
 
@@ -180,6 +181,9 @@ export const HomeBody: React.FC<Props> = memo((props) => {
           return false;
         // Web check
         if (searchWeb && !todo.web!.toLowerCase().includes(searchWeb))
+          return false;
+        // Tel check
+        if (searchTel && !todo.tel!.toLowerCase().includes(searchTel))
           return false;
 
         // Date checks
