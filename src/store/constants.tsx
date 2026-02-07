@@ -2,11 +2,12 @@ export const initialTableFilters = {
   nameTodo: "",
   web: "",
   tel: "",
-  priority: "low",
+  priority: "low", // Doesn't use it for now
   startReminderDate: null,
   endReminderDate: null,
   place: "",
-  completed: null,
+  completed: true,
+  tags: [],
 };
 
 export const Priority = {

@@ -21,12 +21,19 @@ export const FilterTableTodo: React.FC<Props> = memo((props) => {
     (
       e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement> | undefined,
     ) => {
-      setFilterFormTable((prev: FilterFormTable) => ({
-        ...prev,
-        [key]: key.includes("eminderDate")
-          ? new Date(e?.target.value ?? "").getTime()
-          : e?.target.value,
-      }));
+      if (key === "completed") {
+        setFilterFormTable((prev: FilterFormTable) => ({
+          ...prev,
+          completed: (e?.target as HTMLInputElement).checked ?? false,
+        }));
+      } else {
+        setFilterFormTable((prev: FilterFormTable) => ({
+          ...prev,
+          [key]: key.includes("eminderDate")
+            ? new Date(e?.target.value ?? "").getTime()
+            : e?.target.value,
+        }));
+      }
     };
 
   return (
@@ -38,6 +45,11 @@ export const FilterTableTodo: React.FC<Props> = memo((props) => {
             key={input.name}
             name={input.name}
             id={input.name}
+            checked={
+              input.type === "checkbox"
+                ? !!filterFormTable[input.name as keyof FilterFormTable]
+                : undefined
+            }
             value={
               input.name.includes("eminderDate")
                 ? dateConverter(

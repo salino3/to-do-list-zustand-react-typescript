@@ -159,10 +159,14 @@ export const HomeBody: React.FC<Props> = memo((props) => {
 
   //
   const sortedTodoList = useMemo(() => {
+    // TODO: add inputs tags for Create and Filters
+    console.log("tags", filterFormTable.tags);
     // 1. Pre-calculate filter values
     const searchName: string = filterFormTable.nameTodo?.toLowerCase();
     const searchWeb: string = filterFormTable.web?.toLowerCase();
     const searchTel: string = filterFormTable.tel?.toLowerCase();
+    const searchPlace: string = filterFormTable.place?.toLowerCase();
+    const searchCompleted: boolean | null = filterFormTable.completed ?? null;
     const start: number | null = filterFormTable.startReminderDate;
     const end: number | null = filterFormTable.endReminderDate;
 
@@ -185,6 +189,11 @@ export const HomeBody: React.FC<Props> = memo((props) => {
         // Tel check
         if (searchTel && !todo.tel!.toLowerCase().includes(searchTel))
           return false;
+        // Place check
+        if (searchPlace && !todo.place!.toLowerCase().includes(searchPlace))
+          return false;
+        // Uncompleted check
+        if (searchCompleted && !!todo.completed) return false;
 
         // Date checks
         if (start || end) {
@@ -223,6 +232,9 @@ export const HomeBody: React.FC<Props> = memo((props) => {
         initialTableFilters={initialTableFilters}
         customStylesTableRowElement={(item: ITodoItem) =>
           !!item.completed ? "completedRow" : ""
+        }
+        clearFilter={() =>
+          setFilterFormTable(initialTableFilters as FilterFormTable)
         }
       />
       {isOpen && (

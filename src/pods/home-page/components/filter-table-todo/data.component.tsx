@@ -50,4 +50,26 @@ export const listFiltersInputs: ListInput[] = [
     type: "datetime-local",
     ariaLabeInput: "Select the end reminder date for this task",
   },
+  {
+    name: "place",
+    ariaRq: true,
+    pl: "Place",
+    lbl: "Place",
+    type: "text",
+    ariaLabeInput: "Search the place task",
+  },
+  {
+    name: "completed",
+    lbl: "Only uncompleted / All",
+    ariaRq: false,
+    type: "checkbox",
+    ariaLabeInput: "Choose completed or uncompleted tasks",
+  },
+  {
+    name: "tags",
+    lbl: "Tags",
+    ariaRq: false,
+    type: "text",
+    ariaLabeInput: "Search the tasks with some tags",
+  },
 ];

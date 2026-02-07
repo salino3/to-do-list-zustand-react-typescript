@@ -4,4 +4,20 @@
   gap: 1rem;
   width: 100%;
   place-items: center;
+
+  .boxInputcompleted {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+
+    #completedID {
+      height: 1.8rem;
+      width: 1.8rem;
+      outline: none;
+      cursor: pointer;
+    }
+  }
 }
