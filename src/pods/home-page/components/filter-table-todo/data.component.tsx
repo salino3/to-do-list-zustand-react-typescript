@@ -65,4 +65,11 @@ export const listFiltersInputs: ListInput[] = [
     type: "checkbox",
     ariaLabeInput: "Choose completed or uncompleted tasks",
   },
+  {
+    name: "tags",
+    lbl: "Tags",
+    ariaRq: false,
+    type: "text",
+    ariaLabeInput: "Search the tasks with some tags",
+  },
 ];

@@ -159,6 +159,8 @@ export const HomeBody: React.FC<Props> = memo((props) => {
 
   //
   const sortedTodoList = useMemo(() => {
+    // TODO: add inputs tags for Create and Filters
+    console.log("tags", filterFormTable.tags);
     // 1. Pre-calculate filter values
     const searchName: string = filterFormTable.nameTodo?.toLowerCase();
     const searchWeb: string = filterFormTable.web?.toLowerCase();
