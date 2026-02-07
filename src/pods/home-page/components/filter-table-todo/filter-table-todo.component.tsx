@@ -45,6 +45,11 @@ export const FilterTableTodo: React.FC<Props> = memo((props) => {
             key={input.name}
             name={input.name}
             id={input.name}
+            checked={
+              input.type === "checkbox"
+                ? !!filterFormTable[input.name as keyof FilterFormTable]
+                : undefined
+            }
             value={
               input.name.includes("eminderDate")
                 ? dateConverter(

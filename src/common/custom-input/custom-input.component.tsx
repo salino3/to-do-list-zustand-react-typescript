@@ -12,6 +12,7 @@ interface Props {
   name: string;
   id: string;
   type?: React.HTMLInputTypeAttribute | undefined;
+  checked?: boolean | undefined;
   pl: string | undefined;
   lbl: string;
   click?: React.MouseEventHandler<HTMLSelectElement> | undefined;
@@ -29,6 +30,7 @@ export const CustomInput: React.FC<Props> = (props) => {
     id,
     name,
     type,
+    checked,
     pl,
     lbl,
     click,
@@ -78,6 +80,7 @@ export const CustomInput: React.FC<Props> = (props) => {
           id={(id || name) + "ID"}
           name={name}
           value={value ?? ""}
+          checked={checked}
           onChange={handleChange}
           placeholder={pl || name}
           readOnly={readonly}

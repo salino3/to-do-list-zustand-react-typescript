@@ -164,6 +164,7 @@ export const HomeBody: React.FC<Props> = memo((props) => {
     const searchWeb: string = filterFormTable.web?.toLowerCase();
     const searchTel: string = filterFormTable.tel?.toLowerCase();
     const searchPlace: string = filterFormTable.place?.toLowerCase();
+    const searchCompleted: boolean | null = filterFormTable.completed ?? null;
     const start: number | null = filterFormTable.startReminderDate;
     const end: number | null = filterFormTable.endReminderDate;
 
@@ -189,6 +190,8 @@ export const HomeBody: React.FC<Props> = memo((props) => {
         // Place check
         if (searchPlace && !todo.place!.toLowerCase().includes(searchPlace))
           return false;
+        // Uncompleted check
+        if (searchCompleted && !!todo.completed) return false;
 
         // Date checks
         if (start || end) {

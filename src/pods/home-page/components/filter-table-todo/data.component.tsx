@@ -60,7 +60,7 @@ export const listFiltersInputs: ListInput[] = [
   },
   {
     name: "completed",
-    lbl: "The completes",
+    lbl: "Only uncompleted / All",
     ariaRq: false,
     type: "checkbox",
     ariaLabeInput: "Choose completed or uncompleted tasks",
