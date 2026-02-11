@@ -91,6 +91,11 @@ export const FormTodo: React.FC = memo(() => {
                   key={input.name}
                   name={input.name}
                   id={input.name}
+                  checked={
+                    input.type === "checkbox"
+                      ? !!formData[input.name as keyof ITodoItem]
+                      : undefined
+                  }
                   value={
                     input.name === "reminderDate"
                       ? dateConverter(

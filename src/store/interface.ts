@@ -70,7 +70,9 @@ export interface ListInput {
   selectList?: SelectList[];
   ariaRq: boolean;
   click?:
-    | ((e: React.MouseEvent<HTMLSelectElement> | undefined) => void)
+    | ((
+        e: React.MouseEvent<HTMLSelectElement | HTMLInputElement> | undefined,
+      ) => void)
     | undefined;
   pl?: string;
   lbl: string;

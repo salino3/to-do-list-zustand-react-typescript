@@ -15,7 +15,9 @@ interface Props {
   checked?: boolean | undefined;
   pl: string | undefined;
   lbl: string;
-  click?: React.MouseEventHandler<HTMLSelectElement> | undefined;
+  click?:
+    | React.MouseEventHandler<HTMLSelectElement | HTMLInputElement>
+    | undefined;
   selectList?: SelectList[];
   ariaRq?: boolean | undefined;
   readonly?: boolean | undefined;
@@ -45,10 +47,10 @@ export const CustomInput: React.FC<Props> = (props) => {
 
   return (
     <div className={`boxInput boxInput${name}`}>
-      <label htmlFor={(id || name) + "ID"}>{lbl}</label>
+      <label htmlFor={id || name}>{lbl}</label>
       {!type ? (
         <select
-          id={name + "ID"}
+          id={name}
           name={name}
           value={value ?? ""}
           onClick={click}
@@ -77,11 +79,28 @@ export const CustomInput: React.FC<Props> = (props) => {
       ) : (
         <input
           type={type}
-          id={(id || name) + "ID"}
+          id={id || name}
           name={name}
-          value={value ?? ""}
+          // FIX: Don't pass value="" to a checkbox, it confuses the browser
+          {...(type !== "checkbox" ? { value: value ?? "" } : {})}
           checked={checked}
           onChange={handleChange}
+          onClick={click}
+          onKeyDown={(e) => {
+            if (type === "checkbox" && e.key === "Enter") {
+              e.preventDefault();
+
+              const createEvent = {
+                target: {
+                  name: name,
+                  type: "checkbox",
+                  checked: !checked,
+                },
+              } as React.ChangeEvent<HTMLInputElement>;
+
+              handleChange(createEvent);
+            }
+          }}
           placeholder={pl || name}
           readOnly={readonly}
           aria-required={ariaRq}

@@ -74,12 +74,10 @@ export const listInputs: ListInput[] = [
   {
     name: "priority",
     lbl: "Priority",
-    click: (e: React.MouseEvent<HTMLSelectElement> | undefined) =>
-      e!.stopPropagation(),
     pl: "Priority",
     selectList: priorityOptions,
     ariaRq: true,
-    type: "",
+    type: "text",
     ariaLabeInput: "Choose the to do priority",
   },
   {
@@ -93,6 +91,9 @@ export const listInputs: ListInput[] = [
   {
     name: "calendar",
     lbl: "Google calendar: (Optional)",
+    click: (
+      e: React.MouseEvent<HTMLSelectElement | HTMLInputElement> | undefined,
+    ) => e!.stopPropagation(),
     ariaRq: false,
     type: "checkbox",
     ariaLabeInput: "Choose if add the task to your Google calendar",

@@ -61,6 +61,9 @@ export const listFiltersInputs: ListInput[] = [
   {
     name: "completed",
     lbl: "Only uncompleted / All",
+    click: (
+      e: React.MouseEvent<HTMLSelectElement | HTMLInputElement> | undefined,
+    ) => e!.stopPropagation(),
     ariaRq: false,
     type: "checkbox",
     ariaLabeInput: "Choose completed or uncompleted tasks",

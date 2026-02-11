@@ -13,11 +13,16 @@
     gap: 1rem;
     width: 100%;
 
-    #completedID {
+    #completed {
       height: 1.8rem;
       width: 1.8rem;
       outline: none;
       cursor: pointer;
+    }
+
+    #completed:focus {
+      outline: 2px solid #00eeff;
+      outline-offset: 2px;
     }
   }
 }
