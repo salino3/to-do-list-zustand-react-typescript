@@ -98,4 +98,12 @@ export const listInputs: ListInput[] = [
     type: "checkbox",
     ariaLabeInput: "Choose if add the task to your Google calendar",
   },
+  {
+    name: "tags",
+    ariaRq: false,
+    pl: "Tags",
+    lbl: "Tags Task",
+    type: "text",
+    ariaLabeInput: "The tags task",
+  },
 ];
