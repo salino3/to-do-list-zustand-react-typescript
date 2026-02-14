@@ -200,8 +200,9 @@ export const HomeBody: React.FC<Props> = memo((props) => {
         if (searchTags.length > 0) {
           const todoTags = (todo.tags || []).map((t) => t.toLowerCase());
 
-          const hasAtLeastOneMatch = searchTags.some((term: string) =>
-            todoTags.some((tTag) => tTag.includes(term)),
+          const hasAtLeastOneMatch = searchTags.some(
+            (term: string) =>
+              term && todoTags.some((tTag) => tTag.includes(term.trim())),
           );
 
           if (!hasAtLeastOneMatch) return false;
