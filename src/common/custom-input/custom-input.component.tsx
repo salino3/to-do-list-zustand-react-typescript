@@ -66,10 +66,10 @@ export const CustomInput: React.FC<Props> = (props) => {
           </option>
           {selectList &&
             selectList?.length > 0 &&
-            selectList.map((item: SelectList) => (
-              <optgroup key={item.optgroup} label={item.optgroup}>
+            selectList.map((item: SelectList, index: number) => (
+              <optgroup key={item.optgroup + index} label={item.optgroup}>
                 {item.content.map((c: Content) => (
-                  <option key={c.key} value={c.key}>
+                  <option key={c.key + index} value={c.key}>
                     {c.text}
                   </option>
                 ))}

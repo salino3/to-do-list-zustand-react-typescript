@@ -26,12 +26,17 @@ export const FilterTableTodo: React.FC<Props> = memo((props) => {
           ...prev,
           completed: (e?.target as HTMLInputElement).checked ?? false,
         }));
+      } else if (key === "tags") {
+        setFilterFormTable((prev: FilterFormTable) => ({
+          ...prev,
+          tags: e?.target.value ? e?.target.value.toLowerCase().split(",") : [],
+        }));
       } else {
         setFilterFormTable((prev: FilterFormTable) => ({
           ...prev,
           [key]: key.includes("eminderDate")
             ? new Date(e?.target.value ?? "").getTime()
-            : e?.target.value,
+            : e?.target.value.toLowerCase(),
         }));
       }
     };

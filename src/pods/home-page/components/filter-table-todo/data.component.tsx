@@ -70,8 +70,9 @@ export const listFiltersInputs: ListInput[] = [
   },
   {
     name: "tags",
-    lbl: "Tags",
     ariaRq: false,
+    pl: "Tags",
+    lbl: "Tags Task",
     type: "text",
     ariaLabeInput: "Search the tasks with some tags",
   },

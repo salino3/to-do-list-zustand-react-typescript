@@ -42,6 +42,11 @@ export const FormTodo: React.FC = memo(() => {
           ...prev,
           calendar: (e?.target as HTMLInputElement).checked ?? false,
         }));
+      } else if (key === "tags") {
+        setFormData((prev: ITodoFormState) => ({
+          ...prev,
+          tags: e?.target.value.split(","),
+        }));
       } else {
         setFormData((prev: ITodoFormState) => ({
           ...prev,
