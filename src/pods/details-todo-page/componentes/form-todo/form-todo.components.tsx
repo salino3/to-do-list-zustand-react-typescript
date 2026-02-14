@@ -43,13 +43,9 @@ export const FormTodo: React.FC = memo(() => {
           calendar: (e?.target as HTMLInputElement).checked ?? false,
         }));
       } else if (key === "tags") {
-        const value = e?.target.value ?? "";
-
-        const tagsArray = value.split(",").map((tag) => tag.trim());
-
-        setFormData((prev) => ({
+        setFormData((prev: ITodoFormState) => ({
           ...prev,
-          tags: tagsArray,
+          tags: e?.target.value.split(","),
         }));
       } else {
         setFormData((prev: ITodoFormState) => ({
@@ -111,14 +107,7 @@ export const FormTodo: React.FC = memo(() => {
                           (formData[input.name as keyof ITodoItem] as any) ??
                             "",
                         )
-                      : Array.isArray(
-                            formData[input.name as keyof ITodoItem] as any,
-                          )
-                        ? (
-                            formData[input.name as keyof ITodoItem] as string[]
-                          ).join(", ")
-                        : ((formData[input.name as keyof ITodoItem] as any) ??
-                          "")
+                      : ((formData[input.name as keyof ITodoItem] as any) ?? "")
                   }
                   lbl={input.lbl}
                   handleChange={handleChange(input.name as keyof ITodoItem)}
