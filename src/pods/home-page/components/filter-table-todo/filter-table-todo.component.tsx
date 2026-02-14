@@ -29,7 +29,7 @@ export const FilterTableTodo: React.FC<Props> = memo((props) => {
       } else if (key === "tags") {
         setFilterFormTable((prev: FilterFormTable) => ({
           ...prev,
-          tags: e?.target.value ? e?.target.value.split(",") : [],
+          tags: e?.target.value ? e?.target.value.toLowerCase().split(",") : [],
         }));
       } else {
         setFilterFormTable((prev: FilterFormTable) => ({
