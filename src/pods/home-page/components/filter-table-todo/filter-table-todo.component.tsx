@@ -36,7 +36,7 @@ export const FilterTableTodo: React.FC<Props> = memo((props) => {
           ...prev,
           [key]: key.includes("eminderDate")
             ? new Date(e?.target.value ?? "").getTime()
-            : e?.target.value,
+            : e?.target.value.toLowerCase(),
         }));
       }
     };
