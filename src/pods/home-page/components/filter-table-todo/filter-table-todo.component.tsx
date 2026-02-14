@@ -26,6 +26,11 @@ export const FilterTableTodo: React.FC<Props> = memo((props) => {
           ...prev,
           completed: (e?.target as HTMLInputElement).checked ?? false,
         }));
+      } else if (key === "tags") {
+        setFilterFormTable((prev: FilterFormTable) => ({
+          ...prev,
+          tags: e?.target.value.split(","),
+        }));
       } else {
         setFilterFormTable((prev: FilterFormTable) => ({
           ...prev,

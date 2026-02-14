@@ -75,4 +75,12 @@ export const listFiltersInputs: ListInput[] = [
     type: "text",
     ariaLabeInput: "Search the tasks with some tags",
   },
+  {
+    name: "tags",
+    ariaRq: false,
+    pl: "Tags",
+    lbl: "Tags Task",
+    type: "text",
+    ariaLabeInput: "Search the tags task",
+  },
 ];

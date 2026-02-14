@@ -104,6 +104,6 @@ export const listInputs: ListInput[] = [
     pl: "Tags",
     lbl: "Tags Task",
     type: "text",
-    ariaLabeInput: "The tags task",
+    ariaLabeInput: "Text the tags task",
   },
 ];
