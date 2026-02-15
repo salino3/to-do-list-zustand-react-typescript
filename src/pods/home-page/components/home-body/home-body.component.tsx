@@ -261,6 +261,7 @@ export const HomeBody: React.FC<Props> = memo((props) => {
         clearFilter={() =>
           setFilterFormTable(initialTableFilters as FilterFormTable)
         }
+        dropDownTable={dropDownTable}
       />
       {isOpen && (
         <ModalApp open={isOpen} onOpenChange={handleOpenChange}>
