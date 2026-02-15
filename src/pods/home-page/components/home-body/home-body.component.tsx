@@ -37,7 +37,9 @@ export const HomeBody: React.FC<Props> = memo((props) => {
 
   const triggerBtnsRef = useRef<Map<string, HTMLButtonElement>>(new Map());
   const [isOpen, setIsOpen] = useState<ITodoItem | null>(null);
-  const [dropDownTable, setDropDownTable] = useState<boolean>(false);
+  const [dropDownTable, setDropDownTable] = useState<Record<string, boolean>>(
+    {},
+  );
 
   const [filterFormTable, setFilterFormTable] = useState<FilterFormTable>(
     initialTableFilters as FilterFormTable,
@@ -72,7 +74,6 @@ export const HomeBody: React.FC<Props> = memo((props) => {
       {
         key: "web",
         title: "Web",
-        // tooltip: (item: string) => item,
         render: (item: string) => <a href={item}>🌐</a>,
       },
       {
@@ -100,7 +101,6 @@ export const HomeBody: React.FC<Props> = memo((props) => {
         key: "reminderDate",
         title: "R. Date",
         render: (item: number) => {
-          console.log("date", item);
           if (item === null || item === undefined) return "-";
 
           const date = new Date(item);
@@ -151,8 +151,13 @@ export const HomeBody: React.FC<Props> = memo((props) => {
                 📝
               </Link>
               <button
-                className={`dropDownButton ${dropDownTable ? "rotate" : ""}`}
-                onClick={() => setDropDownTable((prev) => !prev)}
+                className={`dropDownButton ${dropDownTable[row.id] ? "rotate" : ""}`}
+                onClick={() =>
+                  setDropDownTable((prev) => ({
+                    ...prev,
+                    [row.id]: !prev[row.id],
+                  }))
+                }
               >
                 {"<<"}
               </button>
