@@ -158,14 +158,16 @@ export const TodoTable: React.FC<TableProps> = memo(
                           );
                         })}
                     </tr>
-
                     <tr
                       className={`dropdown_overlay dropdown_overlay_${values.id}`}
                     >
                       {dropDownTable && dropDownTable[values.id] && (
-                        <div className="containerDropDownTable">
+                        <td
+                          colSpan={columns.length}
+                          className="containerDropDownTable"
+                        >
                           {values.tel} column.key
-                        </div>
+                        </td>
                       )}
                     </tr>
                   </React.Fragment>
