@@ -77,7 +77,7 @@ export const listInputs: ListInput[] = [
     pl: "Priority",
     selectList: priorityOptions,
     ariaRq: true,
-    type: "text",
+    type: "",
     ariaLabeInput: "Choose the to do priority",
   },
   {

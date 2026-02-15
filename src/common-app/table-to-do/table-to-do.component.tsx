@@ -24,6 +24,7 @@ export interface Columns {
   minDate?: string | number | undefined;
   maxDate?: string | number | undefined;
   valueClass?: any;
+  dropDownTable?: (_: undefined, row: any) => boolean;
 }
 
 //
@@ -160,6 +161,13 @@ export const TodoTable: React.FC<TableProps> = memo(
                               >
                                 {tooltip}
                               </span>
+                            )}
+                            {column.key && !!column.dropDownTable && (
+                              <div
+                                className={`dropdown_overlay dropdown_overlay_${column.key}`}
+                              >
+                                column.key
+                              </div>
                             )}
                           </td>
                         );
