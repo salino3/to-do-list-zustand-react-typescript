@@ -37,6 +37,9 @@ export const HomeBody: React.FC<Props> = memo((props) => {
 
   const triggerBtnsRef = useRef<Map<string, HTMLButtonElement>>(new Map());
   const [isOpen, setIsOpen] = useState<ITodoItem | null>(null);
+  const [dropDownTable, setDropDownTable] = useState<Record<string, boolean>>(
+    {},
+  );
 
   const [filterFormTable, setFilterFormTable] = useState<FilterFormTable>(
     initialTableFilters as FilterFormTable,
@@ -71,7 +74,6 @@ export const HomeBody: React.FC<Props> = memo((props) => {
       {
         key: "web",
         title: "Web",
-        // tooltip: (item: string) => item,
         render: (item: string) => <a href={item}>🌐</a>,
       },
       {
@@ -99,7 +101,6 @@ export const HomeBody: React.FC<Props> = memo((props) => {
         key: "reminderDate",
         title: "R. Date",
         render: (item: number) => {
-          console.log("date", item);
           if (item === null || item === undefined) return "-";
 
           const date = new Date(item);
@@ -123,7 +124,6 @@ export const HomeBody: React.FC<Props> = memo((props) => {
         title: "Actions",
         valueClass: (_: undefined, row: ITodoItem) => `actions-${row.priority}`,
         render: (_: undefined, row: ITodoItem) => {
-          // console.log("clog!!!");
           return (
             <div className="containerActions">
               <button
@@ -149,12 +149,23 @@ export const HomeBody: React.FC<Props> = memo((props) => {
               <Link className="updateItem" to={routesApp.detailsTodo(row.id)}>
                 📝
               </Link>
+              <button
+                className={`dropDownButton ${dropDownTable[row.id] ? "rotate" : ""}`}
+                onClick={() =>
+                  setDropDownTable((prev) => ({
+                    ...prev,
+                    [row.id]: !prev[row.id],
+                  }))
+                }
+              >
+                {"<<"}
+              </button>
             </div>
           );
         },
       },
     ],
-    [],
+    [dropDownTable],
   );
 
   //
@@ -249,6 +260,7 @@ export const HomeBody: React.FC<Props> = memo((props) => {
         clearFilter={() =>
           setFilterFormTable(initialTableFilters as FilterFormTable)
         }
+        dropDownTable={dropDownTable}
       />
       {isOpen && (
         <ModalApp open={isOpen} onOpenChange={handleOpenChange}>

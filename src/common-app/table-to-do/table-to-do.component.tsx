@@ -1,4 +1,4 @@
-import type React from "react";
+import React from "react";
 import { memo } from "react";
 import { CustomButton } from "../../common/custom-button";
 import "./table-to-do.styles.scss";
@@ -41,6 +41,7 @@ interface TableProps {
   initialTableFilters: any;
   customStylesTableRowElement?: (values: any) => string;
   clearFilter: () => void;
+  dropDownTable: Record<string, boolean>;
 }
 
 export const TodoTable: React.FC<TableProps> = memo(
@@ -58,6 +59,7 @@ export const TodoTable: React.FC<TableProps> = memo(
     // initialTableFilters,
     customStylesTableRowElement,
     clearFilter,
+    dropDownTable,
   }) => {
     // console.log("clog1", rows);
     // console.log("clog2", columns);
@@ -94,40 +96,42 @@ export const TodoTable: React.FC<TableProps> = memo(
               rows?.length > 0 &&
               rows.map((values: any, rowIndex: number) => {
                 return (
-                  <tr
-                    className={`priority-${values.priority}
-                      ${customStylesTableRowElement && customStylesTableRowElement(values)}
-                       `}
+                  <React.Fragment
                     key={
                       uniqueKey && values[uniqueKey]
                         ? values[uniqueKey]
                         : rowIndex
                     }
                   >
-                    {columns &&
-                      columns?.length > 0 &&
-                      columns.map((column, colIndex) => {
-                        const content =
-                          column && column.render
-                            ? column.render(values[column.key], values)
-                            : (values[column.key] ?? "-");
-                        const tooltip =
-                          column && column.tooltip
-                            ? column.tooltip(values[column.key], values)
-                            : null;
-                        const valueClass: string =
-                          column && column.valueClass
-                            ? column.valueClass(values[column.key], values)
-                            : "";
+                    <tr
+                      className={`priority-${values.priority}
+                      ${customStylesTableRowElement && customStylesTableRowElement(values)}
+                       `}
+                    >
+                      {columns &&
+                        columns?.length > 0 &&
+                        columns.map((column, colIndex) => {
+                          const content =
+                            column && column.render
+                              ? column.render(values[column.key], values)
+                              : (values[column.key] ?? "-");
+                          const tooltip =
+                            column && column.tooltip
+                              ? column.tooltip(values[column.key], values)
+                              : null;
+                          const valueClass: string =
+                            column && column.valueClass
+                              ? column.valueClass(values[column.key], values)
+                              : "";
 
-                        return (
-                          <td
-                            key={`${column.key}_${
-                              uniqueKey && values[uniqueKey]
-                                ? values[uniqueKey]
-                                : rowIndex
-                            }_${colIndex}`}
-                            className={`
+                          return (
+                            <td
+                              key={`${column.key}_${
+                                uniqueKey && values[uniqueKey]
+                                  ? values[uniqueKey]
+                                  : rowIndex
+                              }_${colIndex}`}
+                              className={`
                             ${valueClass}
                             table_x02_${column.key} 
                             table_x02_${column.key}_${
@@ -135,36 +139,37 @@ export const TodoTable: React.FC<TableProps> = memo(
                                 ? values[uniqueKey]
                                 : rowIndex
                             }_${colIndex}`}
-                            style={
-                              {
-                                // minWidth:
-                                //   key == "Contenido" || key == "diputados_autores"
-                                //     ? "300px"
-                                //     : "",
-                                // wordBreak:
-                                //   key == "Contenido" || key == "diputados_autores"
-                                //     ? "break-word"
-                                //     : "unset",
-                              }
-                            }
-                          >
-                            {content}
-                            {column?.key && tooltip && (
-                              <span
-                                className={`table_x03_spanTooltip${
-                                  column.key == "Contenido" ||
-                                  column.key == "diputados_autores"
-                                    ? "table_x02_spanTooltip"
-                                    : ""
-                                }`}
-                              >
-                                {tooltip}
-                              </span>
-                            )}
-                          </td>
-                        );
-                      })}
-                  </tr>
+                            >
+                              {content}
+                              {column?.key && tooltip && (
+                                <span
+                                  className={`table_x03_spanTooltip${
+                                    column.key == "Contenido" ||
+                                    column.key == "diputados_autores"
+                                      ? "table_x02_spanTooltip"
+                                      : ""
+                                  }`}
+                                >
+                                  {tooltip}
+                                </span>
+                              )}
+                            </td>
+                          );
+                        })}
+                    </tr>
+                    <tr
+                      className={`dropdown_overlay dropdown_overlay_${values.id}`}
+                    >
+                      {dropDownTable && dropDownTable[values.id] && (
+                        <td
+                          colSpan={columns.length}
+                          className="containerDropDownTable"
+                        >
+                          {values.tel} column.key
+                        </td>
+                      )}
+                    </tr>
+                  </React.Fragment>
                 );
               })}
           </tbody>
