@@ -24,7 +24,6 @@ export interface Columns {
   minDate?: string | number | undefined;
   maxDate?: string | number | undefined;
   valueClass?: any;
-  // dropDownTable?: (_: undefined, row: any) => boolean;
 }
 
 //

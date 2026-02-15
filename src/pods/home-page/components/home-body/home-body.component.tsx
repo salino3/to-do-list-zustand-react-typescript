@@ -122,7 +122,6 @@ export const HomeBody: React.FC<Props> = memo((props) => {
       {
         key: "actions",
         title: "Actions",
-        dropDownTable: (_: undefined, row: ITodoItem) => dropDownTable[row.id],
         valueClass: (_: undefined, row: ITodoItem) => `actions-${row.priority}`,
         render: (_: undefined, row: ITodoItem) => {
           return (
