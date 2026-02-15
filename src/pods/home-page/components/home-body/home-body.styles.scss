@@ -62,10 +62,12 @@
 
               .deleteItem,
               .spanToggle,
-              .updateItem {
+              .updateItem,
+              .dropDownButton {
                 cursor: pointer;
                 padding: 2px;
                 border-radius: 3px;
+                min-width: 1.5rem;
               }
 
               .deleteItem {
@@ -78,6 +80,16 @@
 
               .updateItem {
                 background-color: var(--color-btn);
+              }
+
+              .dropDownButton {
+                background-color: var(--text-dim);
+                color: var(--color-btn);
+                transition: transform 0.3s ease-in-out;
+              }
+
+              .dropDownButton.rotate {
+                transform: rotate(-90deg);
               }
             }
           }

@@ -37,6 +37,7 @@ export const HomeBody: React.FC<Props> = memo((props) => {
 
   const triggerBtnsRef = useRef<Map<string, HTMLButtonElement>>(new Map());
   const [isOpen, setIsOpen] = useState<ITodoItem | null>(null);
+  const [dropDownTable, setDropDownTable] = useState<boolean>(false);
 
   const [filterFormTable, setFilterFormTable] = useState<FilterFormTable>(
     initialTableFilters as FilterFormTable,
@@ -149,12 +150,18 @@ export const HomeBody: React.FC<Props> = memo((props) => {
               <Link className="updateItem" to={routesApp.detailsTodo(row.id)}>
                 📝
               </Link>
+              <button
+                className={`dropDownButton ${dropDownTable ? "rotate" : ""}`}
+                onClick={() => setDropDownTable((prev) => !prev)}
+              >
+                {"<<"}
+              </button>
             </div>
           );
         },
       },
     ],
-    [],
+    [dropDownTable],
   );
 
   //
