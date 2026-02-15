@@ -136,18 +136,6 @@ export const TodoTable: React.FC<TableProps> = memo(
                                 ? values[uniqueKey]
                                 : rowIndex
                             }_${colIndex}`}
-                            style={
-                              {
-                                // minWidth:
-                                //   key == "Contenido" || key == "diputados_autores"
-                                //     ? "300px"
-                                //     : "",
-                                // wordBreak:
-                                //   key == "Contenido" || key == "diputados_autores"
-                                //     ? "break-word"
-                                //     : "unset",
-                              }
-                            }
                           >
                             {content}
                             {column?.key && tooltip && (
@@ -162,13 +150,14 @@ export const TodoTable: React.FC<TableProps> = memo(
                                 {tooltip}
                               </span>
                             )}
-                            {column.key && !!column.dropDownTable && (
-                              <div
-                                className={`dropdown_overlay dropdown_overlay_${column.key}`}
-                              >
-                                column.key
-                              </div>
-                            )}
+                            {column.key === "actions" &&
+                              column?.dropDownTable(undefined, values) && (
+                                <div
+                                  className={`dropdown_overlay dropdown_overlay_${column.key}`}
+                                >
+                                  {values.tel} column.key
+                                </div>
+                              )}
                           </td>
                         );
                       })}
