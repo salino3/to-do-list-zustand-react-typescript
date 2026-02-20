@@ -12,9 +12,7 @@ export const DropDownTable: React.FC<Props> = (props) => {
   const { rows, values, index } = props;
   return (
     <div className="rootDropDownTable">
-      {rows[0].id}
-      {values.nameTodo}
-      {index}
+      {rows[0].id} - {values.nameTodo} - {index}
     </div>
   );
 };
