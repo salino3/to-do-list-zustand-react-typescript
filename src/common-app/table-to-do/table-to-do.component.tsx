@@ -158,7 +158,8 @@ export const TodoTable: React.FC<TableProps> = memo(
                         })}
                     </tr>
                     <tr
-                      className={`dropdown_overlay dropdown_overlay_${values.id}`}
+                      className={`dropdown_overlay dropdown_overlay_${values.id}
+                         ${dropDownTable?.[values.id] ? "isOpenDropDown" : ""}`}
                     >
                       {dropDownTable && dropDownTable[values.id] && (
                         <td
