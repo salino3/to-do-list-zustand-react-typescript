@@ -42,6 +42,11 @@ interface TableProps {
   customStylesTableRowElement?: (values: any) => string;
   clearFilter: () => void;
   dropDownTable: Record<string, boolean>;
+  dropDownComponent?: (
+    rows: any[],
+    values: any,
+    rowIndex: number,
+  ) => React.ReactNode | undefined;
 }
 
 export const TodoTable: React.FC<TableProps> = memo(
@@ -60,6 +65,7 @@ export const TodoTable: React.FC<TableProps> = memo(
     customStylesTableRowElement,
     clearFilter,
     dropDownTable,
+    dropDownComponent,
   }) => {
     // console.log("clog1", rows);
     // console.log("clog2", columns);
@@ -166,7 +172,8 @@ export const TodoTable: React.FC<TableProps> = memo(
                           colSpan={columns.length}
                           className="containerDropDownTable"
                         >
-                          {values.tel} column.key
+                          {dropDownComponent &&
+                            dropDownComponent(rows, values, rowIndex)}
                         </td>
                       )}
                     </tr>
