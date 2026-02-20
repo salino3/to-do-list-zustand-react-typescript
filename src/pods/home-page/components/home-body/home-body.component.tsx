@@ -12,7 +12,7 @@ import {
   TodoTable,
   type Columns,
 } from "../../../../common-app";
-import { FilterTableTodo } from "../filter-table-todo";
+import { FilterTableTodo, DropDownTable } from "..";
 import { routesApp } from "../../../../router";
 import "./home-body.styles.scss";
 
@@ -261,6 +261,14 @@ export const HomeBody: React.FC<Props> = memo((props) => {
           setFilterFormTable(initialTableFilters as FilterFormTable)
         }
         dropDownTable={dropDownTable}
+        dropDownComponent={(rows, values, index) => (
+          <DropDownTable
+            key={index}
+            rows={rows}
+            values={values}
+            index={index}
+          />
+        )}
       />
       {isOpen && (
         <ModalApp open={isOpen} onOpenChange={handleOpenChange}>
