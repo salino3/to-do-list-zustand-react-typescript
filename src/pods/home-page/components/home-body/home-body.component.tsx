@@ -235,7 +235,7 @@ export const HomeBody: React.FC<Props> = memo((props) => {
         );
       });
   }, [todoList, filterFormTable]);
-
+  console.log("clog1", sortedTodoList);
   return (
     <div className="rootHomeBody">
       <FilterTableTodo

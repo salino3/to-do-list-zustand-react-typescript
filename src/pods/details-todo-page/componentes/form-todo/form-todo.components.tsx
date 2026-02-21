@@ -62,14 +62,16 @@ export const FormTodo: React.FC = memo(() => {
     e?.preventDefault();
 
     if (id) {
-      await fnPromise(updateDataTodo && updateDataTodo(formData)).then(() =>
-        navigate(routesApp.root),
-      );
+      await fnPromise(
+        updateDataTodo &&
+          updateDataTodo({ ...formData, updatedAt: new Date().getTime() }),
+      ).then(() => navigate(routesApp.root));
     } else {
       addTodo &&
         addTodo({
           ...formData,
           id: uuidv4(),
+          createdAt: new Date().getTime(),
         }).then(() => navigate(routesApp.root));
     }
   }
