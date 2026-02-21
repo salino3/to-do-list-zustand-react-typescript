@@ -122,7 +122,7 @@ export const HomeBody: React.FC<Props> = memo((props) => {
       {
         key: "actions",
         title: "Actions",
-        valueClass: (_: undefined, row: ITodoItem) => `actions-${row.priority}`,
+        // valueClass: (_: undefined, row: ITodoItem) => `actions-${row.priority}`,
         render: (_: undefined, row: ITodoItem) => {
           return (
             <div className="containerActions">
