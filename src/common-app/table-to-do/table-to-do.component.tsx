@@ -45,7 +45,7 @@ interface TableProps {
   dropDownComponent?: (
     rows: any[],
     values: any,
-    rowIndex: number,
+    rowIndex: string | number,
   ) => React.ReactNode | undefined;
 }
 
@@ -170,7 +170,8 @@ export const TodoTable: React.FC<TableProps> = memo(
                       {dropDownTable && dropDownTable[values.id] && (
                         <td
                           colSpan={columns.length}
-                          className="containerDropDownTable"
+                          className={`containerDropDownTable actions-${values.priority}
+                              ${!!values.completed ? "completedRow" : ""}`}
                         >
                           {dropDownComponent &&
                             dropDownComponent(rows, values, rowIndex)}

@@ -13,7 +13,7 @@
     border-radius: var(--border-radius);
     overflow: hidden;
 
-    background: rgba(30, 30, 36, 0.7);
+    background: rgba(var(--color-black02-values), 0.7);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
 
@@ -101,6 +101,7 @@
         z-index: 0 !important;
 
         .containerDropDownTable {
+          border-bottom: solid var(--color-black02) 5px;
         }
       }
     }
