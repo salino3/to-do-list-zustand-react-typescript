@@ -235,7 +235,7 @@ export const HomeBody: React.FC<Props> = memo((props) => {
         );
       });
   }, [todoList, filterFormTable]);
-  console.log("clog1", sortedTodoList);
+
   return (
     <div className="rootHomeBody">
       <FilterTableTodo
@@ -263,10 +263,10 @@ export const HomeBody: React.FC<Props> = memo((props) => {
         dropDownTable={dropDownTable}
         dropDownComponent={(rows, values, index) => (
           <DropDownTable
-            key={index}
+            key={values?.id ?? index}
             rows={rows}
             values={values}
-            index={index}
+            index={values?.id ?? index}
           />
         )}
       />

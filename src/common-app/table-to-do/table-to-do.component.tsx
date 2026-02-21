@@ -45,7 +45,7 @@ interface TableProps {
   dropDownComponent?: (
     rows: any[],
     values: any,
-    rowIndex: number,
+    rowIndex: string | number,
   ) => React.ReactNode | undefined;
 }
 
