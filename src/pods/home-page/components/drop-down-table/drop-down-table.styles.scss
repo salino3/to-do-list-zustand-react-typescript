@@ -6,8 +6,9 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
-
+  align-items: stretch;
+  height: 100%;
+  gap: 0.25rem;
   & > * {
     display: flex;
 
@@ -15,11 +16,16 @@
     padding: 0 0.25rem;
   }
 
-  .boxLeft {
+  .boxLeft,
+  .boxRight {
     flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: stretch;
     gap: 0.25rem;
+    min-height: 100%;
+    border: dashed;
+    border-radius: 0.25rem;
+
     .boxText {
       display: flex;
       flex-direction: row;
