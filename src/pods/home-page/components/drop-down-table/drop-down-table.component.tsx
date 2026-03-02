@@ -27,6 +27,8 @@ export const DropDownTable: React.FC<Props> = (props) => {
 
   const { dateConverter } = useAppUtilities();
 
+  console.log(rows, index);
+
   return (
     <div className="rootDropDownTable">
       <div className="boxLeft">
