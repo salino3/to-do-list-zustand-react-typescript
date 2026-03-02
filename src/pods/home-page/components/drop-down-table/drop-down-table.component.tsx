@@ -27,14 +27,19 @@ export const DropDownTable: React.FC<Props> = (props) => {
 
   const { dateConverter } = useAppUtilities();
 
+  console.log(rows, index);
+
   return (
     <div className="rootDropDownTable">
       <div className="boxLeft">
         <BoxText title="Created At" value={dateConverter(values.createdAt)} />
         <BoxText title="Updated At" value={dateConverter(values.updatedAt)} />
+        <BoxText title="Tags" value={values.tags} />
+        <BoxText title="Place" value={values.place} />
       </div>
       <div className="boxRight">
-        {rows[0].id} - {values.nameTodo} - {index}
+        <BoxText title="Web" value={values.web} />
+        <BoxText title="Tel" value={values.tel} />
       </div>
     </div>
   );
